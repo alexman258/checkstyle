@@ -59,11 +59,11 @@ public class BeforeExecutionExclusionFileFilterTest extends AbstractModuleTestSu
 
     @Test
     public void testReject() {
-        final String fileName = "Test";
+        final String fileName = "Test.java";
         final BeforeExecutionExclusionFileFilter filter =
                 createExclusionBeforeExecutionFileFilter(fileName);
 
-        assertFalse("Should reject file, but did not", filter.accept("ATest.java"));
+        assertFalse("Should reject file, but did not", filter.accept("Test.java"));
     }
 
     @Test

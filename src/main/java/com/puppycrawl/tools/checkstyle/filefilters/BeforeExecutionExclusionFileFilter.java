@@ -75,7 +75,7 @@ public final class BeforeExecutionExclusionFileFilter extends AutomaticBean
      * @param fileNamePattern regular expression of the excluded file.
      */
     public void setFileNamePattern(Pattern fileNamePattern) {
-        this.fileNamePattern = fileNamePattern;
+        this.fileNamePattern = Pattern.compile("^" + fileNamePattern.toString() + "$");
     }
 
     @Override
@@ -85,7 +85,7 @@ public final class BeforeExecutionExclusionFileFilter extends AutomaticBean
 
     @Override
     public boolean accept(String uri) {
-        return fileNamePattern == null || !fileNamePattern.matcher(uri).find();
+        return fileNamePattern == null || !fileNamePattern.matcher(uri).matches();
     }
 
 }
