@@ -129,6 +129,7 @@ public class RightCurlyCheck extends AbstractCheck {
     @Override
     public int[] getAcceptableTokens() {
         return new int[] {
+        	TokenTypes.LITERAL_CASE,
             TokenTypes.LITERAL_TRY,
             TokenTypes.LITERAL_CATCH,
             TokenTypes.LITERAL_FINALLY,
@@ -453,7 +454,7 @@ public class RightCurlyCheck extends AbstractCheck {
             DetailAST rcurly = null;
             final DetailAST lcurly;
             final int tokenType = ast.getType();
-            if (tokenType == TokenTypes.CLASS_DEF) {
+            if (tokenType == TokenTypes.CLASS_DEF || tokenType == TokenTypes.LITERAL_CASE) {
                 final DetailAST child = ast.getLastChild();
                 lcurly = child.getFirstChild();
                 rcurly = child.getLastChild();
