@@ -330,7 +330,17 @@ class Foo
 {
   public static final int FOO_CONST = 1;
   public void foo() {} //should be separated from previous statement.
+  class NestedFoo // violation needs seperator
+  {
+  	private String fooString = "foo";
+  	private int myInt = 10; // violation: fields need seperation
+  	public NextedFoo() {} // violation: constructors require seperation
+  	
+  }
+  void FooMethod1() {} // violation: Needs seperation from nested class
+  void FooMethod2() {} // violation: Methods require seperation
 }
+
       </source>
       <p>
         To configure the check with default parameters:
@@ -355,6 +365,20 @@ class Foo
   public static final int FOO_CONST = 1;
 
   public void foo() {}
+  
+  class NestedFoo 
+  {
+  	private String fooString = "foo";
+  	
+  	private int myInt = 10;
+  	
+  	public NextedFoo() {}
+  	
+  }
+  
+  void FooMethod1() {}
+  
+  void FooMethod2() {}
 }
       </source>
       <p>
