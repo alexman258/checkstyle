@@ -196,3 +196,23 @@ class ClassWithStaticInitializers
             return new Thread(r);
         }}; // violation
 }
+
+class WithSwitchAlone {
+	void test() {
+		int x = 0; 
+		
+		switch (x) {default:break;} 
+		
+		switch (x) {
+		case 1:
+			break;
+		default:
+			break;} 		
+		switch (x) {
+		case 1:
+			break;
+		default:
+			break;
+		}
+	} 
+}

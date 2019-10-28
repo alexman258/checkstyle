@@ -143,3 +143,24 @@ class WithArraysAlone {
     String[] s4 =
         {"foo", "foo"}; // ok
 }
+
+class WithSwitchAlone {
+	void test() {
+		int x = 0; 
+		
+		switch (x) {default:break;} 
+		
+		switch (x) {
+		case 1:
+			break;
+		default:
+			break;} 		
+		switch (x) {
+		case 1:
+			break;
+		default:
+			break;
+		}
+	} 
+}
+
