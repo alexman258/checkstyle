@@ -803,6 +803,11 @@ try {
         </source>
 
         <p>
+          Single line statements without braces are if, switch cases, do, while, and
+          for statements that are not followed by  { ... }. 
+          If the desired result is to allow these kind of statements, the following
+          configurations can be performed to allow these statements:
+          
           To configure the check to allow single-line statements
           (<code>if, while, do-while, for</code>) without braces:
         </p>
