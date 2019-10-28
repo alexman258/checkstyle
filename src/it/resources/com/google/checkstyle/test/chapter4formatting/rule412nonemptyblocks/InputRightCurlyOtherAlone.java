@@ -143,3 +143,16 @@ class WithArraysAlone {
     String[] s4 =
         {"foo", "foo"}; // ok
 }
+
+/**
+* Test input for closing brace if that brace terminates
+* a statement or the body of a named interface.
+*/
+interface ITest {} //warn
+
+class Foo {
+	interface IFoo {
+		
+    }} //warn
+
+

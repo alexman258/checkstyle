@@ -87,6 +87,9 @@ public class RightCurlyTest extends AbstractGoogleModuleTestSupport {
             "108:6: " + getCheckMessage(RightCurlyCheck.class, MSG_KEY_LINE_ALONE, "}", 6),
             "122:5: " + getCheckMessage(RightCurlyCheck.class, MSG_KEY_LINE_ALONE, "}", 5),
             "122:6: " + getCheckMessage(RightCurlyCheck.class, MSG_KEY_LINE_ALONE, "}", 6),
+            "151:18: " + getCheckMessage(RightCurlyCheck.class, MSG_KEY_LINE_ALONE, "}", 18),
+            "156:5: " + getCheckMessage(RightCurlyCheck.class,  MSG_KEY_LINE_ALONE, "}", 5),
+            "156:6: " + getCheckMessage(RightCurlyCheck.class,  MSG_KEY_LINE_ALONE, "}", 6),
         };
 
         final Configuration checkConfig = getModuleConfig("RightCurly", "RightCurlyAlone");

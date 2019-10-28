@@ -196,3 +196,7 @@ class ClassWithStaticInitializers
             return new Thread(r);
         }}; // violation
 }
+
+// Interface definitions
+interface IFoo {
+    void doStuff(); }
