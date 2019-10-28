@@ -73,11 +73,7 @@
             <property name="option" value="alone"/>
             <property name="tokens"
              value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT,
-<<<<<<< HEAD
                     INSTANCE_INIT, LITERAL_CASE, LITERAL_SWITCH"/>
-=======
-                    INSTANCE_INIT, LITERAL_CASE"/>
->>>>>>> 530a2b430cbcab740b2bcb1f64c0fd5eb8e8c03e
         </module>
         <module name="WhitespaceAround">
             <property name="allowEmptyConstructors" value="true"/>

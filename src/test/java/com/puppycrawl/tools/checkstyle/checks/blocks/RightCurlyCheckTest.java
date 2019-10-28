@@ -95,11 +95,7 @@ public class RightCurlyCheckTest extends AbstractModuleTestSupport {
         final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.SAME.toString());
         checkConfig.addAttribute("tokens", "LITERAL_DO, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT,"
-<<<<<<< HEAD
-                + "INSTANCE_INIT, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_CASE");
-=======
                 + "INSTANCE_INIT, CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_CASE, LITERAL_SWITCH");
->>>>>>> 530a2b430cbcab740b2bcb1f64c0fd5eb8e8c03e
         final String[] expected = CommonUtil.EMPTY_STRING_ARRAY;
         verify(checkConfig, getPath("InputRightCurlySame.java"), expected);
     }
