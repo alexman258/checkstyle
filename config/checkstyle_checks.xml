@@ -255,6 +255,7 @@
       <property name="tokens" value="LITERAL_IF"/>
       <property name="tokens" value="LITERAL_TRY"/>
       <property name="option" value="alone"/>
+      <property name="tokens" value="ENUM_CONSTANT_DEF" />
     </module>
     <module name="RightCurly">
       <property name="tokens" value="LITERAL_DO"/>

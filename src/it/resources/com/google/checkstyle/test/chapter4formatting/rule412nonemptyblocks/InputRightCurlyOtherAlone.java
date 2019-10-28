@@ -1,5 +1,7 @@
 package com.google.checkstyle.test.chapter4formatting.rule412nonemptyblocks;
 
+import com.sun.tools.internal.jxc.ap.Const;
+
 class InputRightCurlyOtherAlone
 {
     /** @see test method **/
@@ -142,4 +144,25 @@ class WithArraysAlone {
         }; // ok
     String[] s4 =
         {"foo", "foo"}; // ok
+}
+
+/**
+* Testing constant enum definitions
+*/
+enum ConsEnums
+{
+    CONSTANT1("cons1")
+    {}, // warn
+
+    CONSTANT2("cons2") {}, // warn
+    
+    CONSTANT3("cons3") { void method1() {
+    	
+    }}; // warn
+    
+    private ConsEnums(String value)
+    {
+
+    }
+
 }

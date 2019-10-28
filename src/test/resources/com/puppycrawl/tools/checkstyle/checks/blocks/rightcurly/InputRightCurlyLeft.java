@@ -196,3 +196,19 @@ class ClassWithStaticInitializers
             return new Thread(r);
         }}; // violation
 }
+
+enum ConsEnums
+{
+    CONSTANT1("cons1") {}, // warn
+
+    CONSTANT2("cons2") {
+        int i = 0;}, // warn
+    
+    CONSTANT3("cons3") { void method1() {}
+    }; // warn
+    
+    private ConsEnums(String value)
+    {
+
+    }
+}

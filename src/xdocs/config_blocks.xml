@@ -930,7 +930,8 @@ allowedFuture.addCallback(result -> {
           Checks the placement of right curly braces (<code>'}'</code>)
           for if-else, try-catch-finally blocks, while-loops, for-loops,
           method definitions, class definitions, constructor definitions,
-          instance and static initialization blocks.
+          instance and static initialization blocks,
+          constant enum definitions.
           For right curly brace of expression blocks please follow issue
           <a href="https://github.com/checkstyle/checkstyle/issues/5945">#5945</a>.
         </p>
@@ -992,6 +993,9 @@ allowedFuture.addCallback(result -> {
              href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#STATIC_INIT">
                 STATIC_INIT</a>,
             <a
+             href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#ENUM_CONSTANT_DEF">
+                ENUM_CONSTANT_DEF</a>,
+            <a
              href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#INSTANCE_INIT">
                 INSTANCE_INIT</a>.</td>
 
@@ -1007,6 +1011,9 @@ allowedFuture.addCallback(result -> {
             <a
              href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#LITERAL_IF">
                 LITERAL_IF</a>,
+            <a 
+             href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#ENUM_CONSTANT_DEF">
+            </a>
             <a
              href="apidocs/com/puppycrawl/tools/checkstyle/api/TokenTypes.html#LITERAL_ELSE">
                 LITERAL_ELSE</a>.</td>

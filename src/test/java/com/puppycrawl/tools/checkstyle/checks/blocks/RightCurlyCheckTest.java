@@ -67,7 +67,7 @@ public class RightCurlyCheckTest extends AbstractModuleTestSupport {
         final DefaultConfiguration checkConfig = createModuleConfig(RightCurlyCheck.class);
         checkConfig.addAttribute("option", RightCurlyOption.SAME.toString());
         checkConfig.addAttribute("tokens", "LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, "
-                + "LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO");
+                + "LITERAL_IF, LITERAL_ELSE, LITERAL_FOR, LITERAL_WHILE, LITERAL_DO, ENUM_CONSTANT_DEF");
         final String[] expected = {
             "25:17: " + getCheckMessage(MSG_KEY_LINE_SAME, "}", 17),
             "28:17: " + getCheckMessage(MSG_KEY_LINE_SAME, "}", 17),
@@ -76,6 +76,9 @@ public class RightCurlyCheckTest extends AbstractModuleTestSupport {
             "93:27: " + getCheckMessage(MSG_KEY_LINE_BREAK_BEFORE, "}", 27),
             "188:9: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 9),
             "189:53: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 53),
+            "202:25: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 25),
+            "205:19: " + getCheckMessage(MSG_KEY_LINE_BREAK_BEFORE, "}", 19),
+            "208:5: " + getCheckMessage(MSG_KEY_LINE_ALONE, "}", 5),
         };
         verify(checkConfig, getPath("InputRightCurlyLeft.java"), expected);
     }

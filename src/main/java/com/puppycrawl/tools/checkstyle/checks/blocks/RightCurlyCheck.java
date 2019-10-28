@@ -34,7 +34,8 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtil;
  * Checks the placement of right curly braces (<code>'}'</code>)
  * for if-else, try-catch-finally blocks, while-loops, for-loops,
  * method definitions, class definitions, constructor definitions,
- * instance and static initialization blocks.
+ * instance and static initialization blocks,
+ * constant enum definitions.
  * For right curly brace of expression blocks please follow issue
  * <a href="https://github.com/checkstyle/checkstyle/issues/5945">#5945</a>.
  * </p>
@@ -142,6 +143,7 @@ public class RightCurlyCheck extends AbstractCheck {
             TokenTypes.LITERAL_DO,
             TokenTypes.STATIC_INIT,
             TokenTypes.INSTANCE_INIT,
+            TokenTypes.ENUM_CONSTANT_DEF,
         };
     }
 
@@ -453,7 +455,7 @@ public class RightCurlyCheck extends AbstractCheck {
             DetailAST rcurly = null;
             final DetailAST lcurly;
             final int tokenType = ast.getType();
-            if (tokenType == TokenTypes.CLASS_DEF) {
+            if (tokenType == TokenTypes.CLASS_DEF || tokenType == TokenTypes.ENUM_CONSTANT_DEF) {
                 final DetailAST child = ast.getLastChild();
                 lcurly = child.getFirstChild();
                 rcurly = child.getLastChild();
