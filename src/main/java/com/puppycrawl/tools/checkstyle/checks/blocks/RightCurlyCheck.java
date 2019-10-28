@@ -454,6 +454,7 @@ public class RightCurlyCheck extends AbstractCheck {
             DetailAST rcurly = null;
             final DetailAST lcurly;
             final int tokenType = ast.getType();
+
             if (tokenType == TokenTypes.CLASS_DEF || tokenType == TokenTypes.LITERAL_SWITCH) {
                 final DetailAST child = ast.getLastChild();
                 lcurly = child.getFirstChild();
