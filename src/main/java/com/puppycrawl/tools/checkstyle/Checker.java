@@ -204,7 +204,6 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
             cacheFile.putExternalResources(getExternalResourceLocations());
         }
 
-        // Prepare to start
         fireAuditStarted();
         for (final FileSetCheck fsc : fileSetChecks) {
             fsc.beginProcessing(charset);
@@ -215,11 +214,8 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
                 .collect(Collectors.toList());
         processFiles(targetFiles);
 
-        // Finish up
-        // It may also log!!!
         fileSetChecks.forEach(FileSetCheck::finishProcessing);
 
-        // It may also log!!!
         fileSetChecks.forEach(FileSetCheck::destroy);
 
         final int errorCount = counter.getCount();
@@ -298,7 +294,6 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
                     cacheFile.remove(fileName);
                 }
 
-                // We need to catch all exceptions to put a reason failure (file name) in exception
                 throw new CheckstyleException("Exception was thrown while processing "
                         + file.getPath(), ex);
             }
@@ -307,7 +302,6 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
                     cacheFile.remove(fileName);
                 }
 
-                // We need to catch all errors to put a reason failure (file name) in error
                 throw new Error("Error was thrown while processing " + file.getPath(), error);
             }
         }

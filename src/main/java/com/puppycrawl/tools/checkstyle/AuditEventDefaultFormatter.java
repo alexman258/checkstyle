@@ -55,9 +55,8 @@ public class AuditEventDefaultFormatter implements AuditEventFormatter {
             severityLevelName = severityLevel.getName().toUpperCase(Locale.US);
         }
 
-        // Avoid StringBuffer.expandCapacity
-        final int bufLen = calculateBufferLength(event, severityLevelName.length());
-        final StringBuilder sb = new StringBuilder(bufLen);
+        final int bufLenWithoutExpand = calculateBufferLength(event, severityLevelName.length());
+        final StringBuilder sb = new StringBuilder(bufLenWithoutExpand);
 
         sb.append('[').append(severityLevelName).append("] ")
             .append(fileName).append(':').append(event.getLine());

@@ -86,7 +86,7 @@ public final class AstTreeStringPrinter {
         final StringBuilder messageBuilder = new StringBuilder(1024);
         DetailAST node = ast;
         while (node != null) {
-            messageBuilder.append(getIndentation(node))
+            messageBuilder.append(getASCIIIndentation(node))
                 .append(getNodeInfo(node))
                 .append(LINE_SEPARATOR);
             if (node.getType() == TokenTypes.COMMENT_CONTENT
@@ -111,7 +111,7 @@ public final class AstTreeStringPrinter {
         final DetailAST javadocBlock = node.getParent();
         final DetailNode tree = DetailNodeTreeStringPrinter.parseJavadocAsDetailNode(javadocBlock);
 
-        String baseIndentation = getIndentation(node);
+        String baseIndentation = getASCIIIndentation(node);
         baseIndentation = baseIndentation.substring(0, baseIndentation.length() - 2);
         final String rootPrefix = baseIndentation + "   `--";
         final String prefix = baseIndentation + "       ";
@@ -143,7 +143,7 @@ public final class AstTreeStringPrinter {
         }
         else {
             result = printBranch(node.getParent())
-                + getIndentation(node)
+                + getASCIIIndentation(node)
                 + getNodeInfo(node)
                 + LINE_SEPARATOR;
         }
@@ -159,7 +159,7 @@ public final class AstTreeStringPrinter {
         final StringBuilder messageBuilder = new StringBuilder(1024);
         DetailAST node = ast;
         while (node != null) {
-            messageBuilder.append(getIndentation(node))
+            messageBuilder.append(getASCIIIndentation(node))
                     .append(getNodeInfo(node))
                     .append(LINE_SEPARATOR)
                     .append(printTree(node.getFirstChild()));
@@ -185,7 +185,7 @@ public final class AstTreeStringPrinter {
      * @param ast the AST to get the indentation for.
      * @return the indentation in String format.
      */
-    private static String getIndentation(DetailAST ast) {
+    private static String getASCIIIndentation(DetailAST ast) {
         final boolean isLastChild = ast.getNextSibling() == null;
         DetailAST node = ast;
         final StringBuilder indentation = new StringBuilder(1024);
@@ -193,8 +193,6 @@ public final class AstTreeStringPrinter {
             node = node.getParent();
             if (node.getParent() == null) {
                 if (isLastChild) {
-                    // only ASCII symbols must be used due to
-                    // problems with running tests on Windows
                     indentation.append("`--");
                 }
                 else {

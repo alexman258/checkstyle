@@ -164,7 +164,6 @@ public final class DetailAstImpl extends CommonASTWithHiddenTokens implements De
 
     @Override
     public int getChildCount() {
-        // lazy init
         if (childCount == NOT_INITIALIZED) {
             childCount = 0;
             AST child = getFirstChild();

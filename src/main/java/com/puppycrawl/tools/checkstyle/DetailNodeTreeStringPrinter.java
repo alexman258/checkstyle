@@ -114,7 +114,7 @@ public final class DetailNodeTreeStringPrinter {
             else {
                 messageBuilder.append(prefix);
             }
-            messageBuilder.append(getIndentation(node))
+            messageBuilder.append(getASCIIIndentation(node))
                     .append(JavadocUtil.getTokenName(node.getType())).append(" -> ")
                     .append(JavadocUtil.escapeAllControlChars(node.getText())).append(" [")
                     .append(node.getLineNumber()).append(':').append(node.getColumnNumber())
@@ -130,7 +130,7 @@ public final class DetailNodeTreeStringPrinter {
      * @param node the DetailNode to get the indentation for.
      * @return the indentation in String format.
      */
-    private static String getIndentation(DetailNode node) {
+    private static String getASCIIIndentation(DetailNode node) {
         final boolean isLastChild = JavadocUtil.getNextSibling(node) == null;
         DetailNode currentNode = node;
         final StringBuilder indentation = new StringBuilder(1024);
@@ -138,8 +138,6 @@ public final class DetailNodeTreeStringPrinter {
             currentNode = currentNode.getParent();
             if (currentNode.getParent() == null) {
                 if (isLastChild) {
-                    // only ASCII symbols must be used due to
-                    // problems with running tests on Windows
                     indentation.append("`--");
                 }
                 else {

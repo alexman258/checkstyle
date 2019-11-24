@@ -92,7 +92,7 @@ public class JavadocDetailNodeParser {
     /**
      * Custom error listener.
      */
-    private DescriptiveErrorListener errorListener;
+    private DescriptiveErrorListener errorMultiListener;
 
     /**
      * Parses Javadoc comment as DetailNode tree.
@@ -105,15 +105,11 @@ public class JavadocDetailNodeParser {
 
         final String javadocComment = JavadocUtil.getJavadocCommentContent(javadocCommentAst);
 
-        // Use a new error listener each time to be able to use
-        // one check instance for multiple files to be checked
-        // without getting side effects.
-        errorListener = new DescriptiveErrorListener();
+        errorMultiListener = new DescriptiveErrorListener();
 
         // Log messages should have line number in scope of file,
         // not in scope of Javadoc comment.
-        // Offset is line number of beginning of Javadoc comment.
-        errorListener.setOffset(javadocCommentAst.getLineNo() - 1);
+        errorMultiListener.setOffset(javadocCommentAst.getLineNo() - 1);
 
         final ParseStatus result = new ParseStatus();
 
@@ -139,7 +135,7 @@ public class JavadocDetailNodeParser {
                 if (recognitionEx.getCtx() instanceof JavadocParser.HtmlTagContext) {
                     final Token htmlTagNameStart = getMissedHtmlTag(recognitionEx);
                     parseErrorMessage = new ParseErrorMessage(
-                            errorListener.offset + htmlTagNameStart.getLine(),
+                            errorMultiListener.offset + htmlTagNameStart.getLine(),
                             MSG_JAVADOC_MISSED_HTML_CLOSE,
                             htmlTagNameStart.getCharPositionInLine(),
                             htmlTagNameStart.getText());
@@ -150,7 +146,7 @@ public class JavadocDetailNodeParser {
                 // If syntax error occurs then message is printed by error listener
                 // and parser throws this runtime exception to stop parsing.
                 // Just stop processing current Javadoc comment.
-                parseErrorMessage = errorListener.getErrorMessage();
+                parseErrorMessage = errorMultiListener.getErrorMessage();
             }
 
             result.setParseErrorMessage(parseErrorMessage);
@@ -176,7 +172,7 @@ public class JavadocDetailNodeParser {
         parser.removeErrorListeners();
 
         // add custom error listener that logs syntax errors
-        parser.addErrorListener(errorListener);
+        parser.addErrorListener(errorMultiListener);
 
         // JavadocParserErrorStrategy stops parsing on first parse error encountered unlike the
         // DefaultErrorStrategy used by ANTLR which rather attempts error recovery.
@@ -519,7 +515,7 @@ public class JavadocDetailNodeParser {
             final Token token = ((TerminalNode) nonTightTagStartContext.getChild(1))
                     .getSymbol();
             offendingToken = new CommonToken(token);
-            offendingToken.setLine(offendingToken.getLine() + errorListener.offset);
+            offendingToken.setLine(offendingToken.getLine() + errorMultiListener.offset);
         }
         return offendingToken;
     }

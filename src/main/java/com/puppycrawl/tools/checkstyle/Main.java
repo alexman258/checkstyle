@@ -139,12 +139,10 @@ public final class Main {
         finally {
             // return exit code base on validation of Checker
             if (errorCounter > 0) {
-                final LocalizedMessage errorCounterMessage = new LocalizedMessage(1,
+                final LocalizedMessage errorCounterMessageReport = new LocalizedMessage(1,
                         Definitions.CHECKSTYLE_BUNDLE, ERROR_COUNTER,
                         new String[] {String.valueOf(errorCounter)}, null, Main.class, null);
-                // print error count statistic to error output stream,
-                // output stream might be used by validation report content
-                System.err.println(errorCounterMessage.getMessage());
+                System.err.println(errorCounterMessageReport.getMessage());
             }
             if (exitStatus != 0) {
                 System.exit(exitStatus);
@@ -214,15 +212,12 @@ public final class Main {
      * @return found files
      */
     private static List<File> listFiles(File node, List<Pattern> patternsToExclude) {
-        // could be replaced with org.apache.commons.io.FileUtils.list() method
-        // if only we add commons-io library
         final List<File> result = new LinkedList<>();
 
         if (node.canRead()) {
             if (!isPathExcluded(node.getAbsolutePath(), patternsToExclude)) {
                 if (node.isDirectory()) {
                     final File[] files = node.listFiles();
-                    // listFiles() can return null, so we need to check it
                     if (files != null) {
                         for (File element : files) {
                             result.addAll(listFiles(element, patternsToExclude));
@@ -274,7 +269,6 @@ public final class Main {
 
         // create config helper object
         if (options.printAst) {
-            // print AST
             final File file = filesToProcess.get(0);
             final String stringAst = AstTreeStringPrinter.printFileAst(file,
                     JavaParser.Options.WITHOUT_COMMENTS);
@@ -322,7 +316,6 @@ public final class Main {
                         + Main.class.getPackage().getImplementationVersion());
             }
 
-            // run Checker
             result = runCheckstyle(options, filesToProcess);
         }
 
@@ -398,7 +391,6 @@ public final class Main {
             rootModule.configure(config);
             rootModule.addListener(listener);
 
-            // run RootModule
             errorCounter = rootModule.process(filesToProcess);
         }
         finally {

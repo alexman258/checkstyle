@@ -572,7 +572,6 @@ public final class ConfigurationLoader {
                 }
 
                 // omit this module if these should be omitted and the module
-                // has the severity 'ignore'
                 final boolean omitModule = omitIgnoredModules
                     && level == SeverityLevel.IGNORE;
 
