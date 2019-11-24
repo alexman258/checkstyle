@@ -115,8 +115,7 @@ public final class FileText {
             decoder = charset.newDecoder();
             decoder.onMalformedInput(CodingErrorAction.REPLACE);
             decoder.onUnmappableCharacter(CodingErrorAction.REPLACE);
-        }
-        catch (final UnsupportedCharsetException ex) {
+        } catch (final UnsupportedCharsetException ex) {
             final String message = "Unsupported charset: " + charsetName;
             throw new IllegalStateException(message, ex);
         }
@@ -150,8 +149,7 @@ public final class FileText {
         lines = fileText.lines.clone();
         if (fileText.lineBreaks == null) {
             lineBreaks = null;
-        }
-        else {
+        } else {
             lineBreaks = fileText.lineBreaks.clone();
         }
     }

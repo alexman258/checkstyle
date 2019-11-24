@@ -227,8 +227,7 @@ public class PackageObjectFactory implements ModuleFactory {
             if (fullCheckModuleName != null) {
                 instance = createObject(fullCheckModuleName);
             }
-        }
-        else {
+        } else {
             instance = createObject(fullModuleName);
         }
         return instance;
@@ -250,8 +249,7 @@ public class PackageObjectFactory implements ModuleFactory {
             if (fullCheckModuleNames != null) {
                 instance = createObjectFromFullModuleNames(name, fullCheckModuleNames);
             }
-        }
-        else {
+        } else {
             instance = createObjectFromFullModuleNames(name, fullModuleNames);
         }
         return instance;
@@ -272,8 +270,7 @@ public class PackageObjectFactory implements ModuleFactory {
         final Object returnValue;
         if (fullModuleNames.size() == 1) {
             returnValue = createObject(fullModuleNames.iterator().next());
-        }
-        else {
+        } else {
             final String optionalNames = fullModuleNames.stream()
                     .sorted()
                     .collect(Collectors.joining(STRING_SEPARATOR));
@@ -298,8 +295,7 @@ public class PackageObjectFactory implements ModuleFactory {
             returnValue = ModuleReflectionUtil.getCheckstyleModules(packages, loader).stream()
                 .collect(Collectors.groupingBy(Class::getSimpleName,
                     Collectors.mapping(Class::getCanonicalName, Collectors.toSet())));
-        }
-        catch (IOException ignore) {
+        } catch (IOException ignore) {
             returnValue = Collections.emptyMap();
         }
         return returnValue;
@@ -343,8 +339,7 @@ public class PackageObjectFactory implements ModuleFactory {
 
         try {
             clazz = Class.forName(className, true, moduleClassLoader);
-        }
-        catch (final ReflectiveOperationException | NoClassDefFoundError ignored) {
+        } catch (final ReflectiveOperationException | NoClassDefFoundError ignored) {
             // ignore the exception
         }
 
@@ -355,8 +350,7 @@ public class PackageObjectFactory implements ModuleFactory {
                 final Constructor<?> declaredConstructor = clazz.getDeclaredConstructor();
                 declaredConstructor.setAccessible(true);
                 instance = declaredConstructor.newInstance();
-            }
-            catch (final ReflectiveOperationException ex) {
+            } catch (final ReflectiveOperationException ex) {
                 throw new CheckstyleException("Unable to instantiate " + className, ex);
             }
         }

@@ -107,8 +107,7 @@ public class XMLLogger
         writer.println("</checkstyle>");
         if (closeStream) {
             writer.close();
-        }
-        else {
+        } else {
             writer.flush();
         }
     }
@@ -171,8 +170,7 @@ public class XMLLogger
                 synchronized (writerLock) {
                     writeFileError(event);
                 }
-            }
-            else {
+            } else {
                 final FileMessages messages = fileMessages.get(fileName);
                 messages.addError(event);
             }
@@ -197,8 +195,7 @@ public class XMLLogger
         writer.print(" source=\"");
         if (event.getModuleId() == null) {
             writer.print(encode(event.getSourceName()));
-        }
-        else {
+        } else {
             writer.print(encode(event.getModuleId()));
         }
         writer.println("\"/>");
@@ -211,8 +208,7 @@ public class XMLLogger
             synchronized (writerLock) {
                 writeException(throwable);
             }
-        }
-        else {
+        } else {
             final FileMessages messages = fileMessages.get(fileName);
             messages.addException(throwable);
         }
@@ -272,8 +268,7 @@ public class XMLLogger
                         sb.append("#x");
                         sb.append(Integer.toHexString(chr));
                         sb.append(';');
-                    }
-                    else {
+                    } else {
                         sb.append(chr);
                     }
                     break;
@@ -292,8 +287,7 @@ public class XMLLogger
 
         if (ent.charAt(0) != '&' || !CommonUtil.endsWithChar(ent, ';')) {
             reference = false;
-        }
-        else if (ent.charAt(1) == '#') {
+        } else if (ent.charAt(1) == '#') {
             // prefix is "&#"
             int prefixLength = 2;
 
@@ -306,12 +300,10 @@ public class XMLLogger
                 Integer.parseInt(
                     ent.substring(prefixLength, ent.length() - 1), radix);
                 reference = true;
-            }
-            catch (final NumberFormatException ignored) {
+            } catch (final NumberFormatException ignored) {
                 reference = false;
             }
-        }
-        else {
+        } else {
             final String name = ent.substring(1, ent.length() - 1);
             for (String element : ENTITIES) {
                 if (name.equals(element)) {

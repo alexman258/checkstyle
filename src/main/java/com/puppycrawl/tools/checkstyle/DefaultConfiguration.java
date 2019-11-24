@@ -125,8 +125,7 @@ public final class DefaultConfiguration implements Configuration {
         final String current = attributeMap.get(attributeName);
         if (current == null) {
             attributeMap.put(attributeName, value);
-        }
-        else {
+        } else {
             attributeMap.put(attributeName, current + "," + value);
         }
     }

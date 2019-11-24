@@ -128,8 +128,7 @@ public final class PropertyCacheFile {
                     reset();
                 }
             }
-        }
-        else {
+        } else {
             // put the hash in the file if the file is going to be created
             reset();
         }
@@ -149,8 +148,7 @@ public final class PropertyCacheFile {
         try {
             out = Files.newOutputStream(path);
             details.store(out, null);
-        }
-        finally {
+        } finally {
             flushAndCloseOutStream(out);
         }
     }
@@ -230,8 +228,7 @@ public final class PropertyCacheFile {
             digest.update(outputStream.toByteArray());
 
             return new BigInteger(1, digest.digest()).toString(BASE_16).toUpperCase(Locale.ROOT);
-        }
-        catch (final IOException | NoSuchAlgorithmException ex) {
+        } catch (final IOException | NoSuchAlgorithmException ex) {
             // rethrow as unchecked exception
             throw new IllegalStateException("Unable to calculate hashcode.", ex);
         }
@@ -248,8 +245,7 @@ public final class PropertyCacheFile {
         final ObjectOutputStream oos = new ObjectOutputStream(outputStream);
         try {
             oos.writeObject(object);
-        }
-        finally {
+        } finally {
             flushAndCloseOutStream(oos);
         }
     }
@@ -280,8 +276,7 @@ public final class PropertyCacheFile {
                 final String contentHashSum = getHashCodeBasedOnObjectContent(content);
                 resources.add(new ExternalResource(EXTERNAL_RESOURCE_KEY_PREFIX + location,
                         contentHashSum));
-            }
-            catch (CheckstyleException | IOException ex) {
+            } catch (CheckstyleException | IOException ex) {
                 // if exception happened (configuration resource was not found, connection is not
                 // available, resource is broken, etc), we need to calculate hash sum based on
                 // exception object content in order to check whether problem is resolved later
@@ -345,8 +340,7 @@ public final class PropertyCacheFile {
                 if (!cachedHashSum.equals(contentHashSum)) {
                     changed = true;
                 }
-            }
-            else {
+            } else {
                 changed = true;
             }
             return changed;

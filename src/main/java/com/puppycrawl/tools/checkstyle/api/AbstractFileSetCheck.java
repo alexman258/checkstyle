@@ -159,8 +159,7 @@ public abstract class AbstractFileSetCheck
             final String extension = extensions[i];
             if (CommonUtil.startsWithChar(extension, '.')) {
                 fileExtensions[i] = extension;
-            }
-            else {
+            } else {
                 fileExtensions[i] = "." + extension;
             }
         }

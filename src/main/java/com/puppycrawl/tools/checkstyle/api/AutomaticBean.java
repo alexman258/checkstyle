@@ -225,8 +225,7 @@ public abstract class AutomaticBean
             }
             // finally we can set the bean property
             beanUtils.copyProperty(this, key, value);
-        }
-        catch (final InvocationTargetException | IllegalAccessException
+        } catch (final InvocationTargetException | IllegalAccessException
                 | NoSuchMethodException ex) {
             // There is no way to catch IllegalAccessException | NoSuchMethodException
             // as we do PropertyUtils.getPropertyDescriptor before beanUtils.copyProperty
@@ -235,8 +234,7 @@ public abstract class AutomaticBean
             final String message = String.format(Locale.ROOT,
                     "Cannot set property '%s' to '%s'", key, value);
             throw new CheckstyleException(message, ex);
-        }
-        catch (final IllegalArgumentException | ConversionException ex) {
+        } catch (final IllegalArgumentException | ConversionException ex) {
             final String message = String.format(Locale.ROOT, "illegal value '%s' for property "
                     + "'%s'", value, key);
             throw new CheckstyleException(message, ex);
@@ -333,8 +331,7 @@ public abstract class AutomaticBean
             if (!CommonUtil.isBlank(url)) {
                 try {
                     result = CommonUtil.getUriByFilename(url);
-                }
-                catch (CheckstyleException ex) {
+                } catch (CheckstyleException ex) {
                     throw new IllegalArgumentException(ex);
                 }
             }

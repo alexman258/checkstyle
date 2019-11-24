@@ -116,27 +116,22 @@ public final class Main {
             final ParseResult parseResult = commandLine.parseArgs(args);
             if (parseResult.isVersionHelpRequested()) {
                 System.out.println(getVersionString());
-            }
-            else if (parseResult.isUsageHelpRequested()) {
+            } else if (parseResult.isUsageHelpRequested()) {
                 commandLine.usage(System.out);
-            }
-            else {
+            } else {
                 exitStatus = execute(parseResult, cliOptions);
                 errorCounter = exitStatus;
             }
-        }
-        catch (ParameterException ex) {
+        } catch (ParameterException ex) {
             exitStatus = EXIT_WITH_INVALID_USER_INPUT_CODE;
             System.err.println(ex.getMessage());
             System.err.println("Usage: checkstyle [OPTIONS]... FILES...");
             System.err.println("Try 'checkstyle --help' for more information.");
-        }
-        catch (CheckstyleException ex) {
+        } catch (CheckstyleException ex) {
             exitStatus = EXIT_WITH_CHECKSTYLE_EXCEPTION_CODE;
             errorCounter = 1;
             ex.printStackTrace();
-        }
-        finally {
+        } finally {
             // return exit code base on validation of Checker
             if (errorCounter > 0) {
                 final LocalizedMessage errorCounterMessage = new LocalizedMessage(1,
@@ -182,8 +177,7 @@ public final class Main {
         if (hasMessages) {
             messages.forEach(System.out::println);
             exitStatus = EXIT_WITH_INVALID_USER_INPUT_CODE;
-        }
-        else {
+        } else {
             exitStatus = runCli(options, filesToProcess);
         }
         return exitStatus;
@@ -228,8 +222,7 @@ public final class Main {
                             result.addAll(listFiles(element, patternsToExclude));
                         }
                     }
-                }
-                else if (node.isFile()) {
+                } else if (node.isFile()) {
                     result.add(node);
                 }
             }
@@ -279,35 +272,29 @@ public final class Main {
             final String stringAst = AstTreeStringPrinter.printFileAst(file,
                     JavaParser.Options.WITHOUT_COMMENTS);
             System.out.print(stringAst);
-        }
-        else if (Objects.nonNull(options.xpath)) {
+        } else if (Objects.nonNull(options.xpath)) {
             final String branch = XpathUtil.printXpathBranch(options.xpath, filesToProcess.get(0));
             System.out.print(branch);
-        }
-        else if (options.printAstWithComments) {
+        } else if (options.printAstWithComments) {
             final File file = filesToProcess.get(0);
             final String stringAst = AstTreeStringPrinter.printFileAst(file,
                     JavaParser.Options.WITH_COMMENTS);
             System.out.print(stringAst);
-        }
-        else if (options.printJavadocTree) {
+        } else if (options.printJavadocTree) {
             final File file = filesToProcess.get(0);
             final String stringAst = DetailNodeTreeStringPrinter.printFileAst(file);
             System.out.print(stringAst);
-        }
-        else if (options.printTreeWithJavadoc) {
+        } else if (options.printTreeWithJavadoc) {
             final File file = filesToProcess.get(0);
             final String stringAst = AstTreeStringPrinter.printJavaAndJavadocTree(file);
             System.out.print(stringAst);
-        }
-        else if (hasSuppressionLineColumnNumber) {
+        } else if (hasSuppressionLineColumnNumber) {
             final File file = filesToProcess.get(0);
             final String stringSuppressions =
                     SuppressionsStringPrinter.printSuppressions(file,
                             options.suppressionLineColumnNumber, options.tabWidth);
             System.out.print(stringSuppressions);
-        }
-        else {
+        } else {
             if (options.debug) {
                 final Logger parentLogger = Logger.getLogger(Main.class.getName()).getParent();
                 final ConsoleHandler handler = new ConsoleHandler();
@@ -346,8 +333,7 @@ public final class Main {
 
         if (options.propertiesFile == null) {
             props = System.getProperties();
-        }
-        else {
+        } else {
             props = loadProperties(options.propertiesFile);
         }
 
@@ -359,8 +345,7 @@ public final class Main {
         final ConfigurationLoader.IgnoredModulesOptions ignoredModulesOptions;
         if (options.executeIgnoredModules) {
             ignoredModulesOptions = ConfigurationLoader.IgnoredModulesOptions.EXECUTE;
-        }
-        else {
+        } else {
             ignoredModulesOptions = ConfigurationLoader.IgnoredModulesOptions.OMIT;
         }
 
@@ -389,8 +374,7 @@ public final class Main {
 
                 listener = new XpathFileGeneratorAuditListener(getOutputStream(options.outputPath),
                         AutomaticBean.OutputStreamOptions.NONE);
-            }
-            else {
+            } else {
                 listener = createListener(options.format, options.outputPath);
             }
 
@@ -400,8 +384,7 @@ public final class Main {
 
             // run RootModule
             errorCounter = rootModule.process(filesToProcess);
-        }
-        finally {
+        } finally {
             rootModule.destroy();
         }
 
@@ -422,8 +405,7 @@ public final class Main {
 
         try (InputStream stream = Files.newInputStream(file.toPath())) {
             properties.load(stream);
-        }
-        catch (final IOException ex) {
+        } catch (final IOException ex) {
             final LocalizedMessage loadPropertiesExceptionMessage = new LocalizedMessage(1,
                     Definitions.CHECKSTYLE_BUNDLE, LOAD_PROPERTIES_EXCEPTION,
                     new String[] {file.getAbsolutePath()}, null, Main.class, null);
@@ -497,8 +479,7 @@ public final class Main {
         final OutputStream result;
         if (outputPath == null) {
             result = System.out;
-        }
-        else {
+        } else {
             result = Files.newOutputStream(outputPath);
         }
         return result;
@@ -513,8 +494,7 @@ public final class Main {
         final AutomaticBean.OutputStreamOptions result;
         if (outputPath == null) {
             result = AutomaticBean.OutputStreamOptions.NONE;
-        }
-        else {
+        } else {
             result = AutomaticBean.OutputStreamOptions.CLOSE;
         }
         return result;
@@ -543,8 +523,7 @@ public final class Main {
             final AuditListener result;
             if (this == XML) {
                 result = new XMLLogger(out, options);
-            }
-            else {
+            } else {
                 result = new DefaultLogger(out, options);
             }
             return result;
@@ -764,27 +743,22 @@ public final class Main {
                         || propertiesFile != null || outputPath != null
                         || parseResult.hasMatchedOption(OUTPUT_FORMAT_OPTION)) {
                     result.add("Option '-t' cannot be used with other options.");
-                }
-                else if (filesToProcess.size() > 1) {
+                } else if (filesToProcess.size() > 1) {
                     result.add("Printing AST is allowed for only one file.");
                 }
-            }
-            else if (hasSuppressionLineColumnNumber) {
+            } else if (hasSuppressionLineColumnNumber) {
                 if (configurationFile != null || propertiesFile != null
                         || outputPath != null
                         || parseResult.hasMatchedOption(OUTPUT_FORMAT_OPTION)) {
                     result.add("Option '-s' cannot be used with other options.");
-                }
-                else if (filesToProcess.size() > 1) {
+                } else if (filesToProcess.size() > 1) {
                     result.add("Printing xpath suppressions is allowed for only one file.");
                 }
-            }
-            else if (hasConfigurationFile) {
+            } else if (hasConfigurationFile) {
                 try {
                     // test location only
                     CommonUtil.getUriByFilename(configurationFile);
-                }
-                catch (CheckstyleException ignored) {
+                } catch (CheckstyleException ignored) {
                     final String msg = "Could not find config XML file '%s'.";
                     result.add(String.format(Locale.ROOT, msg, configurationFile));
                 }
@@ -800,8 +774,7 @@ public final class Main {
                 if (treeWalkerThreadsNumber < 1) {
                     result.add("TreeWalker threads number must be greater than zero");
                 }
-            }
-            else {
+            } else {
                 result.add("Must specify a config XML file.");
             }
 

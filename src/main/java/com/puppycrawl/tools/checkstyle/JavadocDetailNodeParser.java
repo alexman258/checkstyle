@@ -129,8 +129,7 @@ public class JavadocDetailNodeParser {
                                 + JAVADOC_START.length());
             result.setTree(tree);
             result.firstNonTightHtmlTag = getFirstNonTightHtmlTag(javadocParser);
-        }
-        catch (ParseCancellationException | IllegalArgumentException ex) {
+        } catch (ParseCancellationException | IllegalArgumentException ex) {
             ParseErrorMessage parseErrorMessage = null;
 
             if (ex.getCause() instanceof FailedPredicateException
@@ -213,8 +212,7 @@ public class JavadocDetailNodeParser {
             if (children.length > 0) {
                 currentJavadocParent = children[0];
                 parseTreeParent = parseTreeParent.getChild(0);
-            }
-            else {
+            } else {
                 JavadocNodeImpl nextJavadocSibling = (JavadocNodeImpl) JavadocUtil
                         .getNextSibling(currentJavadocParent);
 
@@ -311,8 +309,7 @@ public class JavadocDetailNodeParser {
         if (parseTree.getChildCount() == 0
                 || "Text".equals(getNodeClassNameWithoutContext(parseTree))) {
             node.setText(parseTree.getText());
-        }
-        else {
+        } else {
             node.setText(getFormattedNodeClassNameWithoutContext(parseTree));
         }
         node.setColumnNumber(getColumn(parseTree));
@@ -349,8 +346,7 @@ public class JavadocDetailNodeParser {
         final int line;
         if (tree instanceof TerminalNode) {
             line = ((TerminalNode) tree).getSymbol().getLine() - 1;
-        }
-        else {
+        } else {
             final ParserRuleContext rule = (ParserRuleContext) tree;
             line = rule.start.getLine() - 1;
         }
@@ -367,8 +363,7 @@ public class JavadocDetailNodeParser {
         final int column;
         if (tree instanceof TerminalNode) {
             column = ((TerminalNode) tree).getSymbol().getCharPositionInLine();
-        }
-        else {
+        } else {
             final ParserRuleContext rule = (ParserRuleContext) tree;
             column = rule.start.getCharPositionInLine();
         }
@@ -408,8 +403,7 @@ public class JavadocDetailNodeParser {
 
         if (node.getChildCount() == 0) {
             tokenType = ((TerminalNode) node).getSymbol().getType();
-        }
-        else {
+        } else {
             final String className = getNodeClassNameWithoutContext(node);
             tokenType = JavadocUtil.getTokenId(convertUpperCamelToUpperUnderscore(className));
         }
@@ -482,12 +476,10 @@ public class JavadocDetailNodeParser {
             if (tokenType == JavadocTokenTypes.HTML_TAG_NAME
                     && prevTokenType == JavadocTokenTypes.START) {
                 stack.push(token);
-            }
-            else if (tokenType == JavadocTokenTypes.HTML_TAG_NAME && !stack.isEmpty()) {
+            } else if (tokenType == JavadocTokenTypes.HTML_TAG_NAME && !stack.isEmpty()) {
                 if (stack.peek().getText().equals(token.getText())) {
                     stack.pop();
-                }
-                else {
+                } else {
                     htmlTagNameStart = stack.pop();
                 }
             }
@@ -514,8 +506,7 @@ public class JavadocDetailNodeParser {
         final ParserRuleContext nonTightTagStartContext = javadocParser.nonTightTagStartContext;
         if (nonTightTagStartContext == null) {
             offendingToken = null;
-        }
-        else {
+        } else {
             final Token token = ((TerminalNode) nonTightTagStartContext.getChild(1))
                     .getSymbol();
             offendingToken = new CommonToken(token);

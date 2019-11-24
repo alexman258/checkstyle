@@ -106,8 +106,7 @@ public class XpathFileGeneratorAuditListener extends AutomaticBean implements Au
                         PackageObjectFactory.getShortFromFullModuleNames(event.getSourceName());
                 writer.print("       checks=\"");
                 writer.print(checkName);
-            }
-            else {
+            } else {
                 writer.print("       id=\"");
                 writer.print(event.getModuleId());
             }

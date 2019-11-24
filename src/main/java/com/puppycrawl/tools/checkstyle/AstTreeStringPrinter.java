@@ -93,8 +93,7 @@ public final class AstTreeStringPrinter {
                     && JavadocUtil.isJavadocComment(node.getParent())) {
                 final String javadocTree = parseAndPrintJavadocTree(node);
                 messageBuilder.append(javadocTree);
-            }
-            else {
+            } else {
                 messageBuilder.append(printJavaAndJavadocTree(node.getFirstChild()));
             }
             node = node.getNextSibling();
@@ -140,8 +139,7 @@ public final class AstTreeStringPrinter {
         final String result;
         if (node == null) {
             result = "";
-        }
-        else {
+        } else {
             result = printBranch(node.getParent())
                 + getIndentation(node)
                 + getNodeInfo(node)
@@ -196,16 +194,13 @@ public final class AstTreeStringPrinter {
                     // only ASCII symbols must be used due to
                     // problems with running tests on Windows
                     indentation.append("`--");
-                }
-                else {
+                } else {
                     indentation.append("|--");
                 }
-            }
-            else {
+            } else {
                 if (node.getNextSibling() == null) {
                     indentation.insert(0, "    ");
-                }
-                else {
+                } else {
                     indentation.insert(0, "|   ");
                 }
             }

@@ -310,14 +310,12 @@ public final class ConfigurationLoader {
                             omitIgnoreModules, threadModeSettings);
             loader.parseInputSource(configSource);
             return loader.configuration;
-        }
-        catch (final SAXParseException ex) {
+        } catch (final SAXParseException ex) {
             final String message = String.format(Locale.ROOT, SAX_PARSE_EXCEPTION_FORMAT,
                     UNABLE_TO_PARSE_EXCEPTION_PREFIX,
                     ex.getMessage(), ex.getLineNumber(), ex.getColumnNumber());
             throw new CheckstyleException(message, ex);
-        }
-        catch (final ParserConfigurationException | IOException | SAXException ex) {
+        } catch (final ParserConfigurationException | IOException | SAXException ex) {
             throw new CheckstyleException(UNABLE_TO_PARSE_EXCEPTION_PREFIX, ex);
         }
     }
@@ -416,8 +414,7 @@ public final class ConfigurationLoader {
             if (pos == value.length() - 1) {
                 fragments.add(String.valueOf(DOLLAR_SIGN));
                 prev = pos + 1;
-            }
-            else if (value.charAt(pos + 1) == '{') {
+            } else if (value.charAt(pos + 1) == '{') {
                 //property found, extract its name or bail on a typo
                 final int endName = value.indexOf('}', pos);
                 if (endName == -1) {
@@ -428,13 +425,11 @@ public final class ConfigurationLoader {
                 fragments.add(null);
                 propertyRefs.add(propertyName);
                 prev = endName + 1;
-            }
-            else {
+            } else {
                 if (value.charAt(pos + 1) == DOLLAR_SIGN) {
                     //backwards compatibility two $ map to one mode
                     fragments.add(String.valueOf(DOLLAR_SIGN));
-                }
-                else {
+                } else {
                     //new behaviour: $X maps to $X for all values of X!='$'
                     fragments.add(value.substring(pos, pos + 2));
                 }
@@ -512,15 +507,13 @@ public final class ConfigurationLoader {
                 }
 
                 configStack.push(conf);
-            }
-            else if (qName.equals(PROPERTY)) {
+            } else if (qName.equals(PROPERTY)) {
                 //extract value and name
                 final String value;
                 try {
                     value = replaceProperties(attributes.getValue(VALUE),
                         overridePropsResolver, attributes.getValue(DEFAULT));
-                }
-                catch (final CheckstyleException ex) {
+                } catch (final CheckstyleException ex) {
                     // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
                     throw new SAXException(ex);
                 }
@@ -530,8 +523,7 @@ public final class ConfigurationLoader {
                 final DefaultConfiguration top =
                     configStack.peek();
                 top.addAttribute(name, value);
-            }
-            else if (qName.equals(MESSAGE)) {
+            } else if (qName.equals(MESSAGE)) {
                 //extract key and value
                 final String key = attributes.getValue(KEY);
                 final String value = attributes.getValue(VALUE);
@@ -539,8 +531,7 @@ public final class ConfigurationLoader {
                 //add to messages of configuration
                 final DefaultConfiguration top = configStack.peek();
                 top.addMessage(key, value);
-            }
-            else {
+            } else {
                 if (!qName.equals(METADATA)) {
                     throw new IllegalStateException("Unknown name:" + qName + ".");
                 }
@@ -561,8 +552,7 @@ public final class ConfigurationLoader {
                     try {
                         final String severity = recentModule.getAttribute(SEVERITY);
                         level = SeverityLevel.getInstance(severity);
-                    }
-                    catch (final CheckstyleException ex) {
+                    } catch (final CheckstyleException ex) {
                         // -@cs[IllegalInstantiation] SAXException is in the overridden
                         // method signature
                         throw new SAXException(

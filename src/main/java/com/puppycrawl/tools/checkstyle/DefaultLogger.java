@@ -124,8 +124,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
 
         if (infoStream == errorStream) {
             errorWriter = infoWriter;
-        }
-        else {
+        } else {
             final Writer errorStreamWriter = new OutputStreamWriter(errorStream,
                     StandardCharsets.UTF_8);
             errorWriter = new PrintWriter(errorStreamWriter);

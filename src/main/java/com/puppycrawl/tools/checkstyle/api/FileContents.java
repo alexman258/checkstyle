@@ -118,8 +118,7 @@ public final class FileContents implements CommentListener {
         if (clangComments.containsKey(startLineNo)) {
             final List<TextBlock> entries = clangComments.get(startLineNo);
             entries.add(comment);
-        }
-        else {
+        } else {
             final List<TextBlock> entries = new ArrayList<>();
             entries.add(comment);
             clangComments.put(startLineNo, entries);
@@ -166,8 +165,7 @@ public final class FileContents implements CommentListener {
             returnValue = new String[1];
             returnValue[0] = line(startLineNo - 1).substring(startColNo,
                     endColNo + 1);
-        }
-        else {
+        } else {
             returnValue = new String[endLineNo - startLineNo + 1];
             returnValue[0] = line(startLineNo - 1).substring(startColNo);
             for (int i = startLineNo; i < endLineNo; i++) {

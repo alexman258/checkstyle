@@ -50,8 +50,7 @@ public class AuditEventDefaultFormatter implements AuditEventFormatter {
             // We change the name of severity level intentionally
             // to shorten the length of the log message.
             severityLevelName = "WARN";
-        }
-        else {
+        } else {
             severityLevelName = severityLevel.getName().toUpperCase(Locale.US);
         }
 
@@ -68,8 +67,7 @@ public class AuditEventDefaultFormatter implements AuditEventFormatter {
         if (event.getModuleId() == null) {
             final String checkShortName = getCheckShortName(event);
             sb.append(checkShortName);
-        }
-        else {
+        } else {
             sb.append(event.getModuleId());
         }
         sb.append(']');
@@ -103,17 +101,14 @@ public class AuditEventDefaultFormatter implements AuditEventFormatter {
         if (lastDotIndex == -1) {
             if (checkFullName.endsWith(SUFFIX)) {
                 checkShortName = checkFullName.substring(0, checkFullName.lastIndexOf(SUFFIX));
-            }
-            else {
+            } else {
                 checkShortName = checkFullName;
             }
-        }
-        else {
+        } else {
             if (checkFullName.endsWith(SUFFIX)) {
                 checkShortName = checkFullName.substring(lastDotIndex + 1,
                     checkFullName.lastIndexOf(SUFFIX));
-            }
-            else {
+            } else {
                 checkShortName = checkFullName.substring(lastDotIndex + 1);
             }
         }
