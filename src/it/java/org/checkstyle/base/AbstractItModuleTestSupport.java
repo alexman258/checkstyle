@@ -331,6 +331,8 @@ public abstract class AbstractItModuleTestSupport extends AbstractPathTestSuppor
                 }
                 lineNumber++;
             }
+        } catch (IOException e) {
+        	e.printStackTrace();
         }
         return result.toArray(new Integer[0]);
     }

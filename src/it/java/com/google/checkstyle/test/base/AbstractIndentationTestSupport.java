@@ -61,8 +61,7 @@ public abstract class AbstractIndentationTestSupport extends AbstractGoogleModul
     }
 
     private static Integer[] getLinesWithWarnAndCheckComments(String aFileName,
-            final int tabWidth)
-                    throws IOException {
+            final int tabWidth) {
         final List<Integer> result = new ArrayList<>();
         try (BufferedReader br = Files.newBufferedReader(
                 Paths.get(aFileName), StandardCharsets.UTF_8)) {
@@ -105,6 +104,8 @@ public abstract class AbstractIndentationTestSupport extends AbstractGoogleModul
                 }
                 lineNumber++;
             }
+        } catch (IOException e) {
+        	e.printStackTrace();
         }
         return result.toArray(new Integer[0]);
     }

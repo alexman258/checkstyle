@@ -22,6 +22,7 @@ package org.checkstyle.suppressionxpathfilter;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -106,6 +107,8 @@ public abstract class AbstractXpathTestSupport extends AbstractCheckstyleModuleT
             bw.write(String.join(DELIMITER, xpathQueries));
             bw.write("\"/>\n");
             bw.write("</suppressions>");
+        } catch (IOException e) {
+        	e.printStackTrace();
         }
 
         return suppressionsXpathConfigFile.getPath();
