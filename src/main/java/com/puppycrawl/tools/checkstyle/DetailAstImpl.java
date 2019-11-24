@@ -207,21 +207,7 @@ public final class DetailAstImpl extends CommonASTWithHiddenTokens implements De
 
     @Override
     public int getLineNo() {
-        int resultNo = -1;
-
-        if (lineNo == NOT_INITIALIZED) {
-            // an inner AST that has been initialized
-            // with initialize(String text)
-            resultNo = findLineNo(getFirstChild());
-
-            if (resultNo == -1) {
-                resultNo = findLineNo(getNextSibling());
-            }
-        }
-        if (resultNo == -1) {
-            resultNo = lineNo;
-        }
-        return resultNo;
+        return getNo("line");
     }
 
     /**
@@ -235,21 +221,38 @@ public final class DetailAstImpl extends CommonASTWithHiddenTokens implements De
 
     @Override
     public int getColumnNo() {
-        int resultNo = -1;
+        return getNo("column");
+    }
+    
+    public int getNo(String typeNo) {
+    	int resultNo = -1;
+    	
+    	if (typeNo.equals("line") && lineNo == NOT_INITIALIZED) {
+    		// an inner AST that has been initialized
+            // with initialize(String text)
+            resultNo = findLineNo(getFirstChild());
 
-        if (columnNo == NOT_INITIALIZED) {
+            if (resultNo == -1) {
+            	resultNo = findLineNo(getNextSibling());
+            }
+            
+    		if (resultNo == -1) {
+                resultNo = lineNo;
+            }
+    	} else if (typeNo.contentEquals("column") && columnNo == NOT_INITIALIZED) {
             // an inner AST that has been initialized
             // with initialize(String text)
             resultNo = findColumnNo(getFirstChild());
 
             if (resultNo == -1) {
-                resultNo = findColumnNo(getNextSibling());
+            	resultNo = findColumnNo(getNextSibling());
             }
-        }
-        if (resultNo == -1) {
-            resultNo = columnNo;
-        }
-        return resultNo;
+            
+            if (resultNo == -1) {
+                resultNo = columnNo;
+            }
+    	}
+    	return resultNo;
     }
 
     /**
