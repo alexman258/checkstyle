@@ -339,16 +339,13 @@ public class JavadocMethodCheck extends AbstractCheck {
     public final void visitToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.PACKAGE_DEF) {
             processPackage(ast);
-        }
-        else if (ast.getType() == TokenTypes.IMPORT) {
+        } else if (ast.getType() == TokenTypes.IMPORT) {
             processImport(ast);
-        }
-        else if (ast.getType() == TokenTypes.CLASS_DEF
+        } else if (ast.getType() == TokenTypes.CLASS_DEF
                  || ast.getType() == TokenTypes.INTERFACE_DEF
                  || ast.getType() == TokenTypes.ENUM_DEF) {
             processClass(ast);
-        }
-        else {
+        } else {
             if (ast.getType() == TokenTypes.METHOD_DEF) {
                 processTypeParams(ast);
             }
@@ -370,13 +367,11 @@ public class JavadocMethodCheck extends AbstractCheck {
             if (dotIdx == -1) {
                 // looks like a topmost class
                 currentClassName = "";
-            }
-            else {
+            } else {
                 currentClassName = currentClassName.substring(0, dotIdx);
             }
             currentTypeParams.pop();
-        }
-        else if (ast.getType() == TokenTypes.METHOD_DEF) {
+        } else if (ast.getType() == TokenTypes.METHOD_DEF) {
             currentTypeParams.pop();
         }
     }
@@ -427,8 +422,7 @@ public class JavadocMethodCheck extends AbstractCheck {
         if (!hasShortCircuitTag(ast, tags)) {
             if (ast.getType() == TokenTypes.ANNOTATION_FIELD_DEF) {
                 checkReturnTag(tags, ast.getLineNo(), true);
-            }
-            else {
+            } else {
                 final Iterator<JavadocTag> it = tags.iterator();
                 // Check for inheritDoc
                 boolean hasInheritDocTag = false;
@@ -444,7 +438,6 @@ public class JavadocMethodCheck extends AbstractCheck {
                     checkReturnTag(tags, ast.getLineNo(), reportExpectedTags);
                 }
             }
-
             // Dump out all unused tags
             tags.stream().filter(javadocTag -> !javadocTag.isSeeOrInheritDocTag())
                 .forEach(javadocTag -> log(javadocTag.getLineNo(), MSG_UNUSED_TAG_GENERAL));
@@ -468,8 +461,7 @@ public class JavadocMethodCheck extends AbstractCheck {
             if (!JavadocTagInfo.INHERIT_DOC.isValidOn(ast)) {
                 log(ast, MSG_INVALID_INHERIT_DOC);
             }
-        }
-        else {
+        } else {
             result = false;
         }
         return result;
@@ -488,8 +480,7 @@ public class JavadocMethodCheck extends AbstractCheck {
 
         if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
             scope = Scope.PUBLIC;
-        }
-        else {
+        } else {
             final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
             scope = ScopeUtil.getScopeFromMods(mods);
         }
@@ -526,20 +517,16 @@ public class JavadocMethodCheck extends AbstractCheck {
                 final int col = calculateTagColumn(javadocArgMatcher, i, startColumnNumber);
                 tags.add(new JavadocTag(currentLine, col, javadocArgMatcher.group(1),
                         javadocArgMatcher.group(2)));
-            }
-            else if (javadocNoargMatcher.find()) {
+            } else if (javadocNoargMatcher.find()) {
                 final int col = calculateTagColumn(javadocNoargMatcher, i, startColumnNumber);
                 tags.add(new JavadocTag(currentLine, col, javadocNoargMatcher.group(1)));
-            }
-            else if (noargCurlyMatcher.find()) {
+            } else if (noargCurlyMatcher.find()) {
                 final int col = calculateTagColumn(noargCurlyMatcher, i, startColumnNumber);
                 tags.add(new JavadocTag(currentLine, col, noargCurlyMatcher.group(1)));
-            }
-            else if (argMultilineStart.find()) {
+            } else if (argMultilineStart.find()) {
                 final int col = calculateTagColumn(argMultilineStart, i, startColumnNumber);
                 tags.addAll(getMultilineArgTags(argMultilineStart, col, lines, i, currentLine));
-            }
-            else if (noargMultilineStart.find()) {
+            } else if (noargMultilineStart.find()) {
                 tags.addAll(getMultilineNoArgTags(noargMultilineStart, lines, i, currentLine));
             }
         }
@@ -897,8 +884,7 @@ public class JavadocMethodCheck extends AbstractCheck {
             if (documentedClassInfo.getClazz() == exceptionInfo.getClazz()) {
                 found = true;
                 foundException = exceptionInfo;
-            }
-            else if (allowThrowsTagsForSubclasses) {
+            } else if (allowThrowsTagsForSubclasses) {
                 found = isSubclass(documentedClassInfo.getClazz(), exceptionInfo.getClazz());
             }
         }
@@ -967,9 +953,8 @@ public class JavadocMethodCheck extends AbstractCheck {
         Class<?> clazz;
         try {
             clazz = getClassResolver().resolve(resolvableClassName, className);
-        }
-        // -@cs[IllegalCatch] Exception type is not predictable.
-        catch (final Exception ignored) {
+        } catch (final Exception ignored) {
+            // -@cs[IllegalCatch] Exception type is not predictable.
             clazz = null;
         }
         return clazz;
@@ -1064,8 +1049,7 @@ public class JavadocMethodCheck extends AbstractCheck {
         final AbstractClassInfo classInfo = findClassAlias(name.getText());
         if (classInfo == null) {
             result = new RegularClass(name, surroundingClass, this);
-        }
-        else {
+        }  else {
             result = new ClassAlias(name, classInfo);
         }
         return result;

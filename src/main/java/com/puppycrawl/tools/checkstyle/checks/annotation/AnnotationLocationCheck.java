@@ -284,8 +284,7 @@ public class AnnotationLocationCheck extends AbstractCheck {
             if (!isCorrectLocation(annotation, hasParameters)) {
                 log(annotation.getLineNo(),
                         MSG_KEY_ANNOTATION_LOCATION_ALONE, getAnnotationName(annotation));
-            }
-            else if (annotation.getColumnNo() != correctIndentation && !hasNodeBefore(annotation)) {
+            } else if (annotation.getColumnNo() != correctIndentation && !hasNodeBefore(annotation)) {
                 log(annotation.getLineNo(), MSG_KEY_ANNOTATION_LOCATION,
                     getAnnotationName(annotation), annotation.getColumnNo(), correctIndentation);
             }
@@ -337,8 +336,7 @@ public class AnnotationLocationCheck extends AbstractCheck {
 
         if (hasParams) {
             allowingCondition = allowSamelineParameterizedAnnotation;
-        }
-        else {
+        } else {
             allowingCondition = allowSamelineSingleParameterlessAnnotation;
         }
         return allowSamelineMultipleAnnotations

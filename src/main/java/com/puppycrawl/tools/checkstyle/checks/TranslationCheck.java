@@ -386,8 +386,7 @@ public class TranslationCheck extends AbstractFileSetCheck {
             searchForDefaultTranslation = true;
             fileNameRegexp = String.format(Locale.ROOT, REGEXP_FORMAT_TO_CHECK_DEFAULT_TRANSLATIONS,
                     baseName, extension);
-        }
-        else {
+        } else {
             searchForDefaultTranslation = false;
             fileNameRegexp = String.format(Locale.ROOT,
                 REGEXP_FORMAT_TO_CHECK_REQUIRED_TRANSLATIONS, baseName, languageCode, extension);
@@ -397,8 +396,7 @@ public class TranslationCheck extends AbstractFileSetCheck {
             if (searchForDefaultTranslation) {
                 missingFileName = Optional.of(String.format(Locale.ROOT,
                         DEFAULT_TRANSLATION_FILE_NAME_FORMATTER, baseName, extension));
-            }
-            else {
+            } else {
                 missingFileName = Optional.of(String.format(Locale.ROOT,
                         FILE_NAME_WITH_LANGUAGE_CODE_FORMATTER, baseName, languageCode, extension));
             }
@@ -440,8 +438,7 @@ public class TranslationCheck extends AbstractFileSetCheck {
                 final Optional<ResourceBundle> bundle = findBundle(resourceBundles, newBundle);
                 if (bundle.isPresent()) {
                     bundle.get().addFile(currentFile);
-                }
-                else {
+                } else {
                     newBundle.addFile(currentFile);
                     resourceBundles.add(newBundle);
                 }
@@ -485,14 +482,11 @@ public class TranslationCheck extends AbstractFileSetCheck {
         final Matcher languageMatcher = LANGUAGE_PATTERN.matcher(fileName);
         if (languageCountryVariantMatcher.matches()) {
             regexp = LANGUAGE_COUNTRY_VARIANT_PATTERN.pattern();
-        }
-        else if (languageCountryMatcher.matches()) {
+        } else if (languageCountryMatcher.matches()) {
             regexp = LANGUAGE_COUNTRY_PATTERN.pattern();
-        }
-        else if (languageMatcher.matches()) {
+        } else if (languageMatcher.matches()) {
             regexp = LANGUAGE_PATTERN.pattern();
-        }
-        else {
+        } else {
             regexp = DEFAULT_TRANSLATION_REGEXP;
         }
         // We use substring(...) instead of replace(...), so that the regular expression does
@@ -568,10 +562,7 @@ public class TranslationCheck extends AbstractFileSetCheck {
             final Properties translations = new Properties();
             translations.load(inStream);
             keys = translations.stringPropertyNames();
-        }
-        // -@cs[IllegalCatch] It is better to catch all exceptions since it can throw
-        // a runtime exception.
-        catch (final Exception ex) {
+        } catch (final Exception ex) {
             logException(ex, file);
         }
         return keys;
@@ -588,8 +579,7 @@ public class TranslationCheck extends AbstractFileSetCheck {
         if (exception instanceof NoSuchFileException) {
             args = null;
             key = "general.fileNotFound";
-        }
-        else {
+        } else {
             args = new String[] {exception.getMessage()};
             key = "general.exception";
         }

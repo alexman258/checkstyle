@@ -49,8 +49,7 @@ public class ArrayInitHandler extends BlockParentHandler {
         if (type == TokenTypes.LITERAL_NEW || type == TokenTypes.ASSIGN) {
             // note: assumes new or assignment is line to align with
             indentLevel = new IndentLevel(getLineStart(parentAST));
-        }
-        else {
+        } else {
             // at this point getParent() is instance of BlockParentHandler
             indentLevel = ((BlockParentHandler) getParent()).getChildrenExpectedIndent();
         }

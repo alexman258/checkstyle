@@ -110,8 +110,7 @@ public final class DetailNodeTreeStringPrinter {
         while (node != null) {
             if (node.getType() == JavadocTokenTypes.JAVADOC) {
                 messageBuilder.append(rootPrefix);
-            }
-            else {
+            } else {
                 messageBuilder.append(prefix);
             }
             messageBuilder.append(getIndentation(node))
@@ -141,16 +140,13 @@ public final class DetailNodeTreeStringPrinter {
                     // only ASCII symbols must be used due to
                     // problems with running tests on Windows
                     indentation.append("`--");
-                }
-                else {
+                } else {
                     indentation.append("|--");
                 }
-            }
-            else {
+            } else {
                 if (JavadocUtil.getNextSibling(currentNode) == null) {
                     indentation.insert(0, "    ");
-                }
-                else {
+                } else {
                     indentation.insert(0, "|   ");
                 }
             }

@@ -87,23 +87,18 @@ abstract class AbstractImportControl {
         final AccessResult returnValue = localCheckAccess(inPkg, inFileName, forImport);
         if (returnValue != AccessResult.UNKNOWN) {
             result = returnValue;
-        }
-        else if (parent == null) {
+        } else if (parent == null) {
             if (strategyOnMismatch == MismatchStrategy.ALLOWED) {
                 result = AccessResult.ALLOWED;
-            }
-            else {
+            } else {
                 result = AccessResult.DISALLOWED;
             }
-        }
-        else {
+        } else {
             if (strategyOnMismatch == MismatchStrategy.ALLOWED) {
                 result = AccessResult.ALLOWED;
-            }
-            else if (strategyOnMismatch == MismatchStrategy.DISALLOWED) {
+            } else if (strategyOnMismatch == MismatchStrategy.DISALLOWED) {
                 result = AccessResult.DISALLOWED;
-            }
-            else {
+            } else {
                 result = parent.checkAccess(inPkg, inFileName, forImport);
             }
         }

@@ -65,8 +65,7 @@ public class TryHandler extends BlockParentHandler {
         if (child instanceof CatchHandler
             || child instanceof FinallyHandler) {
             result = getIndent();
-        }
-        else {
+        } else {
             result = super.getSuggestedChildIndent(child);
         }
         return result;
@@ -114,8 +113,7 @@ public class TryHandler extends BlockParentHandler {
             if (!expectedIdent.isAcceptable(expandedTabsColumnNo(ast))) {
                 logError(ast, subType, expandedTabsColumnNo(ast), expectedIdent);
             }
-        }
-        else {
+        } else {
             if (expandedTabsColumnNo(ast) < expectedIdent.getFirstIndentLevel()) {
                 logError(ast, subType, expandedTabsColumnNo(ast), expectedIdent);
             }
@@ -141,8 +139,7 @@ public class TryHandler extends BlockParentHandler {
                 final DetailAST nextSibling;
                 if (resourceAst.getNextSibling() == null) {
                     nextSibling = getTryResRparen();
-                }
-                else {
+                } else {
                     nextSibling = resourceAst.getNextSibling();
                 }
                 if (isOnStartOfLine(resourceAst)) {
@@ -153,8 +150,7 @@ public class TryHandler extends BlockParentHandler {
                         getIndentCheck().getLineWrappingIndentation(),
                         expectedResourceIndent.getFirstIndentLevel(),
                         true);
-                }
-                else {
+                } else {
                     checkWrappingIndentation(resourceAst, nextSibling);
                 }
             }

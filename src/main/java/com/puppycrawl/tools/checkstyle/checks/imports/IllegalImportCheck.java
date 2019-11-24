@@ -366,8 +366,7 @@ public class IllegalImportCheck
         final FullIdent imp;
         if (ast.getType() == TokenTypes.IMPORT) {
             imp = FullIdent.createFullIdentBelow(ast);
-        }
-        else {
+        } else {
             imp = FullIdent.createFullIdent(
                 ast.getFirstChild().getNextSibling());
         }
@@ -437,8 +436,7 @@ public class IllegalImportCheck
         final boolean result;
         if (regexp) {
             result = isIllegalImportByRegularExpressions(importText);
-        }
-        else {
+        } else {
             result = isIllegalImportByPackagesAndClassNames(importText);
         }
         return result;

@@ -510,16 +510,14 @@ public class SuppressWithNearbyCommentFilter
                 tagCheckRegexp = Pattern.compile(format);
                 if (filter.messageFormat == null) {
                     tagMessageRegexp = null;
-                }
-                else {
+                } else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
                             filter.messageFormat, text, filter.commentFormat);
                     tagMessageRegexp = Pattern.compile(format);
                 }
                 if (filter.idFormat == null) {
                     tagIdRegexp = null;
-                }
-                else {
+                } else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
                             filter.idFormat, text, filter.commentFormat);
                     tagIdRegexp = Pattern.compile(format);
@@ -532,13 +530,11 @@ public class SuppressWithNearbyCommentFilter
                 if (influence >= 1) {
                     firstLine = line;
                     lastLine = line + influence;
-                }
-                else {
+                } else {
                     firstLine = line + influence;
                     lastLine = line;
                 }
-            }
-            catch (final PatternSyntaxException ex) {
+            } catch (final PatternSyntaxException ex) {
                 throw new IllegalArgumentException(
                     "unable to parse expanded comment " + format, ex);
             }
@@ -555,8 +551,7 @@ public class SuppressWithNearbyCommentFilter
         private static int parseInfluence(String format, String influenceFormat, String text) {
             try {
                 return Integer.parseInt(format);
-            }
-            catch (final NumberFormatException ex) {
+            } catch (final NumberFormatException ex) {
                 throw new IllegalArgumentException("unable to parse influence from '" + text
                         + "' using " + influenceFormat, ex);
             }
@@ -628,8 +623,7 @@ public class SuppressWithNearbyCommentFilter
             if (tagIdRegexp != null) {
                 if (event.getModuleId() == null) {
                     match = false;
-                }
-                else {
+                } else {
                     final Matcher idMatcher = tagIdRegexp.matcher(event.getModuleId());
                     match = idMatcher.find();
                 }

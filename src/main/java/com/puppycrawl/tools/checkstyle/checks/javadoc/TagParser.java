@@ -97,11 +97,9 @@ class TagParser {
             // if this is html comment then skip it
             if (isCommentTag(text, position)) {
                 position = skipHtmlComment(text, position);
-            }
-            else if (isTag(text, position)) {
+            } else if (isTag(text, position)) {
                 position = parseTag(text, lineNo, nLines, position);
-            }
-            else {
+            } else {
                 position = getNextCharPos(text, position);
             }
             position = findChar(text, '<', position);
@@ -125,8 +123,7 @@ class TagParser {
 
         if (incompleteTag) {
             tagId = "";
-        }
-        else {
+        } else {
             tagId = getTagId(text, position);
         }
         // is this closed tag

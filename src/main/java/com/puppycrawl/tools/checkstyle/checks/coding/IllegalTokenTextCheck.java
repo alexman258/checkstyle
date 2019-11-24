@@ -152,8 +152,7 @@ public class IllegalTokenTextCheck
     public void setMessage(String message) {
         if (message == null) {
             this.message = "";
-        }
-        else {
+        } else {
             this.message = message;
         }
     }
@@ -184,8 +183,7 @@ public class IllegalTokenTextCheck
         final int compileFlags;
         if (ignoreCase) {
             compileFlags = Pattern.CASE_INSENSITIVE;
-        }
-        else {
+        } else {
             compileFlags = 0;
         }
         format = CommonUtil.createPattern(formatString, compileFlags);

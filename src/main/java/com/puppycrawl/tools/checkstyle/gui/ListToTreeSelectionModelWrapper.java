@@ -71,8 +71,7 @@ class ListToTreeSelectionModelWrapper extends DefaultTreeSelectionModel {
             updatingListSelectionModel = true;
             try {
                 super.resetRowSelection();
-            }
-            finally {
+            } finally {
                 updatingListSelectionModel = false;
             }
         }
@@ -103,8 +102,7 @@ class ListToTreeSelectionModelWrapper extends DefaultTreeSelectionModel {
                         updateSelectedPathIfRowIsSelected(counter);
                     }
                 }
-            }
-            finally {
+            } finally {
                 updatingListSelectionModel = false;
             }
         }

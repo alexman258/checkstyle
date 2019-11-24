@@ -366,8 +366,7 @@ public class AvoidEscapedUnicodeCharactersCheck
         final int lineNo = ast.getLineNo();
         if (singlelineComments.containsKey(lineNo)) {
             result = true;
-        }
-        else {
+        } else {
             final List<TextBlock> commentList = blockComments.get(lineNo);
             if (commentList != null) {
                 final TextBlock comment = commentList.get(commentList.size() - 1);

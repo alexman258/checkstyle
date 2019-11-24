@@ -89,8 +89,7 @@ public abstract class AbstractParenPadCheck
             if (option == PadOption.NOSPACE
                 && Character.isWhitespace(line.charAt(after))) {
                 log(ast, MSG_WS_FOLLOWED, OPEN_PARENTHESIS);
-            }
-            else if (option == PadOption.SPACE
+            } else if (option == PadOption.SPACE
                      && !Character.isWhitespace(line.charAt(after))
                      && line.charAt(after) != CLOSE_PARENTHESIS) {
                 log(ast, MSG_WS_NOT_FOLLOWED, OPEN_PARENTHESIS);
@@ -110,8 +109,7 @@ public abstract class AbstractParenPadCheck
                 && Character.isWhitespace(line.charAt(before))
                 && !CommonUtil.hasWhitespaceBefore(before, line)) {
                 log(ast, MSG_WS_PRECEDED, CLOSE_PARENTHESIS);
-            }
-            else if (option == PadOption.SPACE
+            } else if (option == PadOption.SPACE
                 && !Character.isWhitespace(line.charAt(before))
                 && line.charAt(before) != OPEN_PARENTHESIS) {
                 log(ast, MSG_WS_NOT_PRECEDED, CLOSE_PARENTHESIS);

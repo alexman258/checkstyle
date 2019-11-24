@@ -47,8 +47,7 @@ class FileImportControl extends AbstractImportControl {
         if (regex) {
             this.name = encloseInGroup(name);
             patternForExactMatch = createPatternForExactMatch(this.name);
-        }
-        else {
+        } else {
             this.name = name;
             patternForExactMatch = null;
         }
@@ -88,11 +87,9 @@ class FileImportControl extends AbstractImportControl {
         final boolean result;
         if (fileName == null) {
             result = false;
-        }
-        else if (regex) {
+        } else if (regex) {
             result = patternForExactMatch.matcher(fileName).matches();
-        }
-        else {
+        } else {
             result = name.equals(fileName);
         }
         return result;

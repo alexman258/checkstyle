@@ -52,8 +52,7 @@ class ClassImportRule extends AbstractImportRule {
 
         if (isRegExp()) {
             classMatch = forImport.matches(className);
-        }
-        else {
+        } else {
             classMatch = forImport.equals(className);
         }
 

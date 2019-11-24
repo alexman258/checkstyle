@@ -220,8 +220,7 @@ public class MainFrameModel {
                 }
                 linesToPosition = linesToPositionTemp;
                 text = sb.toString();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 final String exceptionMsg = String.format(Locale.ROOT,
                     "%s occurred while opening file %s.",
                     ex.getClass().getSimpleName(), file.getPath());

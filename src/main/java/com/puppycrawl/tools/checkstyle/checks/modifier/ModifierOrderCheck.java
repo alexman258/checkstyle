@@ -130,8 +130,7 @@ public class ModifierOrderCheck
                              error.getFirstChild().getText()
                              + error.getFirstChild().getNextSibling()
                                 .getText());
-                }
-                else {
+                } else {
                     log(error, MSG_MODIFIER_ORDER, error.getText());
                 }
             }
@@ -176,11 +175,9 @@ public class ModifierOrderCheck
                 if (index == JLS_ORDER.length) {
                     //Current modifier is out of JLS order
                     offendingModifier = modifier;
-                }
-                else if (iterator.hasNext()) {
+                } else if (iterator.hasNext()) {
                     modifier = iterator.next();
-                }
-                else {
+                } else {
                     //Reached end of modifiers without problem
                     modifier = null;
                 }
@@ -216,8 +213,7 @@ public class ModifierOrderCheck
                 || definitionType == TokenTypes.PARAMETER_DEF
                 || definitionType == TokenTypes.CTOR_DEF) {
             annotationOnType = true;
-        }
-        else if (definitionType == TokenTypes.METHOD_DEF) {
+        } else if (definitionType == TokenTypes.METHOD_DEF) {
             final DetailAST typeToken = definition.findFirstToken(TokenTypes.TYPE);
             final int methodReturnType = typeToken.getLastChild().getType();
             if (methodReturnType != TokenTypes.LITERAL_VOID) {

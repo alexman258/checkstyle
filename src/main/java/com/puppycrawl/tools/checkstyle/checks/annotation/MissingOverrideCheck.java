@@ -149,8 +149,7 @@ public final class MissingOverrideCheck extends AbstractCheck {
         if (containsTag && !JavadocTagInfo.INHERIT_DOC.isValidOn(ast)) {
             log(ast.getLineNo(), MSG_KEY_TAG_NOT_VALID_ON,
                 JavadocTagInfo.INHERIT_DOC.getText());
-        }
-        else {
+        } else {
             boolean check = true;
 
             if (javaFiveCompatibility) {

@@ -129,8 +129,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
                 bean.contextualize(childContext);
                 bean.configure(childConf);
             }
-        }
-        catch (final CheckstyleException ex) {
+        } catch (final CheckstyleException ex) {
             throw new CheckstyleException("cannot initialize module " + name
                     + " - " + ex.getMessage(), ex);
         }
@@ -138,12 +137,10 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
             final AbstractCheck check = (AbstractCheck) module;
             check.init();
             registerCheck(check);
-        }
-        else if (module instanceof TreeWalkerFilter) {
+        } else if (module instanceof TreeWalkerFilter) {
             final TreeWalkerFilter filter = (TreeWalkerFilter) module;
             filters.add(filter);
-        }
-        else {
+        } else {
             throw new CheckstyleException(
                 "TreeWalker is not allowed as a parent of " + name
                         + " Please review 'Parent Module' section for this Check in web"
@@ -166,8 +163,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
             }
             if (filters.isEmpty()) {
                 addMessages(messages);
-            }
-            else {
+            } else {
                 final SortedSet<LocalizedMessage> filteredMessages =
                     getFilteredMessages(file.getAbsolutePath(), contents, rootAST);
                 addMessages(filteredMessages);
@@ -209,8 +205,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
         final Set<String> checkTokens = check.getTokenNames();
         if (checkTokens.isEmpty()) {
             tokens = check.getDefaultTokens();
-        }
-        else {
+        } else {
             tokens = check.getRequiredTokens();
 
             //register configured tokens
@@ -220,8 +215,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
                 final int tokenId = TokenUtil.getTokenId(token);
                 if (Arrays.binarySearch(acceptableTokens, tokenId) >= 0) {
                     registerCheck(token, check);
-                }
-                else {
+                } else {
                     final String message = String.format(Locale.ROOT, "Token \"%s\" was "
                             + "not found in Acceptable tokens list in check %s",
                             token, check.getClass().getName());
@@ -234,8 +228,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
         }
         if (check.isCommentNodesRequired()) {
             commentChecks.add(check);
-        }
-        else {
+        } else {
             ordinaryChecks.add(check);
         }
     }
@@ -259,14 +252,12 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
     private void registerCheck(String token, AbstractCheck check) throws CheckstyleException {
         if (check.isCommentNodesRequired()) {
             tokenToCommentChecks.computeIfAbsent(token, empty -> new HashSet<>()).add(check);
-        }
-        else if (TokenUtil.isCommentType(token)) {
+        } else if (TokenUtil.isCommentType(token)) {
             final String message = String.format(Locale.ROOT, "Check '%s' waits for comment type "
                     + "token ('%s') and should override 'isCommentNodesRequired()' "
                     + "method to return 'true'", check.getClass().getName(), token);
             throw new CheckstyleException(message);
-        }
-        else {
+        } else {
             tokenToOrdinaryChecks.computeIfAbsent(token, empty -> new HashSet<>()).add(check);
         }
     }
@@ -296,8 +287,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
 
         if (astState == AstState.WITH_COMMENTS) {
             checks = commentChecks;
-        }
-        else {
+        } else {
             checks = ordinaryChecks;
         }
 
@@ -318,8 +308,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
 
         if (astState == AstState.WITH_COMMENTS) {
             checks = commentChecks;
-        }
-        else {
+        } else {
             checks = ordinaryChecks;
         }
 
@@ -375,8 +364,7 @@ public final class TreeWalker extends AbstractFileSetCheck implements ExternalRe
 
         if (astState == AstState.WITH_COMMENTS) {
             visitors = tokenToCommentChecks.get(tokenType);
-        }
-        else {
+        } else {
             visitors = tokenToOrdinaryChecks.get(tokenType);
         }
         return visitors;

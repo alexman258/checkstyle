@@ -523,8 +523,7 @@ public class RegexpCheck extends AbstractCheck {
     public void setMessage(String message) {
         if (message == null) {
             this.message = "";
-        }
-        else {
+        } else {
             this.message = message;
         }
     }
@@ -623,8 +622,7 @@ public class RegexpCheck extends AbstractCheck {
             if (canContinueValidation(ignore)) {
                 findMatch();
             }
-        }
-        else if (!illegalPattern && matchCount == 0) {
+        } else if (!illegalPattern && matchCount == 0) {
             logMessage(0);
         }
     }
@@ -650,8 +648,7 @@ public class RegexpCheck extends AbstractCheck {
         final LineColumn end;
         if (matcher.end() == 0) {
             end = text.lineColumn(0);
-        }
-        else {
+        } else {
             end = text.lineColumn(matcher.end() - 1);
         }
         boolean ignore = false;
@@ -675,8 +672,7 @@ public class RegexpCheck extends AbstractCheck {
 
         if (message == null || message.isEmpty()) {
             msg = format.pattern();
-        }
-        else {
+        } else {
             msg = message;
         }
 
@@ -686,12 +682,10 @@ public class RegexpCheck extends AbstractCheck {
 
         if (illegalPattern) {
             log(lineNumber, MSG_ILLEGAL_REGEXP, msg);
-        }
-        else {
+        } else {
             if (lineNumber > 0) {
                 log(lineNumber, MSG_DUPLICATE_REGEXP, msg);
-            }
-            else {
+            } else {
                 log(lineNumber, MSG_REQUIRED_REGEXP, msg);
             }
         }

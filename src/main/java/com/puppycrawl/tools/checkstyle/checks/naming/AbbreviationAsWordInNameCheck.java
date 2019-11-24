@@ -311,18 +311,15 @@ public class AbbreviationAsWordInNameCheck extends AbstractCheck {
                     && isInterfaceDeclaration(ast)) {
                 // field declarations in interface are static/final
                 result = true;
-            }
-            else {
+            } else {
                 result = ignoreFinal
                           && modifiers.findFirstToken(TokenTypes.FINAL) != null
                     || ignoreStatic
                         && modifiers.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
             }
-        }
-        else if (ast.getType() == TokenTypes.METHOD_DEF) {
+        } else if (ast.getType() == TokenTypes.METHOD_DEF) {
             result = ignoreOverriddenMethods && hasOverrideAnnotation(modifiers);
-        }
-        else {
+        } else {
             result = CheckUtil.isReceiverParameter(ast);
         }
         return result;
@@ -386,8 +383,7 @@ public class AbbreviationAsWordInNameCheck extends AbstractCheck {
                     abbrStarted = true;
                     beginIndex = index;
                 }
-            }
-            else if (abbrStarted) {
+            } else if (abbrStarted) {
                 abbrStarted = false;
 
                 final int endIndex = index - 1;
@@ -448,8 +444,7 @@ public class AbbreviationAsWordInNameCheck extends AbstractCheck {
         final String result;
         if (endIndex == str.length() - 1) {
             result = str.substring(beginIndex);
-        }
-        else {
+        } else {
             result = str.substring(beginIndex, endIndex);
         }
         return result;

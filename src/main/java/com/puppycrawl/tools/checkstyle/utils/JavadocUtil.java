@@ -123,8 +123,7 @@ public final class JavadocUtil {
             if (JavadocTagInfo.isValidName(tag.getName())) {
                 validTags.add(
                     new JavadocTag(line, col, tag.getName(), tag.getValue()));
-            }
-            else {
+            } else {
                 invalidTags.add(new InvalidJavadocTag(line, col, tag.getName()));
             }
         }
@@ -309,11 +308,9 @@ public final class JavadocUtil {
         final String name;
         if (id == JavadocTokenTypes.EOF) {
             name = "EOF";
-        }
-        else if (id > TOKEN_VALUE_TO_NAME.length - 1) {
+        } else if (id > TOKEN_VALUE_TO_NAME.length - 1) {
             throw new IllegalArgumentException(UNKNOWN_JAVADOC_TOKEN_ID_EXCEPTION_MESSAGE + id);
-        }
-        else {
+        } else {
             name = TOKEN_VALUE_TO_NAME[id];
             if (name == null) {
                 throw new IllegalArgumentException(UNKNOWN_JAVADOC_TOKEN_ID_EXCEPTION_MESSAGE + id);
@@ -347,8 +344,7 @@ public final class JavadocUtil {
         if (javadocTagSection.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG) {
             javadocTagName = getNextSibling(
                     getFirstChild(javadocTagSection)).getText();
-        }
-        else {
+        } else {
             javadocTagName = getFirstChild(javadocTagSection).getText();
         }
         return javadocTagName;
@@ -390,11 +386,9 @@ public final class JavadocUtil {
                     break;
                 }
                 sibling = sibling.getNextSibling();
-            }
-            else if (sibling.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
+            } else if (sibling.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
                 sibling = sibling.getNextSibling();
-            }
-            else {
+            } else {
                 // Annotation, declaration or modifier is here. Do not check further.
                 sibling = null;
             }

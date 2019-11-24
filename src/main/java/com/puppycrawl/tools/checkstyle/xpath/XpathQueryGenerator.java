@@ -182,8 +182,7 @@ public class XpathQueryGenerator {
             final DetailAST child = findChildWithTextAttributeRecursively(ast);
             if (child == null) {
                 xpathQueryBuilder.append(findPositionAmongSiblings(ast));
-            }
-            else {
+            } else {
                 xpathQueryBuilder.append('.').append(getXpathQuery(ast, child));
             }
             xpathQueryBuilder.append(']');
@@ -258,8 +257,7 @@ public class XpathQueryGenerator {
                 curNodeQueryBuilder.append("[@text='")
                         .append(XpathUtil.getTextAttributeValue(cur))
                         .append("']");
-            }
-            else {
+            } else {
                 final DetailAST child = findChildWithTextAttribute(cur);
                 if (child != null && child != ast) {
                     curNodeQueryBuilder.append("[.")

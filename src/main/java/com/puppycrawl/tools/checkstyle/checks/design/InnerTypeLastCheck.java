@@ -76,8 +76,7 @@ public class InnerTypeLastCheck extends AbstractCheck {
         // First root class
         if (rootClass) {
             rootClass = false;
-        }
-        else {
+        } else {
             DetailAST nextSibling = ast.getNextSibling();
             while (nextSibling != null) {
                 if (!ScopeUtil.isInCodeBlock(ast)

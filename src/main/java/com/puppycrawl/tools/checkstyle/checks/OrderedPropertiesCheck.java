@@ -112,8 +112,7 @@ public class OrderedPropertiesCheck extends AbstractFileSetCheck {
         final SequencedProperties properties = new SequencedProperties();
         try (InputStream inputStream = Files.newInputStream(file.toPath())) {
             properties.load(inputStream);
-        }
-        catch (IOException | IllegalArgumentException ex) {
+        } catch (IOException | IllegalArgumentException ex) {
             log(1, MSG_IO_EXCEPTION_KEY, file.getPath(), ex.getLocalizedMessage());
         }
 

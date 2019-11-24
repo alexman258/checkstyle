@@ -446,8 +446,7 @@ public final class NPathComplexityCheck extends AbstractCheck {
             final int type = child.getType();
             if (type == TokenTypes.LOR || type == TokenTypes.LAND) {
                 number++;
-            }
-            else if (type == TokenTypes.QUESTION) {
+            } else if (type == TokenTypes.QUESTION) {
                 number += 2;
             }
             number += countConditionalOperators(child);
@@ -465,8 +464,7 @@ public final class NPathComplexityCheck extends AbstractCheck {
         final DetailAST result;
         if (lastChild.getFirstChild() == null) {
             result = lastChild;
-        }
-        else {
+        } else {
             result = getLastToken(lastChild);
         }
         return result;

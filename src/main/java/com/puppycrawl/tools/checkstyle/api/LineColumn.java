@@ -64,8 +64,7 @@ public class LineColumn implements Comparable<LineColumn> {
         final int result;
         if (line == lineColumn.line) {
             result = Integer.compare(column, lineColumn.column);
-        }
-        else {
+        } else {
             result = Integer.compare(line, lineColumn.line);
         }
         return result;

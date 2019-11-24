@@ -212,8 +212,7 @@ public final class MethodCountCheck extends AbstractCheck {
             if (isInLatestScopeDefinition(ast)) {
                 raiseCounter(ast);
             }
-        }
-        else {
+        } else {
             counters.push(new MethodCounter(ast));
         }
     }
@@ -372,8 +371,7 @@ public final class MethodCountCheck extends AbstractCheck {
             total++;
             if (inInterface) {
                 counts.put(Scope.PUBLIC, 1 + value(Scope.PUBLIC));
-            }
-            else {
+            } else {
                 counts.put(scope, 1 + value(scope));
             }
         }

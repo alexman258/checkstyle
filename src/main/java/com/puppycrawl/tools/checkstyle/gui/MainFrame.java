@@ -144,8 +144,7 @@ public class MainFrame extends JFrame {
             reloadAction.setEnabled(model.isReloadActionEnabled());
             textArea.setText(model.getText());
             treeTable.setLinePositionMap(model.getLinesToPosition());
-        }
-        catch (final CheckstyleException ex) {
+        } catch (final CheckstyleException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }

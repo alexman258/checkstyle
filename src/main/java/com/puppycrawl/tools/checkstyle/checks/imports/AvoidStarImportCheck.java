@@ -139,8 +139,7 @@ public class AvoidStarImportCheck
         for (final String exclude : excludesParam) {
             if (exclude.endsWith(STAR_IMPORT_SUFFIX)) {
                 excludes.add(exclude);
-            }
-            else {
+            } else {
                 excludes.add(exclude + STAR_IMPORT_SUFFIX);
             }
         }
@@ -171,8 +170,7 @@ public class AvoidStarImportCheck
         if (!allowClassImports && ast.getType() == TokenTypes.IMPORT) {
             final DetailAST startingDot = ast.getFirstChild();
             logsStarredImportViolation(startingDot);
-        }
-        else if (!allowStaticMemberImports
+        } else if (!allowStaticMemberImports
             && ast.getType() == TokenTypes.STATIC_IMPORT) {
             // must navigate past the static keyword
             final DetailAST startingDot = ast.getFirstChild().getNextSibling();

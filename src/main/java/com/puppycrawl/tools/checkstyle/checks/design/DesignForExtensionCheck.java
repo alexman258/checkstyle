@@ -399,8 +399,7 @@ public class DesignForExtensionCheck extends AbstractCheck {
         final String name;
         if (dotAst == null) {
             name = annotation.findFirstToken(TokenTypes.IDENT).getText();
-        }
-        else {
+        } else {
             name = dotAst.findFirstToken(TokenTypes.IDENT).getText();
         }
         return name;

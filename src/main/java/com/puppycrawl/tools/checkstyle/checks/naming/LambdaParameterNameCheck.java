@@ -98,8 +98,7 @@ public class LambdaParameterNameCheck extends AbstractNameCheck {
         final DetailAST parametersNode = ast.findFirstToken(TokenTypes.PARAMETERS);
         if (parametersNode == null) {
             super.visitToken(ast);
-        }
-        else {
+        } else {
             for (DetailAST parameterDef = parametersNode.getFirstChild();
                  parameterDef != null;
                  parameterDef = parameterDef.getNextSibling()) {

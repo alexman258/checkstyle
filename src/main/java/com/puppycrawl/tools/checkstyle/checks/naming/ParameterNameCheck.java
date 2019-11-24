@@ -211,8 +211,7 @@ public class ParameterNameCheck extends AbstractNameCheck {
 
         if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
             accessModifier = AccessModifier.PUBLIC;
-        }
-        else {
+        } else {
             final DetailAST params = ast.getParent();
             final DetailAST meth = params.getParent();
             final DetailAST modsToken = meth.findFirstToken(TokenTypes.MODIFIERS);

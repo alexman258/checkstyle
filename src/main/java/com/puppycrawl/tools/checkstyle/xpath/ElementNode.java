@@ -107,12 +107,10 @@ public class ElementNode extends AbstractNode {
         if (TEXT_ATTRIBUTE_NAME.equals(localPart)) {
             if (attributeNode == null) {
                 result = null;
-            }
-            else {
+            } else {
                 result = attributeNode.getStringValue();
             }
-        }
-        else {
+        } else {
             result = null;
         }
         return result;
@@ -199,8 +197,7 @@ public class ElementNode extends AbstractNode {
                             getChildren().toArray(EMPTY_ABSTRACT_NODE_ARRAY))) {
                         result = iterator;
                     }
-                }
-                else {
+                } else {
                     result = EmptyIterator.OfNodes.THE_INSTANCE;
                 }
                 break;
@@ -210,8 +207,7 @@ public class ElementNode extends AbstractNode {
                                  new Navigator.DescendantEnumeration(this, false, true)) {
                         result = iterator;
                     }
-                }
-                else {
+                } else {
                     result = EmptyIterator.OfNodes.THE_INSTANCE;
                 }
                 break;
@@ -299,8 +295,7 @@ public class ElementNode extends AbstractNode {
         final AxisIterator result;
         if (indexAmongSiblings == 0) {
             result = EmptyIterator.OfNodes.THE_INSTANCE;
-        }
-        else {
+        } else {
             try (AxisIterator iterator = new ArrayIterator.OfNodes(
                     getPrecedingSiblings().toArray(EMPTY_ABSTRACT_NODE_ARRAY))) {
                 result = iterator;
@@ -317,8 +312,7 @@ public class ElementNode extends AbstractNode {
         final AxisIterator result;
         if (indexAmongSiblings == parent.getChildren().size() - 1) {
             result = EmptyIterator.OfNodes.THE_INSTANCE;
-        }
-        else {
+        } else {
             try (AxisIterator iterator = new ArrayIterator.OfNodes(
                     getFollowingSiblings().toArray(EMPTY_ABSTRACT_NODE_ARRAY))) {
                 result = iterator;
@@ -400,8 +394,7 @@ public class ElementNode extends AbstractNode {
                 result = siblingEnum.next();
                 if (result == null) {
                     siblingEnum = null;
-                }
-                else {
+                } else {
                     descendEnum = new Navigator.DescendantEnumeration(result, true, false);
                     result = next();
                 }

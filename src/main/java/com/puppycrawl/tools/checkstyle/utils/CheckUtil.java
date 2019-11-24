@@ -171,12 +171,10 @@ public final class CheckUtil {
                 if (txt.startsWith("0x") || txt.startsWith("0X")) {
                     radix = BASE_16;
                     txt = txt.substring(2);
-                }
-                else if (txt.startsWith("0b") || txt.startsWith("0B")) {
+                } else if (txt.startsWith("0b") || txt.startsWith("0B")) {
                     radix = BASE_2;
                     txt = txt.substring(2);
-                }
-                else if (CommonUtil.startsWithChar(txt, '0')) {
+                } else if (CommonUtil.startsWithChar(txt, '0')) {
                     radix = BASE_8;
                     txt = txt.substring(1);
                 }
@@ -208,22 +206,18 @@ public final class CheckUtil {
         final double result;
         if (txt.isEmpty()) {
             result = 0.0;
-        }
-        else {
+        } else {
             final boolean negative = txt.charAt(0) == '-';
             if (type == TokenTypes.NUM_INT) {
                 if (negative) {
                     result = Integer.parseInt(txt, radix);
-                }
-                else {
+                } else {
                     result = Integer.parseUnsignedInt(txt, radix);
                 }
-            }
-            else {
+            } else {
                 if (negative) {
                     result = Long.parseLong(txt, radix);
-                }
-                else {
+                } else {
                     result = Long.parseUnsignedLong(txt, radix);
                 }
             }
@@ -437,11 +431,9 @@ public final class CheckUtil {
             final int tokenType = token.getType();
             if (tokenType == TokenTypes.LITERAL_PUBLIC) {
                 accessModifier = AccessModifier.PUBLIC;
-            }
-            else if (tokenType == TokenTypes.LITERAL_PROTECTED) {
+            } else if (tokenType == TokenTypes.LITERAL_PROTECTED) {
                 accessModifier = AccessModifier.PROTECTED;
-            }
-            else if (tokenType == TokenTypes.LITERAL_PRIVATE) {
+            } else if (tokenType == TokenTypes.LITERAL_PRIVATE) {
                 accessModifier = AccessModifier.PRIVATE;
             }
         }

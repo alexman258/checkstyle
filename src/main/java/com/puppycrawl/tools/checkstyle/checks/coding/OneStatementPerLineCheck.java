@@ -251,11 +251,9 @@ public final class OneStatementPerLineCheck extends AbstractCheck {
         }
         if (isInLambda) {
             checkLambda(ast, currentStatement);
-        }
-        else if (isResource(ast.getParent())) {
+        } else if (isResource(ast.getParent())) {
             checkResourceVariable(ast);
-        }
-        else if (!inForHeader && isOnTheSameLine(currentStatement, lastStatementEnd,
+        } else if (!inForHeader && isOnTheSameLine(currentStatement, lastStatementEnd,
                 forStatementEnd, lambdaStatementEnd)) {
             log(ast, MSG_KEY);
         }
@@ -317,8 +315,7 @@ public final class OneStatementPerLineCheck extends AbstractCheck {
         final boolean multiline;
         if (ast.getPreviousSibling() == null) {
             multiline = false;
-        }
-        else {
+        } else {
             final DetailAST prevSibling = ast.getPreviousSibling();
             multiline = prevSibling.getLineNo() != ast.getLineNo()
                     && ast.getParent() != null;

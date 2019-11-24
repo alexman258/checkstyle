@@ -298,8 +298,7 @@ public class MagicNumberCheck extends AbstractCheck {
                 if (!ignoreFieldDeclaration || !isFieldDeclaration(ast)) {
                     reportMagicNumber(ast);
                 }
-            }
-            else {
+            } else {
                 final boolean found = isMagicNumberExists(ast, constantDefAST);
                 if (found) {
                     reportMagicNumber(ast);
@@ -366,8 +365,7 @@ public class MagicNumberCheck extends AbstractCheck {
             if (ScopeUtil.isInInterfaceOrAnnotationBlock(varDefAST)
                     || varDefAST.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
                 constantDef = varDefAST;
-            }
-            else {
+            } else {
                 // explicit constant
                 final DetailAST modifiersAST = varDefAST.findFirstToken(TokenTypes.MODIFIERS);
 
@@ -390,8 +388,7 @@ public class MagicNumberCheck extends AbstractCheck {
         if (parent.getType() == TokenTypes.UNARY_MINUS) {
             reportAST = parent;
             text = "-" + text;
-        }
-        else if (parent.getType() == TokenTypes.UNARY_PLUS) {
+        } else if (parent.getType() == TokenTypes.UNARY_PLUS) {
             reportAST = parent;
             text = "+" + text;
         }
@@ -493,8 +490,7 @@ public class MagicNumberCheck extends AbstractCheck {
     public void setIgnoreNumbers(double... list) {
         if (list.length == 0) {
             ignoreNumbers = CommonUtil.EMPTY_DOUBLE_ARRAY;
-        }
-        else {
+        } else {
             ignoreNumbers = new double[list.length];
             System.arraycopy(list, 0, ignoreNumbers, 0, list.length);
             Arrays.sort(ignoreNumbers);

@@ -288,8 +288,7 @@ public final class ReturnCountCheck extends AbstractCheck {
         // after the first return statement is seen
         if (ast.getFirstChild().getType() == TokenTypes.SEMI) {
             context.visitLiteralReturn(maxForVoid, true);
-        }
-        else {
+        } else {
             context.visitLiteralReturn(max, false);
         }
     }
@@ -337,8 +336,7 @@ public final class ReturnCountCheck extends AbstractCheck {
             if (checking && maxAllowed != null && count > maxAllowed) {
                 if (isVoidContext) {
                     log(ast, MSG_KEY_VOID, count, maxAllowed);
-                }
-                else {
+                } else {
                     log(ast, MSG_KEY, count, maxAllowed);
                 }
             }

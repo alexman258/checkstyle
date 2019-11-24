@@ -232,8 +232,7 @@ public class JavadocTypeCheck
 
         if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
             customScope = Scope.PUBLIC;
-        }
-        else {
+        } else {
             final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
             customScope = ScopeUtil.getScopeFromMods(mods);
         }
@@ -351,8 +350,7 @@ public class JavadocTypeCheck
                 TYPE_NAME_IN_JAVADOC_TAG.matcher(tag.getFirstArg());
         if (matchInAngleBrackets.find()) {
             typeParamName = matchInAngleBrackets.group(1).trim();
-        }
-        else {
+        } else {
             typeParamName = TYPE_NAME_IN_JAVADOC_TAG_SPLITTER.split(tag.getFirstArg())[0];
         }
         return typeParamName;

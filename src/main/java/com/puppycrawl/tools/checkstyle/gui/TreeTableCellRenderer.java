@@ -123,8 +123,7 @@ class TreeTableCellRenderer extends JTree implements
             int row, int column) {
         if (isSelected) {
             setBackground(table.getSelectionBackground());
-        }
-        else {
+        } else {
             setBackground(table.getBackground());
         }
 

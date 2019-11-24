@@ -148,8 +148,7 @@ public class MultipleStringLiteralsCheck extends AbstractCheck {
     public final void setIgnoreStringsRegexp(Pattern ignoreStringsRegexp) {
         if (ignoreStringsRegexp == null || ignoreStringsRegexp.pattern().isEmpty()) {
             this.ignoreStringsRegexp = null;
-        }
-        else {
+        } else {
             this.ignoreStringsRegexp = ignoreStringsRegexp;
         }
     }

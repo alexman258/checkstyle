@@ -219,8 +219,7 @@ public class JavaNCSSCheck extends AbstractCheck {
             if (count > methodMaximum) {
                 log(ast, MSG_METHOD, count, methodMaximum);
             }
-        }
-        else if (tokenType == TokenTypes.CLASS_DEF) {
+        } else if (tokenType == TokenTypes.CLASS_DEF) {
             //pop counter from the stack
             final Counter counter = counters.pop();
 
@@ -288,9 +287,7 @@ public class JavaNCSSCheck extends AbstractCheck {
         //check if an expression is countable
         if (tokenType == TokenTypes.EXPR) {
             countable = isExpressionCountable(ast);
-        }
-        //check if an variable definition is countable
-        else if (tokenType == TokenTypes.VARIABLE_DEF) {
+        } else if (tokenType == TokenTypes.VARIABLE_DEF) {
             countable = isVariableDefCountable(ast);
         }
         return countable;

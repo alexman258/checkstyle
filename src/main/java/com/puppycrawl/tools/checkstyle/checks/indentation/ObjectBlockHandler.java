@@ -67,8 +67,7 @@ public class ObjectBlockHandler extends BlockParentHandler {
         IndentLevel indent = getParent().getIndent();
         if (parentAST.getType() == TokenTypes.LITERAL_NEW) {
             indent = IndentLevel.addAcceptable(indent, super.getIndentImpl());
-        }
-        else if (parentAST.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
+        } else if (parentAST.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
             indent = super.getIndentImpl();
         }
         return indent;

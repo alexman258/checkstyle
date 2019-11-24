@@ -244,8 +244,7 @@ public class LocalVariableNameCheck
         if (allowOneCharVarInForLoop && isForLoopVariable(ast)) {
             final String variableName = ast.findFirstToken(TokenTypes.IDENT).getText();
             result = variableName.length() != 1;
-        }
-        else {
+        } else {
             final DetailAST modifiersAST = ast.findFirstToken(TokenTypes.MODIFIERS);
             final boolean isFinal = modifiersAST.findFirstToken(TokenTypes.FINAL) != null;
             result = !isFinal && ScopeUtil.isLocalVariableDef(ast);

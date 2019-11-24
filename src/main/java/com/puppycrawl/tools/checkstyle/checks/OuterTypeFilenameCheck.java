@@ -101,8 +101,7 @@ public class OuterTypeFilenameCheck extends AbstractCheck {
                     && ast.getParent() == null) {
                 hasPublic = true;
             }
-        }
-        else {
+        } else {
             final String outerTypeName = ast.findFirstToken(TokenTypes.IDENT).getText();
 
             if (!fileName.equals(outerTypeName)) {

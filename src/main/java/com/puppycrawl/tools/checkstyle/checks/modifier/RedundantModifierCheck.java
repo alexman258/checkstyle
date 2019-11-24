@@ -217,23 +217,18 @@ public class RedundantModifierCheck
     public void visitToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.INTERFACE_DEF) {
             checkInterfaceModifiers(ast);
-        }
-        else if (ast.getType() == TokenTypes.ENUM_DEF) {
+        } else if (ast.getType() == TokenTypes.ENUM_DEF) {
             checkEnumDef(ast);
-        }
-        else {
+        } else {
             if (ast.getType() == TokenTypes.CTOR_DEF) {
                 if (isEnumMember(ast)) {
                     checkEnumConstructorModifiers(ast);
-                }
-                else {
+                } else {
                     checkClassConstructorModifiers(ast);
                 }
-            }
-            else if (ast.getType() == TokenTypes.METHOD_DEF) {
+            } else if (ast.getType() == TokenTypes.METHOD_DEF) {
                 processMethods(ast);
-            }
-            else if (ast.getType() == TokenTypes.RESOURCE) {
+            } else if (ast.getType() == TokenTypes.RESOURCE) {
                 processResources(ast);
             }
 
@@ -295,8 +290,7 @@ public class RedundantModifierCheck
     private void checkEnumDef(DetailAST ast) {
         if (isInterfaceOrAnnotationMember(ast)) {
             processInterfaceOrAnnotation(ast);
-        }
-        else {
+        } else {
             checkForRedundantModifier(ast, TokenTypes.LITERAL_STATIC);
         }
     }
@@ -347,17 +341,14 @@ public class RedundantModifierCheck
                     parent.findFirstToken(TokenTypes.MODIFIERS);
                 checkFinal = classModifiers.findFirstToken(TokenTypes.FINAL) != null;
                 parent = null;
-            }
-            else if (parent.getType() == TokenTypes.LITERAL_NEW
+            } else if (parent.getType() == TokenTypes.LITERAL_NEW
                     || parent.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
                 checkFinal = true;
                 parent = null;
-            }
-            else if (parent.getType() == TokenTypes.ENUM_DEF) {
+            } else if (parent.getType() == TokenTypes.ENUM_DEF) {
                 checkFinal = modifiers.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
                 parent = null;
-            }
-            else {
+            } else {
                 parent = parent.getParent();
             }
         }
@@ -446,8 +437,7 @@ public class RedundantModifierCheck
 
         if (isMostOuterScope) {
             isAccessibleFromPublic = hasPublicModifier;
-        }
-        else {
+        } else {
             final DetailAST parentClassAst = ast.getParent().getParent();
 
             if (hasPublicModifier || parentClassAst.getType() == TokenTypes.INTERFACE_DEF) {

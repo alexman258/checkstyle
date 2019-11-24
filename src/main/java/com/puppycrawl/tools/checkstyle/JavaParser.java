@@ -97,8 +97,7 @@ public final class JavaParser {
         parser.setASTNodeClass(DetailAstImpl.class.getName());
         try {
             parser.compilationUnit();
-        }
-        catch (RecognitionException | TokenStreamException | IllegalStateException ex) {
+        } catch (RecognitionException | TokenStreamException | IllegalStateException ex) {
             final String exceptionMsg = String.format(Locale.ROOT,
                 "%s occurred while parsing file %s.",
                 ex.getClass().getSimpleName(), contents.getFileName());
@@ -206,8 +205,7 @@ public final class JavaParser {
         final DetailAST commentAst;
         if (token.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
             commentAst = createSlCommentNode(token);
-        }
-        else {
+        } else {
             commentAst = CommonUtil.createBlockCommentNode(token);
         }
         return commentAst;

@@ -287,8 +287,7 @@ public class RegexpOnFilenameCheck extends AbstractFileSetCheck {
     private static String getFolderPath(File file) throws CheckstyleException {
         try {
             return file.getCanonicalFile().getParent();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new CheckstyleException("unable to create canonical path names for "
                     + file.getAbsolutePath(), ex);
         }
@@ -307,8 +306,7 @@ public class RegexpOnFilenameCheck extends AbstractFileSetCheck {
         // null pattern always matches, regardless of value of 'match'
         if (folderPattern == null) {
             result = true;
-        }
-        else {
+        } else {
             // null pattern means 'match' applies to the folderPattern matching
             final boolean useMatch = fileNamePattern != null || match;
             result = folderPattern.matcher(folderPath).find() == useMatch;
@@ -336,8 +334,7 @@ public class RegexpOnFilenameCheck extends AbstractFileSetCheck {
 
         if (match) {
             log(1, MSG_MATCH, folder, fileName);
-        }
-        else {
+        } else {
             log(1, MSG_MISMATCH, folder, fileName);
         }
     }
@@ -355,8 +352,7 @@ public class RegexpOnFilenameCheck extends AbstractFileSetCheck {
 
         if (pattern == null) {
             result = defaultString;
-        }
-        else {
+        } else {
             result = pattern.toString();
         }
 

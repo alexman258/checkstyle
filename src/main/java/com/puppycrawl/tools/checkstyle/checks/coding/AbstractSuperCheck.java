@@ -80,8 +80,7 @@ public abstract class AbstractSuperCheck
     public void visitToken(DetailAST ast) {
         if (isOverridingMethod(ast)) {
             methodStack.add(new MethodNode(ast));
-        }
-        else if (isSuperCall(ast)) {
+        } else if (isSuperCall(ast)) {
             final MethodNode methodNode = methodStack.getLast();
             methodNode.setCallingSuper();
         }

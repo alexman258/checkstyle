@@ -177,8 +177,7 @@ public class FallThroughCheck extends AbstractCheck {
                 && !hasFallThroughComment(ast, nextGroup)) {
                 if (isLastGroup) {
                     log(ast, MSG_FALL_THROUGH_LAST);
-                }
-                else {
+                } else {
                     log(nextGroup, MSG_FALL_THROUGH);
                 }
             }
@@ -284,8 +283,7 @@ public class FallThroughCheck extends AbstractCheck {
         if (ast.getType() == TokenTypes.LITERAL_DO) {
             final DetailAST lparen = ast.findFirstToken(TokenTypes.DO_WHILE);
             loopBody = lparen.getPreviousSibling();
-        }
-        else {
+        } else {
             final DetailAST rparen = ast.findFirstToken(TokenTypes.RPAREN);
             loopBody = rparen.getNextSibling();
         }
@@ -395,8 +393,7 @@ public class FallThroughCheck extends AbstractCheck {
         final String linePart = lines[endLineNo - 1].substring(0, endColNo);
         if (matchesComment(reliefPattern, linePart, endLineNo)) {
             allThroughComment = true;
-        }
-        else {
+        } else {
             // Handle:
             //    case 1:
             //    .....

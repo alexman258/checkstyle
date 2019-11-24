@@ -84,8 +84,7 @@ public class SlistHandler extends BlockParentHandler {
             || child instanceof SlistHandler
                 && getParent() instanceof CaseHandler) {
             result = getParent().getSuggestedChildIndent(child);
-        }
-        else {
+        } else {
             result = super.getSuggestedChildIndent(child);
         }
         return result;

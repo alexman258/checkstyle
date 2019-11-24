@@ -365,8 +365,7 @@ public class FinalLocalVariableCheck extends AbstractCheck {
                     && !isInSpecificCodeBlock(ident, TokenTypes.CASE_GROUP)) {
                 candidate.alreadyAssigned = true;
             }
-        }
-        else {
+        } else {
             candidate.assigned = true;
         }
     }

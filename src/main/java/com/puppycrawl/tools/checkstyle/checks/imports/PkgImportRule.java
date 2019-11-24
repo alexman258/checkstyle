@@ -66,8 +66,7 @@ class PkgImportRule extends AbstractImportRule {
             if (pkgMatch && exactMatch) {
                 pkgMatch = !forImport.matches(pkgName + "\\..*\\..*");
             }
-        }
-        else {
+        } else {
             pkgMatch = forImport.startsWith(pkgName + ".");
 
             if (pkgMatch && exactMatch) {

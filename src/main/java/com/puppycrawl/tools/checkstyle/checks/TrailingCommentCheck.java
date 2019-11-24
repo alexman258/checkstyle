@@ -189,8 +189,7 @@ public class TrailingCommentCheck extends AbstractCheck {
             if (cppComments.containsKey(lineNo)) {
                 comment = cppComments.get(lineNo);
                 lineBefore = line.substring(0, comment.getStartColNo());
-            }
-            else {
+            } else {
                 final List<TextBlock> commentList = cComments.get(lineNo);
                 comment = commentList.get(commentList.size() - 1);
                 lineBefore = line.substring(0, comment.getStartColNo());
@@ -221,8 +220,7 @@ public class TrailingCommentCheck extends AbstractCheck {
         // multi-line comment can not be legal
         if (legalComment == null || comment.getStartLineNo() != comment.getEndLineNo()) {
             legal = false;
-        }
-        else {
+        } else {
             String commentText = comment.getText()[0];
             // remove chars which start comment
             commentText = commentText.substring(2);

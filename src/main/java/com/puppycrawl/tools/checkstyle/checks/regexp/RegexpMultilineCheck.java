@@ -157,8 +157,7 @@ public class RegexpMultilineCheck extends AbstractFileSetCheck {
 
         if (matchAcrossLines) {
             result = Pattern.DOTALL;
-        }
-        else {
+        } else {
             result = Pattern.MULTILINE;
         }
 

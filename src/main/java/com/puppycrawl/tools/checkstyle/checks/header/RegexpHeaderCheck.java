@@ -229,8 +229,7 @@ public class RegexpHeaderCheck extends AbstractHeaderCheck {
     public void setMultiLines(int... list) {
         if (list.length == 0) {
             multiLines = EMPTY_INT_ARRAY;
-        }
-        else {
+        } else {
             multiLines = new int[list.length];
             System.arraycopy(list, 0, multiLines, 0, list.length);
             Arrays.sort(multiLines);
@@ -244,8 +243,7 @@ public class RegexpHeaderCheck extends AbstractHeaderCheck {
 
         if (headerSize - multiLines.length > fileSize) {
             log(1, MSG_HEADER_MISSING);
-        }
-        else {
+        } else {
             int headerLineNo = 0;
             int index;
             for (index = 0; headerLineNo < headerSize && index < fileSize; index++) {
@@ -326,12 +324,10 @@ public class RegexpHeaderCheck extends AbstractHeaderCheck {
             try {
                 if (line.isEmpty()) {
                     headerRegexps.add(BLANK_LINE);
-                }
-                else {
+                } else {
                     headerRegexps.add(Pattern.compile(line));
                 }
-            }
-            catch (final PatternSyntaxException ex) {
+            } catch (final PatternSyntaxException ex) {
                 throw new IllegalArgumentException("line "
                         + (headerRegexps.size() + 1)
                         + " in header specification"

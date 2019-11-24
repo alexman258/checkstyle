@@ -164,8 +164,7 @@ public class HeaderCheck extends AbstractHeaderCheck {
     public void setIgnoreLines(int... list) {
         if (list.length == 0) {
             ignoreLines = EMPTY_INT_ARRAY;
-        }
-        else {
+        } else {
             ignoreLines = new int[list.length];
             System.arraycopy(list, 0, ignoreLines, 0, list.length);
             Arrays.sort(ignoreLines);
@@ -176,8 +175,7 @@ public class HeaderCheck extends AbstractHeaderCheck {
     protected void processFiltered(File file, FileText fileText) {
         if (getHeaderLines().size() > fileText.size()) {
             log(1, MSG_MISSING);
-        }
-        else {
+        } else {
             for (int i = 0; i < getHeaderLines().size(); i++) {
                 if (!isMatch(i, fileText.get(i))) {
                     log(i + 1, MSG_MISMATCH, getHeaderLines().get(i));

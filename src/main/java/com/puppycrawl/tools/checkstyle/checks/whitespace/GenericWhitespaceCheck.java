@@ -169,8 +169,7 @@ public class GenericWhitespaceCheck extends AbstractCheck {
             // or a '(),[.'.
             if (depth == 1) {
                 processSingleGeneric(ast, line, after);
-            }
-            else {
+            } else {
                 processNestedGenerics(ast, line, after);
             }
         }
@@ -196,12 +195,10 @@ public class GenericWhitespaceCheck extends AbstractCheck {
             && containsWhitespaceBetween(after, indexOfAmp, line)) {
             if (indexOfAmp - after == 0) {
                 log(ast, MSG_WS_NOT_PRECEDED, "&");
-            }
-            else if (indexOfAmp - after != 1) {
+            } else if (indexOfAmp - after != 1) {
                 log(ast, MSG_WS_FOLLOWED, CLOSE_ANGLE_BRACKET);
             }
-        }
-        else if (line.charAt(after) == ' ') {
+        } else if (line.charAt(after) == ' ') {
             log(ast, MSG_WS_FOLLOWED, CLOSE_ANGLE_BRACKET);
         }
     }
@@ -223,8 +220,7 @@ public class GenericWhitespaceCheck extends AbstractCheck {
             if (Character.isWhitespace(charAfter)) {
                 log(ast, MSG_WS_FOLLOWED, CLOSE_ANGLE_BRACKET);
             }
-        }
-        else if (!isCharacterValidAfterGenericEnd(charAfter)) {
+        } else if (!isCharacterValidAfterGenericEnd(charAfter)) {
             log(ast, MSG_WS_ILLEGAL_FOLLOW, CLOSE_ANGLE_BRACKET);
         }
     }
@@ -275,9 +271,7 @@ public class GenericWhitespaceCheck extends AbstractCheck {
                 if (!Character.isWhitespace(line.charAt(before))) {
                     log(ast, MSG_WS_NOT_PRECEDED, OPEN_ANGLE_BRACKET);
                 }
-            }
-            // Whitespace not required
-            else if (Character.isWhitespace(line.charAt(before))
+            } else if (Character.isWhitespace(line.charAt(before))
                 && !containsWhitespaceBefore(before, line)) {
                 log(ast, MSG_WS_PRECEDED, OPEN_ANGLE_BRACKET);
             }

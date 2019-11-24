@@ -53,8 +53,7 @@ class CsvFilterElement implements IntFilterElement {
             if (index == -1) {
                 final int matchValue = Integer.parseInt(token);
                 addFilter(new IntMatchFilterElement(matchValue));
-            }
-            else {
+            } else {
                 final int lowerBound =
                     Integer.parseInt(token.substring(0, index));
                 final int upperBound =

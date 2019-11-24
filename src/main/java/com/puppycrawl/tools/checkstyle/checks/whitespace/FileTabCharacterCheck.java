@@ -99,8 +99,7 @@ public class FileTabCharacterCheck extends AbstractFileSetCheck {
             if (tabPosition != -1) {
                 if (eachLine) {
                     log(lineNum, tabPosition, MSG_CONTAINS_TAB);
-                }
-                else {
+                } else {
                     log(lineNum, tabPosition, MSG_FILE_CONTAINS_TAB);
                     break;
                 }

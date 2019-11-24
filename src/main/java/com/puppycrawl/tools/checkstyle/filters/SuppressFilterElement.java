@@ -89,37 +89,32 @@ public class SuppressFilterElement
         filePattern = files;
         if (files == null) {
             fileRegexp = null;
-        }
-        else {
+        } else {
             fileRegexp = Pattern.compile(files);
         }
         checkPattern = checks;
         if (checks == null) {
             checkRegexp = null;
-        }
-        else {
+        } else {
             checkRegexp = Pattern.compile(checks);
         }
         messagePattern = message;
         if (message == null) {
             messageRegexp = null;
-        }
-        else {
+        } else {
             messageRegexp = Pattern.compile(message);
         }
         moduleId = modId;
         linesCsv = lines;
         if (lines == null) {
             lineFilter = null;
-        }
-        else {
+        } else {
             lineFilter = new CsvFilterElement(lines);
         }
         columnsCsv = columns;
         if (columns == null) {
             columnFilter = null;
-        }
-        else {
+        } else {
             columnFilter = new CsvFilterElement(columns);
         }
     }
@@ -138,24 +133,21 @@ public class SuppressFilterElement
         if (files == null) {
             filePattern = null;
             fileRegexp = null;
-        }
-        else {
+        } else {
             filePattern = files.pattern();
             fileRegexp = files;
         }
         if (checks == null) {
             checkPattern = null;
             checkRegexp = null;
-        }
-        else {
+        } else {
             checkPattern = checks.pattern();
             checkRegexp = checks;
         }
         if (message == null) {
             messagePattern = null;
             messageRegexp = null;
-        }
-        else {
+        } else {
             messagePattern = message.pattern();
             messageRegexp = message;
         }
@@ -163,16 +155,14 @@ public class SuppressFilterElement
         if (lines == null) {
             linesCsv = null;
             lineFilter = null;
-        }
-        else {
+        } else {
             linesCsv = lines;
             lineFilter = new CsvFilterElement(lines);
         }
         if (columns == null) {
             columnsCsv = null;
             columnFilter = null;
-        }
-        else {
+        } else {
             columnsCsv = columns;
             columnFilter = new CsvFilterElement(columns);
         }

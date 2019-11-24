@@ -398,8 +398,7 @@ public class SuppressWithPlainTextCommentFilter extends AutomaticBean implements
         if (!file.isDirectory()) {
             try {
                 result = new FileText(file, StandardCharsets.UTF_8.name());
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 throw new IllegalStateException("Cannot read source file: " + fileName, ex);
             }
         }
@@ -515,8 +514,7 @@ public class SuppressWithPlainTextCommentFilter extends AutomaticBean implements
             final Pattern commentFormat;
             if (this.suppressionType == SuppressionType.ON) {
                 commentFormat = filter.onCommentFormat;
-            }
-            else {
+            } else {
                 commentFormat = filter.offCommentFormat;
             }
 
@@ -529,22 +527,19 @@ public class SuppressWithPlainTextCommentFilter extends AutomaticBean implements
                 eventSourceRegexp = Pattern.compile(format);
                 if (filter.messageFormat == null) {
                     eventMessageRegexp = null;
-                }
-                else {
+                } else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
                             filter.messageFormat, text, commentFormat);
                     eventMessageRegexp = Pattern.compile(format);
                 }
                 if (filter.idFormat == null) {
                     eventIdRegexp = null;
-                }
-                else {
+                } else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
                             filter.idFormat, text, commentFormat);
                     eventIdRegexp = Pattern.compile(format);
                 }
-            }
-            catch (final PatternSyntaxException ex) {
+            } catch (final PatternSyntaxException ex) {
                 throw new IllegalArgumentException(
                     "unable to parse expanded comment " + format, ex);
             }
@@ -621,8 +616,7 @@ public class SuppressWithPlainTextCommentFilter extends AutomaticBean implements
             if (eventIdRegexp != null) {
                 if (event.getModuleId() == null) {
                     match = false;
-                }
-                else {
+                } else {
                     final Matcher idMatcher = eventIdRegexp.matcher(event.getModuleId());
                     match = idMatcher.find();
                 }

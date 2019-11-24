@@ -229,8 +229,7 @@ public class OperatorWrapCheck
                     && !text.equals(currentLine.trim())
                     && CommonUtil.isBlank(currentLine.substring(colNo + text.length()))) {
                 log(ast, MSG_LINE_NEW, text);
-            }
-            else if (option == WrapOption.EOL
+            } else if (option == WrapOption.EOL
                     && CommonUtil.hasWhitespaceBefore(colNo - 1, currentLine)) {
                 log(ast, MSG_LINE_PREVIOUS, text);
             }

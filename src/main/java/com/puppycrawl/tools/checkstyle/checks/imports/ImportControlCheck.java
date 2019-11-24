@@ -516,16 +516,14 @@ public class ImportControlCheck extends AbstractCheck implements ExternalResourc
             if (ast.getType() == TokenTypes.PACKAGE_DEF) {
                 if (root == null) {
                     log(ast, MSG_MISSING_FILE);
-                }
-                else {
+                } else {
                     packageName = getPackageText(ast);
                     currentImportControl = root.locateFinest(packageName, fileName);
                     if (currentImportControl == null) {
                         log(ast, MSG_UNKNOWN_PKG);
                     }
                 }
-            }
-            else if (currentImportControl != null) {
+            } else if (currentImportControl != null) {
                 final String importText = getImportText(ast);
                 final AccessResult access = currentImportControl.checkAccess(packageName, fileName,
                         importText);
@@ -560,8 +558,7 @@ public class ImportControlCheck extends AbstractCheck implements ExternalResourc
         final FullIdent imp;
         if (ast.getType() == TokenTypes.IMPORT) {
             imp = FullIdent.createFullIdentBelow(ast);
-        }
-        else {
+        } else {
             // know it is a static import
             imp = FullIdent.createFullIdent(ast
                     .getFirstChild().getNextSibling());
@@ -583,8 +580,7 @@ public class ImportControlCheck extends AbstractCheck implements ExternalResourc
             try {
                 root = ImportControlLoader.load(uri);
                 file = uri;
-            }
-            catch (CheckstyleException ex) {
+            } catch (CheckstyleException ex) {
                 throw new IllegalArgumentException(UNABLE_TO_LOAD + uri, ex);
             }
         }

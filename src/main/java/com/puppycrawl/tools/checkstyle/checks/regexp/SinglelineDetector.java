@@ -74,8 +74,7 @@ class SinglelineDetector {
             if (options.getMessage().isEmpty()) {
                 options.getReporter().log(1, MSG_REGEXP_MINIMUM,
                         options.getMinimum(), options.getFormat());
-            }
-            else {
+            } else {
                 options.getReporter().log(1, options.getMessage());
             }
         }
@@ -109,15 +108,13 @@ class SinglelineDetector {
             if (options.getSuppressor()
                     .shouldSuppress(lineNo, startCol, lineNo, endCol - 1)) {
                 checkLine(lineNo, line, matcher, endCol);
-            }
-            else {
+            } else {
                 currentMatches++;
                 if (currentMatches > options.getMaximum()) {
                     if (options.getMessage().isEmpty()) {
                         options.getReporter().log(lineNo, MSG_REGEXP_EXCEEDED,
                                 matcher.pattern().toString());
-                    }
-                    else {
+                    } else {
                         options.getReporter().log(lineNo, options.getMessage());
                     }
                 }

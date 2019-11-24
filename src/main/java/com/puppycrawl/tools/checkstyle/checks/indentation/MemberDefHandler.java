@@ -46,8 +46,7 @@ public class MemberDefHandler extends AbstractExpressionHandler {
         final DetailAST modifiersNode = getMainAst().findFirstToken(TokenTypes.MODIFIERS);
         if (modifiersNode.getChildCount() == 0) {
             checkType();
-        }
-        else {
+        } else {
             checkModifiers();
         }
         final DetailAST firstNode = getMainAst();

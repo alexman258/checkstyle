@@ -196,14 +196,11 @@ public class UnusedImportsCheck extends AbstractCheck {
             if (collect) {
                 processIdent(ast);
             }
-        }
-        else if (ast.getType() == TokenTypes.IMPORT) {
+        } else if (ast.getType() == TokenTypes.IMPORT) {
             processImport(ast);
-        }
-        else if (ast.getType() == TokenTypes.STATIC_IMPORT) {
+        } else if (ast.getType() == TokenTypes.STATIC_IMPORT) {
             processStaticImport(ast);
-        }
-        else {
+        } else {
             collect = true;
             if (processJavadoc) {
                 collectReferencesFromJavadoc(ast);
@@ -350,8 +347,7 @@ public class UnusedImportsCheck extends AbstractCheck {
         final int dotIndex = type.indexOf('.');
         if (dotIndex == -1) {
             topLevelType = type;
-        }
-        else {
+        } else {
             topLevelType = type.substring(0, dotIndex);
         }
         return topLevelType;

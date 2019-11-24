@@ -102,8 +102,7 @@ public class EqualsHashCodeCheck
     public void visitToken(DetailAST ast) {
         if (isEqualsMethod(ast)) {
             objBlockWithEquals.put(ast.getParent(), ast);
-        }
-        else if (isHashCodeMethod(ast)) {
+        } else if (isHashCodeMethod(ast)) {
             objBlockWithHashCode.put(ast.getParent(), ast);
         }
     }

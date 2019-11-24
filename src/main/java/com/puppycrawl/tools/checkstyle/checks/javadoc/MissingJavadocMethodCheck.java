@@ -268,8 +268,7 @@ public class MissingJavadocMethodCheck extends AbstractCheck {
 
         if (lcurly.getFirstChild() == rcurly) {
             numberOfLines = 1;
-        }
-        else {
+        } else {
             numberOfLines = rcurly.getLineNo() - lcurly.getLineNo() - 1;
         }
         return numberOfLines;
@@ -350,8 +349,7 @@ public class MissingJavadocMethodCheck extends AbstractCheck {
 
         if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
             scope = Scope.PUBLIC;
-        }
-        else {
+        } else {
             final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
             scope = ScopeUtil.getScopeFromMods(mods);
         }

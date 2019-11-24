@@ -128,8 +128,7 @@ public final class TreeTable extends JTable {
 
         if (tree.isExpanded(selected)) {
             tree.collapsePath(selected);
-        }
-        else {
+        } else {
             tree.expandPath(selected);
         }
         tree.setSelectionPath(selected);

@@ -53,17 +53,12 @@ public class MethodCallHandler extends AbstractExpressionHandler {
                     || isChainedMethodCallWrapped()
                     || areMethodsChained(container.getMainAst(), getMainAst())) {
                 indentLevel = container.getIndent();
-            }
-            // we should increase indentation only if this is the first
-            // chained method call which was moved to the next line
-            else {
+            } else {
                 indentLevel = new IndentLevel(container.getIndent(), getBasicOffset());
             }
-        }
-        else if (getMainAst().getFirstChild().getType() == TokenTypes.LITERAL_NEW) {
+        } else if (getMainAst().getFirstChild().getType() == TokenTypes.LITERAL_NEW) {
             indentLevel = super.getIndentImpl();
-        }
-        else {
+        } else {
             // if our expression isn't first on the line, just use the start
             // of the line
             final LineSet lines = new LineSet();
@@ -72,8 +67,7 @@ public class MethodCallHandler extends AbstractExpressionHandler {
             final int lineStart = getLineStart(getFirstAst(getMainAst()));
             if (lineStart == firstCol) {
                 indentLevel = super.getIndentImpl();
-            }
-            else {
+            } else {
                 indentLevel = new IndentLevel(lineStart);
             }
         }
@@ -195,8 +189,7 @@ public class MethodCallHandler extends AbstractExpressionHandler {
                 checkExpressionSubtree(getMainAst().getFirstChild(), getIndent(), false, false);
                 lparen = getMainAst();
             }
-        }
-        else {
+        } else {
             // TokenTypes.CTOR_CALL|TokenTypes.SUPER_CTOR_CALL
             lparen = getMainAst().getFirstChild();
         }

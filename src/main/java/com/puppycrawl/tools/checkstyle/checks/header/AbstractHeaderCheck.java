@@ -113,8 +113,7 @@ public abstract class AbstractHeaderCheck extends AbstractFileSetCheck
         try (Reader headerReader = new InputStreamReader(new BufferedInputStream(
                     headerFile.toURL().openStream()), charset)) {
             loadHeader(headerReader);
-        }
-        catch (final IOException ex) {
+        } catch (final IOException ex) {
             throw new CheckstyleException(
                     "unable to load header file " + headerFile, ex);
         }
@@ -147,8 +146,7 @@ public abstract class AbstractHeaderCheck extends AbstractFileSetCheck
 
             try (Reader headerReader = new StringReader(headerExpandedNewLines)) {
                 loadHeader(headerReader);
-            }
-            catch (final IOException ex) {
+            } catch (final IOException ex) {
                 throw new IllegalArgumentException("unable to load header", ex);
             }
         }
@@ -185,8 +183,7 @@ public abstract class AbstractHeaderCheck extends AbstractFileSetCheck
 
         if (headerFile == null) {
             result = Collections.emptySet();
-        }
-        else {
+        } else {
             result = Collections.singleton(headerFile.toString());
         }
 

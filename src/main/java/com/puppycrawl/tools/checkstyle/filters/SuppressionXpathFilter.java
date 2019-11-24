@@ -798,12 +798,10 @@ public class SuppressionXpathFilter extends AutomaticBean implements
             if (optional) {
                 if (FilterUtil.isFileExists(file)) {
                     filters = SuppressionsLoader.loadXpathSuppressions(file);
-                }
-                else {
+                } else {
                     filters = new HashSet<>();
                 }
-            }
-            else {
+            } else {
                 filters = SuppressionsLoader.loadXpathSuppressions(file);
             }
         }

@@ -97,8 +97,7 @@ public class XmlLoader
                 loader.getResourceAsStream(dtdResourceName);
 
             inputSource = new InputSource(dtdIs);
-        }
-        else {
+        } else {
             inputSource = super.resolveEntity(publicId, systemId);
         }
         return inputSource;

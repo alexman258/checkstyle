@@ -339,8 +339,7 @@ public final class ModifiedControlVariableCheck extends AbstractCheck {
                 // this is for-each loop, just pop variables
                 getCurrentVariables().pop();
             }
-        }
-        else {
+        } else {
             final Set<String> variablesManagedByForLoop = getVariablesManagedByForLoop(ast);
             popCurrentVariables(variablesManagedByForLoop.size());
         }

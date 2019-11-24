@@ -299,8 +299,7 @@ public class HiddenFieldCheck
 
         if (type == TokenTypes.CLASS_DEF || type == TokenTypes.ENUM_DEF) {
             frameName = ast.findFirstToken(TokenTypes.IDENT).getText();
-        }
-        else {
+        } else {
             frameName = null;
         }
         final FieldFrame newFrame = new FieldFrame(frame, isStaticInnerType, frameName);
@@ -318,8 +317,7 @@ public class HiddenFieldCheck
                         child.findFirstToken(TokenTypes.MODIFIERS);
                     if (mods.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
                         newFrame.addInstanceField(name);
-                    }
-                    else {
+                    } else {
                         newFrame.addStaticField(name);
                     }
                 }
@@ -407,16 +405,14 @@ public class HiddenFieldCheck
         while (parent != null && !inStatic) {
             if (parent.getType() == TokenTypes.STATIC_INIT) {
                 inStatic = true;
-            }
-            else if (parent.getType() == TokenTypes.METHOD_DEF
+            } else if (parent.getType() == TokenTypes.METHOD_DEF
                         && !ScopeUtil.isInScope(parent, Scope.ANONINNER)
                         || parent.getType() == TokenTypes.VARIABLE_DEF) {
                 final DetailAST mods =
                     parent.findFirstToken(TokenTypes.MODIFIERS);
                 inStatic = mods.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
                 break;
-            }
-            else {
+            } else {
                 parent = parent.getParent();
             }
         }

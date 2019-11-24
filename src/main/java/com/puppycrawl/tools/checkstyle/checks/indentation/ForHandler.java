@@ -54,8 +54,7 @@ public class ForHandler extends BlockParentHandler {
             final DetailAST forEach =
                     getMainAst().findFirstToken(TokenTypes.FOR_EACH_CLAUSE);
             checkExpressionSubtree(forEach, expected, false, false);
-        }
-        else {
+        } else {
             checkExpressionSubtree(init, expected, false, false);
 
             final DetailAST cond =

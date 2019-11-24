@@ -110,8 +110,7 @@ public class FinalClassCheck
                     final ClassDesc desc = classes.peek();
                     if (modifiers.findFirstToken(TokenTypes.LITERAL_PRIVATE) == null) {
                         desc.registerNonPrivateCtor();
-                    }
-                    else {
+                    } else {
                         desc.registerPrivateCtor();
                     }
                 }
@@ -197,12 +196,10 @@ public class FinalClassCheck
         if (outerClassQualifiedName == null) {
             if (packageName.isEmpty()) {
                 qualifiedClassName = className;
-            }
-            else {
+            } else {
                 qualifiedClassName = packageName + PACKAGE_SEPARATOR + className;
             }
-        }
-        else {
+        } else {
             qualifiedClassName = outerClassQualifiedName + PACKAGE_SEPARATOR + className;
         }
         return qualifiedClassName;

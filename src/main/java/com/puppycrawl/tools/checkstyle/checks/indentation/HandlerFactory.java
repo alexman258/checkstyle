@@ -143,11 +143,9 @@ public class HandlerFactory {
             createdHandlers.get(ast);
         if (handler != null) {
             resultHandler = handler;
-        }
-        else if (ast.getType() == TokenTypes.METHOD_CALL) {
+        } else if (ast.getType() == TokenTypes.METHOD_CALL) {
             resultHandler = createMethodCallHandler(indentCheck, ast, parent);
-        }
-        else {
+        } else {
             final Constructor<?> handlerCtor = typeHandlers.get(ast.getType());
             resultHandler = (AbstractExpressionHandler) CommonUtil.invokeConstructor(
                 handlerCtor, indentCheck, ast, parent);

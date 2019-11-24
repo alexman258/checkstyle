@@ -291,8 +291,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
                 final Entry<DetailAST, Integer> entry;
                 if (validateBetweenScopes) {
                     entry = calculateDistanceBetweenScopes(semicolonAst, variable);
-                }
-                else {
+                } else {
                     entry = calculateDistanceInSingleScope(semicolonAst, variable);
                 }
                 final DetailAST variableUsageAst = entry.getKey();
@@ -302,8 +301,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
                     if (ignoreFinal) {
                         log(variable.getLineNo(),
                                 MSG_KEY_EXT, variable.getText(), dist, allowedDistance);
-                    }
-                    else {
+                    } else {
                         log(variable.getLineNo(),
                                 MSG_KEY, variable.getText(), dist, allowedDistance);
                     }
@@ -359,18 +357,14 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
                         // method is called without instance
                         if (instanceName.isEmpty()) {
                             result = false;
-                        }
-                        // differs from previous instance
-                        else if (!instanceName.equals(initInstanceName)) {
+                        } else if (!instanceName.equals(initInstanceName)) {
                             if (initInstanceName.isEmpty()) {
                                 initInstanceName = instanceName;
-                            }
-                            else {
+                            } else {
                                 result = false;
                             }
                         }
-                    }
-                    else {
+                    } else {
                         // is not method call
                         result = false;
                     }
@@ -419,8 +413,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
                     dist = getDistToVariableUsageInChildNode(currentAst, variableIdentAst, dist);
                     variableUsageAst = currentAst;
                     firstUsageFound = true;
-                }
-                else if (currentAst.getType() != TokenTypes.VARIABLE_DEF) {
+                } else if (currentAst.getType() != TokenTypes.VARIABLE_DEF) {
                     dist++;
                 }
             }
@@ -464,8 +457,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
             case TokenTypes.LITERAL_SWITCH:
                 if (isVariableInOperatorExpr(examineNode, varIdent)) {
                     resultDist++;
-                }
-                else {
+                } else {
                     // variable usage is in inner scope
                     // reset counters, because we can't determine distance
                     resultDist = 0;
@@ -474,8 +466,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
             default:
                 if (examineNode.findFirstToken(TokenTypes.SLIST) == null) {
                     resultDist++;
-                }
-                else {
+                } else {
                     resultDist = 0;
                 }
         }
@@ -542,19 +533,12 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
                 currentScopeAst = exprWithVariableUsage;
                 if (exprWithVariableUsage == null) {
                     variableUsageAst = blockWithVariableUsage;
-                }
-                else {
+                } else {
                     variableUsageAst = exprWithVariableUsage;
                 }
-            }
-
-            // If there's no any variable usage, then distance = 0.
-            else if (variableUsageExpressions.isEmpty()) {
+            } else if (variableUsageExpressions.isEmpty()) {
                 variableUsageAst = null;
-            }
-            // If variable usage exists in different scopes, then distance =
-            // distance until variable first usage.
-            else {
+            } else {
                 dist++;
                 variableUsageAst = variableUsageExpressions.get(0);
             }
@@ -579,10 +563,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
             if (currentStatementAst.getFirstChild() != null) {
                 if (isChild(currentStatementAst, variableAst)) {
                     variableUsageExpressions.add(currentStatementAst);
-                }
-                // If expression doesn't contain variable and this variable
-                // hasn't been met yet, then distance + 1.
-                else if (variableUsageExpressions.isEmpty()
+                } else if (variableUsageExpressions.isEmpty()
                         && currentStatementAst.getType() != TokenTypes.VARIABLE_DEF) {
                     distance++;
                 }
@@ -613,9 +594,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
             // Find currentNode for DO-WHILE block.
             if (block.getType() == TokenTypes.LITERAL_DO) {
                 currentNode = block.getFirstChild();
-            }
-            // Find currentNode for FOR or WHILE block.
-            else {
+            } else {
                 // Looking for RPAREN ( ')' ) token to mark the end of operator
                 // expression.
                 currentNode = block.findFirstToken(TokenTypes.RPAREN).getNextSibling();
@@ -625,8 +604,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
 
             if (currentNodeType == TokenTypes.SLIST) {
                 firstNodeInsideBlock = currentNode.getFirstChild();
-            }
-            else if (currentNodeType != TokenTypes.EXPR) {
+            } else if (currentNodeType != TokenTypes.EXPR) {
                 firstNodeInsideBlock = currentNode;
             }
         }
@@ -669,8 +647,7 @@ public class VariableDeclarationUsageDistanceCheck extends AbstractCheck {
 
                 if (currentNode.getType() == TokenTypes.LITERAL_IF) {
                     currentNode = currentNode.getLastChild();
-                }
-                else if (isChild(currentNode, variable)) {
+                } else if (isChild(currentNode, variable)) {
                     variableUsageExpressions.add(currentNode);
                     currentNode = null;
                 }

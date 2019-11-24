@@ -218,8 +218,7 @@ public class HideUtilityClassConstructorCheck extends AbstractCheck {
                         if (!isPrivate) {
                             hasNonPrivateStaticMethodOrField = true;
                         }
-                    }
-                    else {
+                    } else {
                         hasNonStaticMethodOrField = true;
                     }
                 }

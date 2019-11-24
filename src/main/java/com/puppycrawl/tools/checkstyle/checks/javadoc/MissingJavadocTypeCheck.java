@@ -226,8 +226,7 @@ public class MissingJavadocTypeCheck extends AbstractCheck {
 
         if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)) {
             customScope = Scope.PUBLIC;
-        }
-        else {
+        } else {
             final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
             customScope = ScopeUtil.getScopeFromMods(mods);
         }

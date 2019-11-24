@@ -47,11 +47,9 @@ public final class ScopeUtil {
                 token = token.getNextSibling()) {
             if ("public".equals(token.getText())) {
                 returnValue = Scope.PUBLIC;
-            }
-            else if ("protected".equals(token.getText())) {
+            } else if ("protected".equals(token.getText())) {
                 returnValue = Scope.PROTECTED;
-            }
-            else if ("private".equals(token.getText())) {
+            } else if ("private".equals(token.getText())) {
                 returnValue = Scope.PRIVATE;
             }
         }
@@ -79,8 +77,7 @@ public final class ScopeUtil {
                 if (returnValue == null || returnValue.isIn(modScope)) {
                     returnValue = modScope;
                 }
-            }
-            else if (type == TokenTypes.LITERAL_NEW) {
+            } else if (type == TokenTypes.LITERAL_NEW) {
                 returnValue = Scope.ANONINNER;
                 // because Scope.ANONINNER is not in any other Scope
                 break;
@@ -137,8 +134,7 @@ public final class ScopeUtil {
             final int type = token.getType();
             if (type == tokenType) {
                 returnValue = true;
-            }
-            else if (type == TokenTypes.CLASS_DEF
+            } else if (type == TokenTypes.CLASS_DEF
                 || type == TokenTypes.ENUM_DEF
                 || type == TokenTypes.INTERFACE_DEF
                 || type == TokenTypes.ANNOTATION_DEF
@@ -178,8 +174,7 @@ public final class ScopeUtil {
             final int type = token.getType();
             if (type == TokenTypes.ENUM_DEF) {
                 returnValue = true;
-            }
-            else if (type == TokenTypes.INTERFACE_DEF
+            } else if (type == TokenTypes.INTERFACE_DEF
                 || type == TokenTypes.ANNOTATION_DEF
                 || type == TokenTypes.CLASS_DEF
                 || type == TokenTypes.LITERAL_NEW) {

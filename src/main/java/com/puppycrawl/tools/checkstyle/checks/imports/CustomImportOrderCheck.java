@@ -523,8 +523,7 @@ public class CustomImportOrderCheck extends AbstractCheck {
                 samePackageDomainsRegExp = createSamePackageRegexp(
                         samePackageMatchingDepth, ast);
             }
-        }
-        else {
+        } else {
             final String importFullPath = getFullImportIdent(ast);
             final int lineNo = ast.getLineNo();
             final boolean isStatic = ast.getType() == TokenTypes.STATIC_IMPORT;
@@ -562,12 +561,10 @@ public class CustomImportOrderCheck extends AbstractCheck {
                         && compareImports(fullImportIdent, previousImportFromCurrentGroup) < 0) {
                     log(importObject.getLineNumber(), MSG_LEX,
                             fullImportIdent, previousImportFromCurrentGroup);
-                }
-                else {
+                } else {
                     previousImportFromCurrentGroup = fullImportIdent;
                 }
-            }
-            else {
+            } else {
                 //not the last group, last one is always NON_GROUP
                 if (customImportOrderRules.size() > currentGroupNumber + 1) {
                     final String nextGroup = getNextImportGroup(currentGroupNumber + 1);
@@ -579,13 +576,11 @@ public class CustomImportOrderCheck extends AbstractCheck {
                         currentGroup = nextGroup;
                         currentGroupNumber = customImportOrderRules.indexOf(nextGroup);
                         previousImportFromCurrentGroup = fullImportIdent;
-                    }
-                    else {
+                    } else {
                         logWrongImportGroupOrder(importObject.getLineNumber(),
                                 importGroup, nextGroup, fullImportIdent);
                     }
-                }
-                else {
+                } else {
                     logWrongImportGroupOrder(importObject.getLineNumber(),
                             importGroup, currentGroup, fullImportIdent);
                 }
@@ -608,11 +603,9 @@ public class CustomImportOrderCheck extends AbstractCheck {
             String currentGroupNumber, String fullImportIdent) {
         if (NON_GROUP_RULE_GROUP.equals(importGroup)) {
             log(currentImportLine, MSG_NONGROUP_IMPORT, fullImportIdent);
-        }
-        else if (NON_GROUP_RULE_GROUP.equals(currentGroupNumber)) {
+        } else if (NON_GROUP_RULE_GROUP.equals(currentGroupNumber)) {
             log(currentImportLine, MSG_NONGROUP_EXPECTED, importGroup, fullImportIdent);
-        }
-        else {
+        } else {
             log(currentImportLine, MSG_ORDER, importGroup, currentGroupNumber, fullImportIdent);
         }
     }
@@ -667,8 +660,7 @@ public class CustomImportOrderCheck extends AbstractCheck {
         if (isStatic && customImportOrderRules.contains(STATIC_RULE_GROUP)) {
             bestMatch.group = STATIC_RULE_GROUP;
             bestMatch.matchLength = importPath.length();
-        }
-        else if (customImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)) {
+        } else if (customImportOrderRules.contains(SAME_PACKAGE_RULE_GROUP)) {
             final String importPathTrimmedToSamePackageDepth =
                     getFirstDomainsFromIdent(samePackageMatchingDepth, importPath);
             if (samePackageDomainsRegExp.equals(importPathTrimmedToSamePackageDepth)) {
@@ -800,8 +792,7 @@ public class CustomImportOrderCheck extends AbstractCheck {
                 || STANDARD_JAVA_PACKAGE_RULE_GROUP.equals(ruleStr)
                 || SPECIAL_IMPORTS_RULE_GROUP.equals(ruleStr)) {
             customImportOrderRules.add(ruleStr);
-        }
-        else if (ruleStr.startsWith(SAME_PACKAGE_RULE_GROUP)) {
+        } else if (ruleStr.startsWith(SAME_PACKAGE_RULE_GROUP)) {
             final String rule = ruleStr.substring(ruleStr.indexOf('(') + 1,
                     ruleStr.indexOf(')'));
             samePackageMatchingDepth = Integer.parseInt(rule);
@@ -810,8 +801,7 @@ public class CustomImportOrderCheck extends AbstractCheck {
                         "SAME_PACKAGE rule parameter should be positive integer: " + ruleStr);
             }
             customImportOrderRules.add(SAME_PACKAGE_RULE_GROUP);
-        }
-        else {
+        } else {
             throw new IllegalStateException("Unexpected rule: " + ruleStr);
         }
     }

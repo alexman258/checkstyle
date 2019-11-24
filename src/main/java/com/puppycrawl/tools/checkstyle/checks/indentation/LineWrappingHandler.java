@@ -148,8 +148,7 @@ public class LineWrappingHandler {
         final int firstNodeIndent;
         if (startIndent == -1) {
             firstNodeIndent = getLineStart(firstLineNode);
-        }
-        else {
+        } else {
             firstNodeIndent = startIndent;
         }
         final int currentIndent = firstNodeIndent + indentLevel;
@@ -159,8 +158,7 @@ public class LineWrappingHandler {
 
             if (currentType == TokenTypes.RPAREN) {
                 logWarningMessage(node, firstNodeIndent);
-            }
-            else if (currentType != TokenTypes.RCURLY && currentType != TokenTypes.ARRAY_INIT) {
+            } else if (currentType != TokenTypes.RCURLY && currentType != TokenTypes.ARRAY_INIT) {
                 logWarningMessage(node, currentIndent);
             }
         }
@@ -264,8 +262,7 @@ public class LineWrappingHandler {
                         || parentNode.getParent().getType() == TokenTypes.ANNOTATIONS)
                     || node.getLineNo() == atNode.getLineNo()) {
                 logWarningMessage(node, firstNodeIndent);
-            }
-            else {
+            } else {
                 logWarningMessage(node, currentIndent);
             }
             itr.remove();
@@ -357,8 +354,7 @@ public class LineWrappingHandler {
                         IndentationCheck.MSG_ERROR, currentNode.getText(),
                         expandedTabsColumnNo(currentNode), currentIndent);
             }
-        }
-        else {
+        } else {
             if (expandedTabsColumnNo(currentNode) < currentIndent) {
                 indentCheck.indentationLog(currentNode.getLineNo(),
                         IndentationCheck.MSG_ERROR, currentNode.getText(),

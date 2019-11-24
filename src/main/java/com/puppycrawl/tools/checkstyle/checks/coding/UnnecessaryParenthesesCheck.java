@@ -285,28 +285,22 @@ public class UnnecessaryParenthesesCheck extends AbstractCheck {
 
         if (type == TokenTypes.LAMBDA && isLambdaSingleParameterSurrounded(ast)) {
             log(ast, MSG_LAMBDA, ast.getText());
-        }
-        else if (type != TokenTypes.ASSIGN
+        } else if (type != TokenTypes.ASSIGN
             || parent.getType() != TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR) {
             final boolean surrounded = isSurrounded(ast);
             // An identifier surrounded by parentheses.
             if (surrounded && type == TokenTypes.IDENT) {
                 parentToSkip = ast.getParent();
                 log(ast, MSG_IDENT, ast.getText());
-            }
-            // A literal (numeric or string) surrounded by parentheses.
-            else if (surrounded && isInTokenList(type, LITERALS)) {
+            } else if (surrounded && isInTokenList(type, LITERALS)) {
                 parentToSkip = ast.getParent();
                 if (type == TokenTypes.STRING_LITERAL) {
                     log(ast, MSG_STRING,
                         chopString(ast.getText()));
-                }
-                else {
+                } else {
                     log(ast, MSG_LITERAL, ast.getText());
                 }
-            }
-            // The rhs of an assignment surrounded by parentheses.
-            else if (isInTokenList(type, ASSIGNMENTS)) {
+            } else if (isInTokenList(type, ASSIGNMENTS)) {
                 assignDepth++;
                 final DetailAST last = ast.getLastChild();
                 if (last.getType() == TokenTypes.RPAREN) {
@@ -333,18 +327,15 @@ public class UnnecessaryParenthesesCheck extends AbstractCheck {
                 if (parentToSkip != ast && isExprSurrounded(ast)) {
                     if (assignDepth >= 1) {
                         log(ast, MSG_ASSIGN);
-                    }
-                    else if (ast.getParent().getType() == TokenTypes.LITERAL_RETURN) {
+                    } else if (ast.getParent().getType() == TokenTypes.LITERAL_RETURN) {
                         log(ast, MSG_RETURN);
-                    }
-                    else {
+                    } else {
                         log(ast, MSG_EXPR);
                     }
                 }
 
                 parentToSkip = null;
-            }
-            else if (isInTokenList(type, ASSIGNMENTS)) {
+            } else if (isInTokenList(type, ASSIGNMENTS)) {
                 assignDepth--;
             }
         }

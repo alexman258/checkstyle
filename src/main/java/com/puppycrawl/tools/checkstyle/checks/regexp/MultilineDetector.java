@@ -80,8 +80,7 @@ class MultilineDetector {
         final String format = options.getFormat();
         if (format == null || format.isEmpty()) {
             options.getReporter().log(1, MSG_EMPTY);
-        }
-        else {
+        } else {
             matcher = options.getPattern().matcher(fileText.getFullText());
             findMatch();
             finish();
@@ -100,17 +99,14 @@ class MultilineDetector {
                     if (options.getMessage().isEmpty()) {
                         options.getReporter().log(start.getLine(),
                                 MSG_REGEXP_EXCEEDED, matcher.pattern().toString());
-                    }
-                    else {
+                    } else {
                         options.getReporter()
                                 .log(start.getLine(), options.getMessage());
                     }
                 }
                 foundMatch = matcher.find();
             }
-        }
-        // see http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6337993 et al.
-        catch (StackOverflowError ignored) {
+        } catch (StackOverflowError ignored) {
             // OK http://blog.igorminar.com/2008/05/catching-stackoverflowerror-and-bug-in.html
             // http://programmers.stackexchange.com/questions/
             //        209099/is-it-ever-okay-to-catch-stackoverflowerror-in-java
@@ -124,8 +120,7 @@ class MultilineDetector {
             if (options.getMessage().isEmpty()) {
                 options.getReporter().log(1, MSG_REGEXP_MINIMUM,
                         options.getMinimum(), options.getFormat());
-            }
-            else {
+            } else {
                 options.getReporter().log(1, options.getMessage());
             }
         }

@@ -166,8 +166,7 @@ public final class ImportControlLoader extends XmlLoader {
             final MismatchStrategy strategyOnMismatch = getStrategyForImportControl(attributes);
             final boolean regex = containsRegexAttribute(attributes);
             stack.push(new PkgImportControl(pkg, regex, strategyOnMismatch));
-        }
-        else if (SUBPACKAGE_ELEMENT_NAME.equals(qName)) {
+        } else if (SUBPACKAGE_ELEMENT_NAME.equals(qName)) {
             final String name = safeGet(attributes, NAME_ATTRIBUTE_NAME);
             final MismatchStrategy strategyOnMismatch = getStrategyForSubpackage(attributes);
             final boolean regex = containsRegexAttribute(attributes);
@@ -176,8 +175,7 @@ public final class ImportControlLoader extends XmlLoader {
                     name, regex, strategyOnMismatch);
             parentImportControl.addChild(importControl);
             stack.push(importControl);
-        }
-        else if (FILE_ELEMENT_NAME.equals(qName)) {
+        } else if (FILE_ELEMENT_NAME.equals(qName)) {
             final String name = safeGet(attributes, NAME_ATTRIBUTE_NAME);
             final boolean regex = containsRegexAttribute(attributes);
             final PkgImportControl parentImportControl = (PkgImportControl) stack.peek();
@@ -185,8 +183,7 @@ public final class ImportControlLoader extends XmlLoader {
                     name, regex);
             parentImportControl.addChild(importControl);
             stack.push(importControl);
-        }
-        else if (ALLOW_ELEMENT_NAME.equals(qName) || "disallow".equals(qName)) {
+        } else if (ALLOW_ELEMENT_NAME.equals(qName) || "disallow".equals(qName)) {
             final AbstractImportRule rule = createImportRule(qName, attributes);
             stack.peek().addImportRule(rule);
         }
@@ -215,8 +212,7 @@ public final class ImportControlLoader extends XmlLoader {
             // expressions
             final String clazz = safeGet(attributes, "class");
             rule = new ClassImportRule(isAllow, isLocalOnly, clazz, regex);
-        }
-        else {
+        } else {
             final boolean exactMatch =
                     attributes.getValue("exact-match") != null;
             rule = new PkgImportRule(isAllow, isLocalOnly, pkg, exactMatch, regex);
@@ -251,11 +247,9 @@ public final class ImportControlLoader extends XmlLoader {
         try (InputStream inputStream = uri.toURL().openStream()) {
             final InputSource source = new InputSource(inputStream);
             return load(source, uri);
-        }
-        catch (MalformedURLException ex) {
+        } catch (MalformedURLException ex) {
             throw new CheckstyleException("syntax error in url " + uri, ex);
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new CheckstyleException("unable to find " + uri, ex);
         }
     }
@@ -273,12 +267,10 @@ public final class ImportControlLoader extends XmlLoader {
             final ImportControlLoader loader = new ImportControlLoader();
             loader.parseInputSource(source);
             return loader.getRoot();
-        }
-        catch (ParserConfigurationException | SAXException ex) {
+        } catch (ParserConfigurationException | SAXException ex) {
             throw new CheckstyleException("unable to parse " + uri
                     + " - " + ex.getMessage(), ex);
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new CheckstyleException("unable to read " + uri, ex);
         }
     }
@@ -315,8 +307,7 @@ public final class ImportControlLoader extends XmlLoader {
         MismatchStrategy strategyOnMismatch = MismatchStrategy.DELEGATE_TO_PARENT;
         if (STRATEGY_ON_MISMATCH_ALLOWED_VALUE.equals(returnValue)) {
             strategyOnMismatch = MismatchStrategy.ALLOWED;
-        }
-        else if (STRATEGY_ON_MISMATCH_DISALLOWED_VALUE.equals(returnValue)) {
+        } else if (STRATEGY_ON_MISMATCH_DISALLOWED_VALUE.equals(returnValue)) {
             strategyOnMismatch = MismatchStrategy.DISALLOWED;
         }
         return strategyOnMismatch;

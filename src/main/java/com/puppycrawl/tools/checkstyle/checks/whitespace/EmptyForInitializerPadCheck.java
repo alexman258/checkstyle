@@ -119,8 +119,7 @@ public class EmptyForInitializerPadCheck
                 if (option == PadOption.NOSPACE
                     && Character.isWhitespace(line.charAt(before))) {
                     log(ast, MSG_PRECEDED, SEMICOLON);
-                }
-                else if (option == PadOption.SPACE
+                } else if (option == PadOption.SPACE
                          && !Character.isWhitespace(line.charAt(before))) {
                     log(ast, MSG_NOT_PRECEDED, SEMICOLON);
                 }

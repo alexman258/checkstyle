@@ -193,8 +193,7 @@ public class EmptyBlockCheck
                 final boolean emptyBlock;
                 if (leftCurly.getType() == TokenTypes.LCURLY) {
                     emptyBlock = leftCurly.getNextSibling().getType() != TokenTypes.CASE_GROUP;
-                }
-                else {
+                } else {
                     emptyBlock = leftCurly.getChildCount() <= 1;
                 }
                 if (emptyBlock) {
@@ -202,8 +201,7 @@ public class EmptyBlockCheck
                         MSG_KEY_BLOCK_NO_STATEMENT,
                         ast.getText());
                 }
-            }
-            else if (!hasText(leftCurly)) {
+            } else if (!hasText(leftCurly)) {
                 log(leftCurly,
                     MSG_KEY_BLOCK_EMPTY,
                     ast.getText());
@@ -222,8 +220,7 @@ public class EmptyBlockCheck
 
         if (rightCurly == null) {
             rcurlyAST = slistAST.getParent().findFirstToken(TokenTypes.RCURLY);
-        }
-        else {
+        } else {
             rcurlyAST = rightCurly;
         }
         final int slistLineNo = slistAST.getLineNo();
@@ -239,8 +236,7 @@ public class EmptyBlockCheck
             if (!CommonUtil.isBlank(txt)) {
                 returnValue = true;
             }
-        }
-        else {
+        } else {
             final String firstLine = lines[slistLineNo - 1].substring(slistColNo + 1);
             final String lastLine = lines[rcurlyLineNo - 1].substring(0, rcurlyColNo);
             // check if all lines are also only whitespace
@@ -287,11 +283,9 @@ public class EmptyBlockCheck
                 && ast.getNextSibling().getFirstChild() != null
                 && ast.getNextSibling().getFirstChild().getType() == TokenTypes.SLIST) {
             leftCurly = ast.getNextSibling().getFirstChild();
-        }
-        else if (slistAST == null) {
+        } else if (slistAST == null) {
             leftCurly = ast.findFirstToken(TokenTypes.LCURLY);
-        }
-        else {
+        } else {
             leftCurly = slistAST;
         }
         return leftCurly;

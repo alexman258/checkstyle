@@ -82,35 +82,30 @@ public class XpathFilterElement implements TreeWalkerFilter {
         filePattern = files;
         if (files == null) {
             fileRegexp = null;
-        }
-        else {
+        } else {
             fileRegexp = Pattern.compile(files);
         }
         checkPattern = checks;
         if (checks == null) {
             checkRegexp = null;
-        }
-        else {
+        } else {
             checkRegexp = CommonUtil.createPattern(checks);
         }
         messagePattern = message;
         if (message == null) {
             messageRegexp = null;
-        }
-        else {
+        } else {
             messageRegexp = Pattern.compile(message);
         }
         this.moduleId = moduleId;
         xpathQuery = query;
         if (xpathQuery == null) {
             xpathExpression = null;
-        }
-        else {
+        } else {
             final XPathEvaluator xpathEvaluator = new XPathEvaluator();
             try {
                 xpathExpression = xpathEvaluator.createExpression(xpathQuery);
-            }
-            catch (XPathException ex) {
+            } catch (XPathException ex) {
                 throw new IllegalArgumentException("Unexpected xpath query: " + xpathQuery, ex);
             }
         }
@@ -129,24 +124,21 @@ public class XpathFilterElement implements TreeWalkerFilter {
         if (files == null) {
             filePattern = null;
             fileRegexp = null;
-        }
-        else {
+        } else {
             filePattern = files.pattern();
             fileRegexp = files;
         }
         if (checks == null) {
             checkPattern = null;
             checkRegexp = null;
-        }
-        else {
+        } else {
             checkPattern = checks.pattern();
             checkRegexp = checks;
         }
         if (message == null) {
             messagePattern = null;
             messageRegexp = null;
-        }
-        else {
+        } else {
             messagePattern = message.pattern();
             messageRegexp = message;
         }
@@ -154,13 +146,11 @@ public class XpathFilterElement implements TreeWalkerFilter {
         xpathQuery = query;
         if (xpathQuery == null) {
             xpathExpression = null;
-        }
-        else {
+        } else {
             final XPathEvaluator xpathEvaluator = new XPathEvaluator();
             try {
                 xpathExpression = xpathEvaluator.createExpression(xpathQuery);
-            }
-            catch (XPathException ex) {
+            } catch (XPathException ex) {
                 throw new IllegalArgumentException("Incorrect xpath query: " + xpathQuery, ex);
             }
         }
@@ -204,8 +194,7 @@ public class XpathFilterElement implements TreeWalkerFilter {
         boolean isMatching;
         if (xpathExpression == null) {
             isMatching = true;
-        }
-        else {
+        } else {
             isMatching = false;
             final List<AbstractNode> nodes = getItems(event)
                     .stream().map(item -> (AbstractNode) item).collect(Collectors.toList());
@@ -230,8 +219,7 @@ public class XpathFilterElement implements TreeWalkerFilter {
         final RootNode rootNode;
         if (event.getRootAst() == null) {
             rootNode = null;
-        }
-        else {
+        } else {
             rootNode = new RootNode(event.getRootAst());
         }
         final List<Item<?>> items;
@@ -239,8 +227,7 @@ public class XpathFilterElement implements TreeWalkerFilter {
             final XPathDynamicContext xpathDynamicContext =
                     xpathExpression.createDynamicContext(rootNode);
             items = xpathExpression.evaluate(xpathDynamicContext);
-        }
-        catch (XPathException ex) {
+        } catch (XPathException ex) {
             throw new IllegalStateException("Cannot initialize context and evaluate query: "
                     + xpathQuery, ex);
         }

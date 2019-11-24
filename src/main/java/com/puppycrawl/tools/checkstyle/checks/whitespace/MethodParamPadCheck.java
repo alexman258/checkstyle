@@ -145,8 +145,7 @@ public class MethodParamPadCheck
         final DetailAST parenAST;
         if (ast.getType() == TokenTypes.METHOD_CALL) {
             parenAST = ast;
-        }
-        else {
+        } else {
             parenAST = ast.findFirstToken(TokenTypes.LPAREN);
             // array construction => parenAST == null
         }
@@ -157,14 +156,12 @@ public class MethodParamPadCheck
                 if (!allowLineBreaks) {
                     log(parenAST, MSG_LINE_PREVIOUS, parenAST.getText());
                 }
-            }
-            else {
+            } else {
                 final int before = parenAST.getColumnNo() - 1;
                 if (option == PadOption.NOSPACE
                     && Character.isWhitespace(line.charAt(before))) {
                     log(parenAST, MSG_WS_PRECEDED, parenAST.getText());
-                }
-                else if (option == PadOption.SPACE
+                } else if (option == PadOption.SPACE
                          && !Character.isWhitespace(line.charAt(before))) {
                     log(parenAST, MSG_WS_NOT_PRECEDED, parenAST.getText());
                 }

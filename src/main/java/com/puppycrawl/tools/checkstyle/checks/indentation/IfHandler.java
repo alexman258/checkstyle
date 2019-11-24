@@ -46,8 +46,7 @@ public class IfHandler extends BlockParentHandler {
         final IndentLevel result;
         if (child instanceof ElseHandler) {
             result = getIndent();
-        }
-        else {
+        } else {
             result = super.getSuggestedChildIndent(child);
         }
         return result;
@@ -58,8 +57,7 @@ public class IfHandler extends BlockParentHandler {
         final IndentLevel result;
         if (isIfAfterElse()) {
             result = getParent().getIndent();
-        }
-        else {
+        } else {
             result = super.getIndentImpl();
         }
         return result;

@@ -314,8 +314,7 @@ public class CyclomaticComplexityCheck
             if (ast.getType() != TokenTypes.LITERAL_CASE) {
                 incrementCurrentValue(BigInteger.ONE);
             }
-        }
-        else if (ast.getType() != TokenTypes.LITERAL_SWITCH) {
+        } else if (ast.getType() != TokenTypes.LITERAL_SWITCH) {
             incrementCurrentValue(BigInteger.ONE);
         }
     }

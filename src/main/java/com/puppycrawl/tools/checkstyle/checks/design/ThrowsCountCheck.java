@@ -140,8 +140,7 @@ public final class ThrowsCountCheck extends AbstractCheck {
     public void visitToken(DetailAST ast) {
         if (ast.getType() == TokenTypes.LITERAL_THROWS) {
             visitLiteralThrows(ast);
-        }
-        else {
+        } else {
             throw new IllegalStateException(ast.toString());
         }
     }
@@ -191,8 +190,7 @@ public final class ThrowsCountCheck extends AbstractCheck {
         final String name;
         if (dotAst == null) {
             name = annotation.findFirstToken(TokenTypes.IDENT).getText();
-        }
-        else {
+        } else {
             name = dotAst.findFirstToken(TokenTypes.IDENT).getText();
         }
         return name;

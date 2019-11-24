@@ -130,8 +130,7 @@ public class NewlineAtEndOfFileCheck
     protected void processFiltered(File file, FileText fileText) {
         try {
             readAndCheckFile(file);
-        }
-        catch (final IOException ignored) {
+        } catch (final IOException ignored) {
             log(1, MSG_KEY_UNABLE_OPEN, file.getPath());
         }
     }
@@ -178,8 +177,7 @@ public class NewlineAtEndOfFileCheck
         final int len = lineSeparator.length();
         if (randomAccessFile.length() < len) {
             result = false;
-        }
-        else {
+        } else {
             randomAccessFile.seek(randomAccessFile.length() - len);
             final byte[] lastBytes = new byte[len];
             final int readBytes = randomAccessFile.read(lastBytes);

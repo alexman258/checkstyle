@@ -189,8 +189,7 @@ public class ClassResolver {
         try {
             safeLoad(name);
             result = true;
-        }
-        catch (final ClassNotFoundException | NoClassDefFoundError ignored) {
+        } catch (final ClassNotFoundException | NoClassDefFoundError ignored) {
             result = false;
         }
         return result;
@@ -222,8 +221,7 @@ public class ClassResolver {
         try {
             if (isLoadable(name)) {
                 classObj = safeLoad(name);
-            }
-            else {
+            } else {
                 //Perhaps it's fully-qualified inner class
                 final int dot = name.lastIndexOf('.');
                 if (dot != -1) {
@@ -232,8 +230,7 @@ public class ClassResolver {
                     classObj = resolveQualifiedName(innerName);
                 }
             }
-        }
-        catch (final ClassNotFoundException ex) {
+        } catch (final ClassNotFoundException ex) {
             // we shouldn't get this exception here,
             // so this is unexpected runtime exception
             throw new IllegalStateException(ex);

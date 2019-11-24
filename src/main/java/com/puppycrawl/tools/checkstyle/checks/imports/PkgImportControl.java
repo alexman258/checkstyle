@@ -67,8 +67,7 @@ class PkgImportControl extends AbstractImportControl {
             fullPackageName = encloseInGroup(packageName);
             patternForPartialMatch = createPatternForPartialMatch(fullPackageName);
             patternForExactMatch = createPatternForExactMatch(fullPackageName);
-        }
-        else {
+        } else {
             fullPackageName = packageName;
             patternForPartialMatch = null;
             patternForExactMatch = null;
@@ -95,8 +94,7 @@ class PkgImportControl extends AbstractImportControl {
             patternForPartialMatch = createPatternForPartialMatch(fullPackageName);
             patternForExactMatch = createPatternForExactMatch(fullPackageName);
             this.regex = true;
-        }
-        else {
+        } else {
             fullPackageName = parent.fullPackageName + DOT + subPackageName;
             patternForPartialMatch = null;
             patternForExactMatch = null;
@@ -132,8 +130,7 @@ class PkgImportControl extends AbstractImportControl {
         final String result;
         if (alreadyRegex) {
             result = encloseInGroup(input);
-        }
-        else {
+        } else {
             result = toRegex(input);
         }
         return result;
@@ -214,8 +211,7 @@ class PkgImportControl extends AbstractImportControl {
         final boolean result;
         if (regex) {
             result = patternForPartialMatch.matcher(pkg).matches();
-        }
-        else {
+        } else {
             result = matchesAtFrontNoRegex(pkg);
         }
         return result;
@@ -238,8 +234,7 @@ class PkgImportControl extends AbstractImportControl {
         final boolean result;
         if (regex) {
             result = patternForExactMatch.matcher(pkg).matches();
-        }
-        else {
+        } else {
             result = fullPackageName.equals(pkg);
         }
         return result;

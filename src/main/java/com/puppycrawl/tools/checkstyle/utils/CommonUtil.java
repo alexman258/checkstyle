@@ -105,8 +105,7 @@ public final class CommonUtil {
     public static Pattern createPattern(String pattern, int flags) {
         try {
             return Pattern.compile(pattern, flags);
-        }
-        catch (final PatternSyntaxException ex) {
+        } catch (final PatternSyntaxException ex) {
             throw new IllegalArgumentException(
                 "Failed to initialise regular expression " + pattern, ex);
         }
@@ -198,8 +197,7 @@ public final class CommonUtil {
                 foundCr = false;
                 lines++;
                 columns = 0;
-            }
-            else {
+            } else {
                 if (foundCr) {
                     foundCr = false;
                     lines++;
@@ -231,16 +229,14 @@ public final class CommonUtil {
         boolean result = false;
         if (fileExtensions == null || fileExtensions.length == 0) {
             result = true;
-        }
-        else {
+        } else {
             // normalize extensions so all of them have a leading dot
             final String[] withDotExtensions = new String[fileExtensions.length];
             for (int i = 0; i < fileExtensions.length; i++) {
                 final String extension = fileExtensions[i];
                 if (startsWithChar(extension, '.')) {
                     withDotExtensions[i] = extension;
-                }
-                else {
+                } else {
                     withDotExtensions[i] = "." + extension;
                 }
             }
@@ -317,8 +313,7 @@ public final class CommonUtil {
         for (int idx = 0; idx < toIdx; idx++) {
             if (inputString.charAt(idx) == '\t') {
                 len = (len / tabWidth + 1) * tabWidth;
-            }
-            else {
+            } else {
                 len++;
             }
         }
@@ -336,8 +331,7 @@ public final class CommonUtil {
         boolean isValid = true;
         try {
             Pattern.compile(pattern);
-        }
-        catch (final PatternSyntaxException ignored) {
+        } catch (final PatternSyntaxException ignored) {
             isValid = false;
         }
         return isValid;
@@ -354,8 +348,7 @@ public final class CommonUtil {
         final int index = type.lastIndexOf('.');
         if (index == -1) {
             className = type;
-        }
-        else {
+        } else {
             className = type.substring(index + 1);
         }
         return className;
@@ -375,8 +368,7 @@ public final class CommonUtil {
         final String resultPath;
         if (baseDirectory == null) {
             resultPath = path;
-        }
-        else {
+        } else {
             final Path pathAbsolute = Paths.get(path).normalize();
             final Path pathBase = Paths.get(baseDirectory).normalize();
             resultPath = pathBase.relativize(pathAbsolute).toString();
@@ -438,8 +430,7 @@ public final class CommonUtil {
                                                     Class<?>... parameterTypes) {
         try {
             return targetClass.getConstructor(parameterTypes);
-        }
-        catch (NoSuchMethodException ex) {
+        } catch (NoSuchMethodException ex) {
             throw new IllegalStateException(ex);
         }
     }
@@ -458,8 +449,7 @@ public final class CommonUtil {
     public static <T> T invokeConstructor(Constructor<T> constructor, Object... parameters) {
         try {
             return constructor.newInstance(parameters);
-        }
-        catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {
             throw new IllegalStateException(ex);
         }
     }
@@ -474,8 +464,7 @@ public final class CommonUtil {
         if (closeable != null) {
             try {
                 closeable.close();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 throw new IllegalStateException("Cannot close the stream", ex);
             }
         }
@@ -493,8 +482,7 @@ public final class CommonUtil {
         try {
             final URL url = new URL(filename);
             uri = url.toURI();
-        }
-        catch (final URISyntaxException | MalformedURLException ignored) {
+        } catch (final URISyntaxException | MalformedURLException ignored) {
             uri = null;
         }
 
@@ -502,23 +490,20 @@ public final class CommonUtil {
             final File file = new File(filename);
             if (file.exists()) {
                 uri = file.toURI();
-            }
-            else {
+            } else {
                 // check to see if the file is in the classpath
                 try {
                     final URL configUrl;
                     if (filename.charAt(0) == '/') {
                         configUrl = CommonUtil.class.getResource(filename);
-                    }
-                    else {
+                    } else {
                         configUrl = ClassLoader.getSystemResource(filename);
                     }
                     if (configUrl == null) {
                         throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + filename);
                     }
                     uri = configUrl.toURI();
-                }
-                catch (final URISyntaxException ex) {
+                } catch (final URISyntaxException ex) {
                     throw new CheckstyleException(UNABLE_TO_FIND_EXCEPTION_PREFIX + filename, ex);
                 }
             }
@@ -561,8 +546,7 @@ public final class CommonUtil {
         final String fileNameWithoutExtension;
         if (dotIndex == -1) {
             fileNameWithoutExtension = fileName;
-        }
-        else {
+        } else {
             fileNameWithoutExtension = fileName.substring(0, dotIndex);
         }
         return fileNameWithoutExtension;
@@ -583,8 +567,7 @@ public final class CommonUtil {
         final String extension;
         if (dotIndex == -1) {
             extension = "";
-        }
-        else {
+        } else {
             extension = fileName.substring(dotIndex + 1);
         }
         return extension;
@@ -601,8 +584,7 @@ public final class CommonUtil {
         for (int i = 0; isIdentifier && i < str.length(); i++) {
             if (i == 0) {
                 isIdentifier = Character.isJavaIdentifierStart(str.charAt(0));
-            }
-            else {
+            } else {
                 isIdentifier = Character.isJavaIdentifierPart(str.charAt(i));
             }
         }
@@ -654,13 +636,11 @@ public final class CommonUtil {
         boolean isInt;
         if (str == null) {
             isInt = false;
-        }
-        else {
+        } else {
             try {
                 Integer.parseInt(str);
                 isInt = true;
-            }
-            catch (NumberFormatException ignored) {
+            } catch (NumberFormatException ignored) {
                 isInt = false;
             }
         }

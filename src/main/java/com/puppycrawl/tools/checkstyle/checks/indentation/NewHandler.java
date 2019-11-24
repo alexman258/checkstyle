@@ -59,8 +59,7 @@ public class NewHandler extends AbstractExpressionHandler {
         // of the line
         if (getLineStart(getMainAst()) == getMainAst().getColumnNo()) {
             result = super.getIndentImpl();
-        }
-        else {
+        } else {
             result = new IndentLevel(getLineStart(getMainAst()));
         }
         return result;

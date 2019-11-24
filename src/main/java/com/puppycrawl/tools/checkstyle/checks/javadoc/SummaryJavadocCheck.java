@@ -137,8 +137,7 @@ public class SummaryJavadocCheck extends AbstractJavadocCheck {
             final String summaryDoc = getSummarySentence(ast);
             if (summaryDoc.isEmpty()) {
                 log(ast.getLineNumber(), MSG_SUMMARY_JAVADOC_MISSING);
-            }
-            else if (!period.isEmpty()) {
+            } else if (!period.isEmpty()) {
                 final String firstSentence = getFirstSentence(ast);
                 final int endOfSentence = firstSentence.lastIndexOf(period);
                 if (!summaryDoc.contains(period)) {
@@ -166,8 +165,7 @@ public class SummaryJavadocCheck extends AbstractJavadocCheck {
             if (child.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG
                     && child.getChildren()[1].getType() == JavadocTokenTypes.INHERIT_DOC_LITERAL) {
                 found = true;
-            }
-            else if (child.getType() != JavadocTokenTypes.LEADING_ASTERISK
+            } else if (child.getType() != JavadocTokenTypes.LEADING_ASTERISK
                     && !CommonUtil.isBlank(child.getText())) {
                 break;
             }
@@ -187,13 +185,11 @@ public class SummaryJavadocCheck extends AbstractJavadocCheck {
         for (DetailNode child : ast.getChildren()) {
             if (ALLOWED_TYPES.contains(child.getType())) {
                 result.append(child.getText());
-            }
-            else if (child.getType() == JavadocTokenTypes.HTML_ELEMENT
+            } else if (child.getType() == JavadocTokenTypes.HTML_ELEMENT
                     && CommonUtil.isBlank(result.toString().trim())) {
                 result.append(getStringInsideTag(result.toString(),
                         child.getChildren()[0].getChildren()[0]));
-            }
-            else if (child.getType() == JavadocTokenTypes.JAVADOC_TAG) {
+            } else if (child.getType() == JavadocTokenTypes.JAVADOC_TAG) {
                 flag = false;
             }
             if (!flag) {
@@ -233,8 +229,7 @@ public class SummaryJavadocCheck extends AbstractJavadocCheck {
             final String text;
             if (child.getChildren().length == 0) {
                 text = child.getText();
-            }
-            else {
+            } else {
                 text = getFirstSentence(child);
             }
 
@@ -277,8 +272,7 @@ public class SummaryJavadocCheck extends AbstractJavadocCheck {
 
                 previousWhitespace = true;
                 print = ' ';
-            }
-            else {
+            } else {
                 previousWhitespace = false;
                 print = letter;
             }

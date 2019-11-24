@@ -118,12 +118,10 @@ public final class FullIdent {
                 full.append(".");
                 extractFullIdent(
                     full, ast.getFirstChild().getNextSibling());
-            }
-            else if (ast.getType() == TokenTypes.ARRAY_DECLARATOR) {
+            } else if (ast.getType() == TokenTypes.ARRAY_DECLARATOR) {
                 extractFullIdent(full, ast.getFirstChild());
                 full.append("[]");
-            }
-            else {
+            } else {
                 full.append(ast);
             }
         }

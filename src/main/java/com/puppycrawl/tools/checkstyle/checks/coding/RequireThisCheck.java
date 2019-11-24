@@ -435,8 +435,7 @@ public class RequireThisCheck extends AbstractCheck {
     private void logViolation(String msgKey, DetailAST ast, AbstractFrame frame) {
         if (frame.getFrameName().equals(getNearestClassFrameName())) {
             log(ast, msgKey, ast.getText(), "");
-        }
-        else if (!(frame instanceof AnonymousClassFrame)) {
+        } else if (!(frame instanceof AnonymousClassFrame)) {
             log(ast, msgKey, ast.getText(), frame.getFrameName() + '.');
         }
     }
@@ -503,8 +502,7 @@ public class RequireThisCheck extends AbstractCheck {
                 final DetailAST mods = ast.findFirstToken(TokenTypes.MODIFIERS);
                 if (mods.findFirstToken(TokenTypes.LITERAL_STATIC) == null) {
                     ((ClassFrame) frame).addInstanceMethod(methodFrameNameIdent);
-                }
-                else {
+                } else {
                     ((ClassFrame) frame).addStaticMethod(methodFrameNameIdent);
                 }
                 frameStack.addFirst(new MethodFrame(frame, methodFrameNameIdent));
@@ -551,12 +549,10 @@ public class RequireThisCheck extends AbstractCheck {
             if (ScopeUtil.isInInterfaceBlock(ast)
                     || mods.findFirstToken(TokenTypes.LITERAL_STATIC) != null) {
                 ((ClassFrame) frame).addStaticMember(ident);
-            }
-            else {
+            } else {
                 ((ClassFrame) frame).addInstanceMember(ident);
             }
-        }
-        else {
+        } else {
             frame.addIdent(ident);
         }
     }
@@ -618,8 +614,7 @@ public class RequireThisCheck extends AbstractCheck {
                 && prevSibling == null
                 && canBeReferencedFromStaticContext(ast)) {
             frameWhereViolationIsFound = variableDeclarationFrame;
-        }
-        else if (variableDeclarationFrameType == FrameType.METHOD_FRAME) {
+        } else if (variableDeclarationFrameType == FrameType.METHOD_FRAME) {
             if (isOverlappingByArgument(ast)) {
                 if (!isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
                         && !isReturnedVariable(variableDeclarationFrame, ast)
@@ -627,8 +622,7 @@ public class RequireThisCheck extends AbstractCheck {
                         && canAssignValueToClassField(ast)) {
                     frameWhereViolationIsFound = findFrame(ast, true);
                 }
-            }
-            else if (!validateOnlyOverlapping
+            } else if (!validateOnlyOverlapping
                      && prevSibling == null
                      && isAssignToken(ast.getParent().getType())
                      && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
@@ -636,13 +630,11 @@ public class RequireThisCheck extends AbstractCheck {
                      && canAssignValueToClassField(ast)) {
                 frameWhereViolationIsFound = findFrame(ast, true);
             }
-        }
-        else if (variableDeclarationFrameType == FrameType.CTOR_FRAME
+        } else if (variableDeclarationFrameType == FrameType.CTOR_FRAME
                  && isOverlappingByArgument(ast)
                  && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)) {
             frameWhereViolationIsFound = findFrame(ast, true);
-        }
-        else if (variableDeclarationFrameType == FrameType.BLOCK_FRAME
+        } else if (variableDeclarationFrameType == FrameType.BLOCK_FRAME
                     && isOverlappingByLocalVariable(ast)
                     && canAssignValueToClassField(ast)
                     && !isUserDefinedArrangementOfThis(variableDeclarationFrame, ast)
@@ -695,8 +687,7 @@ public class RequireThisCheck extends AbstractCheck {
         final DetailAST blockNameIdentParent = blockNameIdent.getParent();
         if (blockNameIdentParent.getType() == TokenTypes.CASE_GROUP) {
             blockEndToken = blockNameIdentParent.getNextSibling();
-        }
-        else {
+        } else {
             final Set<DetailAST> rcurlyTokens = getAllTokensOfType(blockNameIdent,
                     TokenTypes.RCURLY);
             for (DetailAST currentRcurly : rcurlyTokens) {
@@ -745,8 +736,7 @@ public class RequireThisCheck extends AbstractCheck {
 
         if (isAstSimilar(tree, ast)) {
             result = true;
-        }
-        else {
+        } else {
             for (DetailAST child = tree.getFirstChild(); child != null
                     && !result; child = child.getNextSibling()) {
                 result = isAstInside(child, ast);
@@ -778,8 +768,7 @@ public class RequireThisCheck extends AbstractCheck {
         boolean staticContext = false;
         if (staticInitializationBlock) {
             staticContext = true;
-        }
-        else {
+        } else {
             if (variableDeclarationFrame.getType() == FrameType.CLASS_FRAME) {
                 final DetailAST codeBlockDefinition = getCodeBlockDefinitionToken(ident);
                 if (codeBlockDefinition != null) {
@@ -787,8 +776,7 @@ public class RequireThisCheck extends AbstractCheck {
                     staticContext = codeBlockDefinition.getType() == TokenTypes.STATIC_INIT
                         || modifiers.findFirstToken(TokenTypes.LITERAL_STATIC) != null;
                 }
-            }
-            else {
+            } else {
                 final DetailAST frameNameIdent = variableDeclarationFrame.getFrameNameIdent();
                 final DetailAST definitionToken = frameNameIdent.getParent();
                 staticContext = definitionToken.findFirstToken(TokenTypes.MODIFIERS)
@@ -863,8 +851,7 @@ public class RequireThisCheck extends AbstractCheck {
         if (sibling != null && isAssignToken(parent.getType())) {
             if (isCompoundAssignToken(parent.getType())) {
                 overlapping = true;
-            }
-            else {
+            } else {
                 final ClassFrame classFrame = (ClassFrame) findFrame(ast, true);
                 final Set<DetailAST> exprIdents = getAllTokensOfType(sibling, TokenTypes.IDENT);
                 overlapping = classFrame.containsFieldOrVariableDef(exprIdents, ast);
@@ -1099,16 +1086,13 @@ public class RequireThisCheck extends AbstractCheck {
         final boolean isLambdaParameter;
         if (parent == null) {
             isLambdaParameter = false;
-        }
-        else if (ast.getType() == TokenTypes.PARAMETER_DEF) {
+        } else if (ast.getType() == TokenTypes.PARAMETER_DEF) {
             isLambdaParameter = true;
-        }
-        else {
+        } else {
             final DetailAST lambdaParameters = parent.findFirstToken(TokenTypes.PARAMETERS);
             if (lambdaParameters == null) {
                 isLambdaParameter = parent.getFirstChild().getText().equals(ast.getText());
-            }
-            else {
+            } else {
                 isLambdaParameter = TokenUtil.findFirstTokenByPredicate(lambdaParameters,
                     paramDef -> {
                         final DetailAST param = paramDef.findFirstToken(TokenTypes.IDENT);
@@ -1219,8 +1203,7 @@ public class RequireThisCheck extends AbstractCheck {
             if (!lookForMethod
                 && containsFieldOrVariable(nameToFind)) {
                 frame = this;
-            }
-            else {
+            } else {
                 frame = parent.getIfContains(nameToFind, lookForMethod);
             }
             return frame;
@@ -1431,8 +1414,7 @@ public class RequireThisCheck extends AbstractCheck {
             if (lookForMethod && containsMethod(nameToFind)
                 || containsFieldOrVariable(nameToFind)) {
                 frame = this;
-            }
-            else if (getParent() != null) {
+            } else if (getParent() != null) {
                 frame = getParent().getIfContains(nameToFind, lookForMethod);
             }
             return frame;

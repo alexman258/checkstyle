@@ -394,8 +394,7 @@ public class NeedBracesCheck extends AbstractCheck {
         boolean result = false;
         if (literalFor.getLastChild().getType() == TokenTypes.EMPTY_STAT) {
             result = true;
-        }
-        else if (literalFor.getParent().getType() == TokenTypes.SLIST) {
+        } else if (literalFor.getParent().getType() == TokenTypes.SLIST) {
             result = isOnSameLine(literalFor, literalFor.getLastChild());
         }
         return result;
@@ -418,8 +417,7 @@ public class NeedBracesCheck extends AbstractCheck {
             final DetailAST block;
             if (literalIfLastChild.getType() == TokenTypes.LITERAL_ELSE) {
                 block = literalIfLastChild.getPreviousSibling();
-            }
-            else {
+            } else {
                 block = literalIfLastChild;
             }
             final DetailAST ifCondition = literalIf.findFirstToken(TokenTypes.EXPR);

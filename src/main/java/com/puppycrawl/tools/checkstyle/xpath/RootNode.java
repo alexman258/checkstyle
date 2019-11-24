@@ -164,8 +164,7 @@ public class RootNode extends AbstractNode {
                             getChildren().toArray(EMPTY_ABSTRACT_NODE_ARRAY))) {
                         result = iterator;
                     }
-                }
-                else {
+                } else {
                     result = EmptyIterator.OfNodes.THE_INSTANCE;
                 }
                 break;
@@ -175,8 +174,7 @@ public class RootNode extends AbstractNode {
                                  new Navigator.DescendantEnumeration(this, false, true)) {
                         result = iterator;
                     }
-                }
-                else {
+                } else {
                     result = EmptyIterator.OfNodes.THE_INSTANCE;
                 }
                 break;

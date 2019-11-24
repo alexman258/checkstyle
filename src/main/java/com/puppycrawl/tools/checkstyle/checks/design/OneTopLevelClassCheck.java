@@ -129,8 +129,7 @@ public class OneTopLevelClassCheck extends AbstractCheck {
                     || currentNode.getType() == TokenTypes.INTERFACE_DEF) {
                 if (isPublic(currentNode)) {
                     publicTypeFound = true;
-                }
-                else {
+                } else {
                     final String typeName = currentNode
                             .findFirstToken(TokenTypes.IDENT).getText();
                     lineNumberTypeMap.put(currentNode.getLineNo(), typeName);

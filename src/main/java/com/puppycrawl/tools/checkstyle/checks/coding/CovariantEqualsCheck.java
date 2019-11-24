@@ -147,8 +147,7 @@ public class CovariantEqualsCheck extends AbstractCheck {
                 if (CheckUtil.isEqualsMethod(child)) {
                     if (isFirstParameterObject(child)) {
                         hasEqualsObject = true;
-                    }
-                    else {
+                    } else {
                         equalsMethods.add(child);
                     }
                 }

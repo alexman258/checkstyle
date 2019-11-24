@@ -370,8 +370,7 @@ public class EmptyLineSeparatorCheck extends AbstractCheck {
                         if (hasNotAllowedTwoEmptyLinesBefore(nextToken)) {
                             log(ast.getLineNo(), MSG_MULTIPLE_LINES_AFTER, ast.getText());
                         }
-                    }
-                    else if (!hasEmptyLineAfter(ast)) {
+                    } else if (!hasEmptyLineAfter(ast)) {
                         log(nextToken.getLineNo(), MSG_SHOULD_BE_SEPARATED,
                             nextToken.getText());
                     }
@@ -478,8 +477,7 @@ public class EmptyLineSeparatorCheck extends AbstractCheck {
                 if (ast.getFirstChild().getChildCount() == 0 && !isPrecededByJavadoc(ast)) {
                     log(ast.getLineNo(), MSG_SHOULD_BE_SEPARATED, ast.getText());
                 }
-            }
-            else {
+            } else {
                 log(ast.getLineNo(), MSG_SHOULD_BE_SEPARATED, ast.getText());
             }
         }
@@ -548,8 +546,7 @@ public class EmptyLineSeparatorCheck extends AbstractCheck {
                     }
                     previousNode = previousNode.getPreviousSibling();
                 }
-            }
-            else {
+            } else {
                 checkCommentsInsideToken(token);
             }
         }
@@ -572,8 +569,7 @@ public class EmptyLineSeparatorCheck extends AbstractCheck {
                         childNodes.add(node);
                     }
                 }
-            }
-            else if (isCommentInBeginningOfLine(childNode)) {
+            } else if (isCommentInBeginningOfLine(childNode)) {
                 childNodes.add(childNode);
             }
             childNode = childNode.getPreviousSibling();

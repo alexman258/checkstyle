@@ -179,17 +179,14 @@ public class EqualsAvoidNullCheck extends AbstractCheck {
         final int astType = ast.getType();
         if (astType == TokenTypes.SLIST) {
             leaveSlist(ast);
-        }
-        else if (astType == TokenTypes.LITERAL_NEW) {
+        } else if (astType == TokenTypes.LITERAL_NEW) {
             leaveLiteralNew(ast);
-        }
-        else if (astType == TokenTypes.OBJBLOCK) {
+        } else if (astType == TokenTypes.OBJBLOCK) {
             final int parentType = ast.getParent().getType();
             if (parentType != TokenTypes.CLASS_DEF && parentType != TokenTypes.ENUM_DEF) {
                 currentFrame = currentFrame.getParent();
             }
-        }
-        else if (astType != TokenTypes.VARIABLE_DEF
+        } else if (astType != TokenTypes.VARIABLE_DEF
                 && astType != TokenTypes.PARAMETER_DEF
                 && astType != TokenTypes.METHOD_CALL) {
             currentFrame = currentFrame.getParent();
@@ -310,8 +307,7 @@ public class EqualsAvoidNullCheck extends AbstractCheck {
             final String methodName = methodCall.getFirstChild().getLastChild().getText();
             if (EQUALS.equals(methodName)) {
                 log(methodCall, MSG_EQUALS_AVOID_NULL);
-            }
-            else {
+            } else {
                 log(methodCall, MSG_EQUALS_IGNORE_CASE_AVOID_NULL);
             }
         }
@@ -347,8 +343,7 @@ public class EqualsAvoidNullCheck extends AbstractCheck {
                         || child.getType() == TokenTypes.IDENT;
                 child = child.getNextSibling();
             }
-        }
-        else {
+        } else {
             argIsNotNull = arg.getType() == TokenTypes.STRING_LITERAL;
         }
 
@@ -381,12 +376,10 @@ public class EqualsAvoidNullCheck extends AbstractCheck {
         final DetailAST previousSiblingAst = objCalledOn.getPreviousSibling();
         if (previousSiblingAst == null) {
             result = isStringFieldOrVariable(objCalledOn);
-        }
-        else {
+        } else {
             if (previousSiblingAst.getType() == TokenTypes.LITERAL_THIS) {
                 result = isStringFieldOrVariableFromThisInstance(objCalledOn);
-            }
-            else {
+            } else {
                 final String className = previousSiblingAst.getText();
                 result = isStringFieldOrVariableFromClass(objCalledOn, className);
             }

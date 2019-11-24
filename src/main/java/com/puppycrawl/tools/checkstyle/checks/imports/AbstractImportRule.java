@@ -85,8 +85,7 @@ abstract class AbstractImportRule {
         if (matched) {
             if (allowed) {
                 result = AccessResult.ALLOWED;
-            }
-            else {
+            } else {
                 result = AccessResult.DISALLOWED;
             }
         }

@@ -164,15 +164,13 @@ public class JavadocStyleCheck
 
         if (ast.getType() == TokenTypes.PACKAGE_DEF) {
             check = getFileContents().inPackageInfo();
-        }
-        else if (!ScopeUtil.isInCodeBlock(ast)) {
+        } else if (!ScopeUtil.isInCodeBlock(ast)) {
             final Scope customScope;
 
             if (ScopeUtil.isInInterfaceOrAnnotationBlock(ast)
                     || ast.getType() == TokenTypes.ENUM_CONSTANT_DEF) {
                 customScope = Scope.PUBLIC;
-            }
-            else {
+            } else {
                 customScope = ScopeUtil.getScopeFromMods(ast.findFirstToken(TokenTypes.MODIFIERS));
             }
             final Scope surroundingScope = ScopeUtil.getSurroundingScope(ast);
@@ -205,8 +203,7 @@ public class JavadocStyleCheck
             if (getFileContents().inPackageInfo()) {
                 log(ast.getLineNo(), MSG_JAVADOC_MISSING);
             }
-        }
-        else {
+        } else {
             if (checkFirstSentence) {
                 checkFirstSentenceEnding(ast, comment);
             }
@@ -294,11 +291,9 @@ public class JavadocStyleCheck
             if (!Character.isWhitespace(line.charAt(index))) {
                 if (line.regionMatches(index, "/**", 0, "/**".length())) {
                     index += 2;
-                }
-                else if (line.regionMatches(index, "*/", 0, 2)) {
+                } else if (line.regionMatches(index, "*/", 0, 2)) {
                     index++;
-                }
-                else if (line.charAt(index) != '*') {
+                } else if (line.charAt(index) != '*') {
                     textStart = index;
                     break;
                 }
@@ -317,8 +312,7 @@ public class JavadocStyleCheck
         while (true) {
             if (Character.isWhitespace(builder.charAt(index))) {
                 builder.deleteCharAt(index);
-            }
-            else if (index > 0 && builder.charAt(index) == '/'
+            } else if (index > 0 && builder.charAt(index) == '/'
                     && builder.charAt(index - 1) == '*') {
                 builder.deleteCharAt(index);
                 builder.deleteCharAt(index - 1);
@@ -327,8 +321,7 @@ public class JavadocStyleCheck
                     builder.deleteCharAt(index - 1);
                     index--;
                 }
-            }
-            else {
+            } else {
                 break;
             }
             index--;
@@ -373,14 +366,12 @@ public class JavadocStyleCheck
                         tag.getPosition(),
                         MSG_EXTRA_HTML,
                         tag.getText());
-                }
-                else {
+                } else {
                     // See if there are any unclosed tags that were opened
                     // after this one.
                     checkUnclosedTags(htmlStack, tag.getId());
                 }
-            }
-            else {
+            } else {
                 //We only push html tags that are allowed
                 if (isAllowedTag(tag)) {
                     htmlStack.push(tag);
@@ -420,8 +411,7 @@ public class JavadocStyleCheck
             // output order won't be back-to-front.
             if (isSingleTag(lastOpenTag)) {
                 lastOpenTag = htmlStack.pop();
-            }
-            else {
+            } else {
                 unclosedTags.push(lastOpenTag);
                 lastOpenTag = htmlStack.pop();
             }

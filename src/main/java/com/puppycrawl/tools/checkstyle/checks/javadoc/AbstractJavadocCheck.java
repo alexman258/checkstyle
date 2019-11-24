@@ -174,8 +174,7 @@ public abstract class AbstractJavadocCheck extends AbstractCheck {
             for (int id : getDefaultJavadocTokens()) {
                 javadocTokens.add(id);
             }
-        }
-        else {
+        } else {
             final int[] acceptableJavadocTokens = getAcceptableJavadocTokens();
             Arrays.sort(acceptableJavadocTokens);
             for (Integer javadocTokenId : javadocTokens) {
@@ -290,8 +289,7 @@ public abstract class AbstractJavadocCheck extends AbstractCheck {
 
             if (TREE_CACHE.get().containsKey(treeCacheKey)) {
                 result = TREE_CACHE.get().get(treeCacheKey);
-            }
-            else {
+            } else {
                 result = context.get().parser
                         .parseJavadocAsDetailNode(blockCommentNode);
                 TREE_CACHE.get().put(treeCacheKey, result);
@@ -307,8 +305,7 @@ public abstract class AbstractJavadocCheck extends AbstractCheck {
                             JavadocDetailNodeParser.MSG_UNCLOSED_HTML_TAG,
                             result.getFirstNonTightHtmlTag().getText());
                 }
-            }
-            else {
+            } else {
                 final ParseErrorMessage parseErrorMessage = result.getParseErrorMessage();
                 log(parseErrorMessage.getLineNumber(),
                         parseErrorMessage.getMessageKey(),

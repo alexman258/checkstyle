@@ -43,8 +43,7 @@ public final class FilterUtil {
         boolean suppressionSourceExists;
         try (InputStream stream = CommonUtil.getUriByFilename(fileName).toURL().openStream()) {
             suppressionSourceExists = true;
-        }
-        catch (CheckstyleException | IOException ignored) {
+        } catch (CheckstyleException | IOException ignored) {
             suppressionSourceExists = false;
         }
         return suppressionSourceExists;

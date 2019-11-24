@@ -133,8 +133,7 @@ public final class LocalizedMessage
 
         if (args == null) {
             this.args = null;
-        }
-        else {
+        } else {
             this.args = Arrays.copyOf(args, args.length);
         }
         this.bundle = bundle;
@@ -341,8 +340,7 @@ public final class LocalizedMessage
                 final String pattern = resourceBundle.getString(key);
                 final MessageFormat formatter = new MessageFormat(pattern, Locale.ROOT);
                 message = formatter.format(args);
-            }
-            catch (final MissingResourceException ignored) {
+            } catch (final MissingResourceException ignored) {
                 // If the Check author didn't provide i18n resource bundles
                 // and logs audit event messages directly, this will return
                 // the author's original message
@@ -455,8 +453,7 @@ public final class LocalizedMessage
         clearCache();
         if (Locale.ENGLISH.getLanguage().equals(locale.getLanguage())) {
             sLocale = Locale.ROOT;
-        }
-        else {
+        } else {
             sLocale = locale;
         }
     }
@@ -473,22 +470,17 @@ public final class LocalizedMessage
             if (columnNo == other.columnNo) {
                 if (Objects.equals(moduleId, other.moduleId)) {
                     result = getMessage().compareTo(other.getMessage());
-                }
-                else if (moduleId == null) {
+                } else if (moduleId == null) {
                     result = -1;
-                }
-                else if (other.moduleId == null) {
+                } else if (other.moduleId == null) {
                     result = 1;
-                }
-                else {
+                } else {
                     result = moduleId.compareTo(other.moduleId);
                 }
-            }
-            else {
+            } else {
                 result = Integer.compare(columnNo, other.columnNo);
             }
-        }
-        else {
+        } else {
             result = Integer.compare(lineNo, other.lineNo);
         }
         return result;

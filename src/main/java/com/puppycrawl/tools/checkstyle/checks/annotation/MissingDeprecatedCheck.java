@@ -182,8 +182,7 @@ public final class MissingDeprecatedCheck extends AbstractJavadocCheck {
                     || type == TokenTypes.ARRAY_DECLARATOR || type == TokenTypes.TYPE_PARAMETERS
                     || type == TokenTypes.DOT) {
                 result = result.getParent();
-            }
-            else {
+            } else {
                 break;
             }
         }

@@ -341,8 +341,7 @@ public class DescendantTokenCheck extends AbstractCheck {
 
         if (sumTokenCounts) {
             logAsTotal(ast);
-        }
-        else {
+        } else {
             logAsSeparated(ast);
         }
     }

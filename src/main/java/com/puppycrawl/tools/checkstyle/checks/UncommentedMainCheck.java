@@ -242,8 +242,7 @@ public class UncommentedMainCheck
 
             if (arrayDecl.isPresent()) {
                 checkPassed = isStringType(arrayDecl.get().getFirstChild());
-            }
-            else if (varargs.isPresent()) {
+            } else if (varargs.isPresent()) {
                 checkPassed = isStringType(parameterType.getFirstChild());
             }
         }

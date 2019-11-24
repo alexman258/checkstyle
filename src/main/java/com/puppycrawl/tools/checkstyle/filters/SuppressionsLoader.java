@@ -140,8 +140,7 @@ public final class SuppressionsLoader
             //add SuppressFilterElement filter to the filter chain
             final SuppressFilterElement suppress = getSuppressElement(attributes);
             filterChain.addFilter(suppress);
-        }
-        else if ("suppress-xpath".equals(qName)) {
+        } else if ("suppress-xpath".equals(qName)) {
             final XpathFilterElement filter = getXpathFilter(attributes);
             treeWalkerFilters.add(filter);
         }
@@ -169,8 +168,7 @@ public final class SuppressionsLoader
             final String lines = attributes.getValue(ATTRIBUTE_NAME_LINES);
             final String columns = attributes.getValue(ATTRIBUTE_NAME_COLUMNS);
             suppress = new SuppressFilterElement(files, checks, message, modId, lines, columns);
-        }
-        catch (final PatternSyntaxException ex) {
+        } catch (final PatternSyntaxException ex) {
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
             throw new SAXException("invalid files or checks or message format", ex);
         }
@@ -197,8 +195,7 @@ public final class SuppressionsLoader
             final String files = attributes.getValue(ATTRIBUTE_NAME_FILES);
             final String xpathQuery = attributes.getValue(ATTRIBUTE_NAME_QUERY);
             filter = new XpathFilterElement(files, checks, message, modId, xpathQuery);
-        }
-        catch (final PatternSyntaxException ex) {
+        } catch (final PatternSyntaxException ex) {
             // -@cs[IllegalInstantiation] SAXException is in the overridden method signature
             throw new SAXException("invalid files or checks or message format for suppress-xpath",
                     ex);
@@ -274,19 +271,15 @@ public final class SuppressionsLoader
                 new SuppressionsLoader();
             suppressionsLoader.parseInputSource(source);
             return suppressionsLoader;
-        }
-        catch (final FileNotFoundException ex) {
+        } catch (final FileNotFoundException ex) {
             throw new CheckstyleException(UNABLE_TO_FIND_ERROR_MESSAGE + sourceName, ex);
-        }
-        catch (final ParserConfigurationException | SAXException ex) {
+        } catch (final ParserConfigurationException | SAXException ex) {
             final String message = String.format(Locale.ROOT, "Unable to parse %s - %s",
                     sourceName, ex.getMessage());
             throw new CheckstyleException(message, ex);
-        }
-        catch (final IOException ex) {
+        } catch (final IOException ex) {
             throw new CheckstyleException("Unable to read " + sourceName, ex);
-        }
-        catch (final NumberFormatException ex) {
+        } catch (final NumberFormatException ex) {
             final String message = String.format(Locale.ROOT, "Number format exception %s - %s",
                     sourceName, ex.getMessage());
             throw new CheckstyleException(message, ex);

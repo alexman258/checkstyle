@@ -220,8 +220,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
             final DetailAST methodDef = ast.getParent();
             final DetailAST endOfParams = methodDef.findFirstToken(TokenTypes.RPAREN);
             after = endOfParams.getColumnNo() + 1;
-        }
-        else {
+        } else {
             after = ast.getColumnNo() + ast.getText().length();
         }
         return after;
@@ -244,8 +243,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
         final String line = getLine(astLineNo - 1);
         if (astLineNo == whitespaceLineNo && whitespaceColumnNo < line.length()) {
             result = Character.isWhitespace(line.charAt(whitespaceColumnNo));
-        }
-        else {
+        } else {
             result = !allowLineBreaks;
         }
         return result;
@@ -265,8 +263,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
         if (firstChild.getType() == TokenTypes.ARRAY_DECLARATOR) {
             // second or higher array index
             previousElement = firstChild.findFirstToken(TokenTypes.RBRACK);
-        }
-        else {
+        } else {
             // first array index, is preceded with identifier or type
             final DetailAST parent = getFirstNonArrayDeclaratorParent(ast);
             switch (parent.getType()) {
@@ -276,8 +273,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
                     if (wildcard == null) {
                         // usual generic type argument like <char[]>
                         previousElement = getTypeLastNode(ast);
-                    }
-                    else {
+                    } else {
                         // constructions with wildcard like <? extends String[]>
                         previousElement = getTypeLastNode(ast.getFirstChild());
                     }
@@ -300,8 +296,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
                     if (ident == null) {
                         //i.e. int[]::new
                         previousElement = ast.getFirstChild();
-                    }
-                    else {
+                    } else {
                         previousElement = ident;
                     }
                     break;
@@ -326,8 +321,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
         if (firstChild.getType() == TokenTypes.INDEX_OP) {
             // second or higher array index
             result = firstChild.findFirstToken(TokenTypes.RBRACK);
-        }
-        else {
+        } else {
             final DetailAST ident = getIdentLastToken(ast);
             if (ident == null) {
                 final DetailAST rparen = ast.findFirstToken(TokenTypes.RPAREN);
@@ -335,13 +329,10 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
                 if (rparen == null) {
                     final DetailAST lastChild = firstChild.getLastChild();
                     result = lastChild.findFirstToken(TokenTypes.RCURLY);
-                }
-                // construction like ((byte[]) pixels)[0]
-                else {
+                } else {
                     result = rparen;
                 }
-            }
-            else {
+            } else {
                 result = ident;
             }
         }
@@ -377,8 +368,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
                 //primitive literal expected
                 result = ast.getFirstChild();
             }
-        }
-        else {
+        } else {
             result = result.findFirstToken(TokenTypes.GENERIC_END);
         }
         return result;
@@ -403,12 +393,9 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
         // determining if it is java style or C style
         if (ident == null || ident.getLineNo() > ast.getLineNo()) {
             previousElement = lastTypeNode;
-        }
-        else if (ident.getLineNo() < ast.getLineNo()) {
+        } else if (ident.getLineNo() < ast.getLineNo()) {
             previousElement = ident;
-        }
-        //ident and lastTypeNode lay on one line
-        else {
+        } else {
             final int instanceOfSize = 13;
             // +2 because ast has `[]` after the ident
             if (ident.getColumnNo() >= ast.getColumnNo() + 2
@@ -416,8 +403,7 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
                 // ' instanceof ' (12 characters)
                 || lastTypeNode.getColumnNo() >= ident.getColumnNo() + instanceOfSize) {
                 previousElement = lastTypeNode;
-            }
-            else {
+            } else {
                 previousElement = ident;
             }
         }
@@ -438,13 +424,10 @@ public class NoWhitespaceAfterCheck extends AbstractCheck {
             final DetailAST methodCall = ast.findFirstToken(TokenTypes.METHOD_CALL);
             if (methodCall == null) {
                 result = ast.findFirstToken(TokenTypes.IDENT);
-            }
-            else {
+            } else {
                 result = methodCall.findFirstToken(TokenTypes.RPAREN);
             }
-        }
-        // qualified name case
-        else {
+        } else {
             result = dot.getFirstChild().getNextSibling();
         }
         return result;

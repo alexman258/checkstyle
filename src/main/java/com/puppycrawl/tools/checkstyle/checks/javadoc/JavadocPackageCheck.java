@@ -69,8 +69,7 @@ public class JavadocPackageCheck extends AbstractFileSetCheck {
         final File dir;
         try {
             dir = file.getCanonicalFile().getParentFile();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new CheckstyleException(
                     "Exception while getting canonical path to file " + file.getPath(), ex);
         }
@@ -84,8 +83,7 @@ public class JavadocPackageCheck extends AbstractFileSetCheck {
                 if (packageHtml.exists()) {
                     log(1, MSG_LEGACY_PACKAGE_HTML);
                 }
-            }
-            else if (!allowLegacy || !packageHtml.exists()) {
+            } else if (!allowLegacy || !packageHtml.exists()) {
                 log(1, MSG_PACKAGE_INFO);
             }
         }

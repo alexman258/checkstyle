@@ -193,8 +193,7 @@ public class SuppressWarningsHolder
             if (index > 0) {
                 registerAlias(sourceAlias.substring(0, index), sourceAlias
                     .substring(index + 1));
-            }
-            else if (!sourceAlias.isEmpty()) {
+            } else if (!sourceAlias.isEmpty()) {
                 throw new IllegalArgumentException(
                     "'=' expected in alias list item: " + sourceAlias);
             }
@@ -296,8 +295,7 @@ public class SuppressWarningsHolder
 
                 if (targetAST == null) {
                     log(ast.getLineNo(), MSG_KEY);
-                }
-                else {
+                } else {
                     // get text range of target
                     final int firstLine = targetAST.getLineNo();
                     final int firstColumn = targetAST.getColumnNo();
@@ -307,8 +305,7 @@ public class SuppressWarningsHolder
                     if (nextAST == null) {
                         lastLine = Integer.MAX_VALUE;
                         lastColumn = Integer.MAX_VALUE;
-                    }
-                    else {
+                    } else {
                         lastLine = nextAST.getLineNo();
                         lastColumn = nextAST.getColumnNo() - 1;
                     }
@@ -472,8 +469,7 @@ public class SuppressWarningsHolder
         final String identifier;
         if (ast.getType() == TokenTypes.IDENT) {
             identifier = ast.getText();
-        }
-        else {
+        } else {
             identifier = getIdentifier(ast.getFirstChild()) + "."
                 + getIdentifier(ast.getLastChild());
         }

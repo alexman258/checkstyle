@@ -265,8 +265,7 @@ public class InnerAssignmentCheck
                 current = getParent(current, skipTokens);
                 if (current.getType() == anElement) {
                     found = true;
-                }
-                else {
+                } else {
                     found = false;
                     break;
                 }

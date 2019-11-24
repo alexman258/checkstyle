@@ -617,8 +617,7 @@ public class ImportOrderCheck
         if (ast.getType() == TokenTypes.IMPORT) {
             ident = FullIdent.createFullIdentBelow(ast);
             isStatic = false;
-        }
-        else {
+        } else {
             ident = FullIdent.createFullIdent(ast.getFirstChild()
                     .getNextSibling());
             isStatic = true;
@@ -629,16 +628,13 @@ public class ImportOrderCheck
         if (option == ImportOrderOption.TOP || option == ImportOrderOption.ABOVE) {
             final boolean isStaticAndNotLastImport = isStatic && !lastImportStatic;
             doVisitToken(ident, isStatic, isStaticAndNotLastImport, line);
-        }
-        else if (option == ImportOrderOption.BOTTOM || option == ImportOrderOption.UNDER) {
+        } else if (option == ImportOrderOption.BOTTOM || option == ImportOrderOption.UNDER) {
             final boolean isLastImportAndNonStatic = lastImportStatic && !isStatic;
             doVisitToken(ident, isStatic, isLastImportAndNonStatic, line);
-        }
-        else if (option == ImportOrderOption.INFLOW) {
+        } else if (option == ImportOrderOption.INFLOW) {
             // "previous" argument is useless here
             doVisitToken(ident, isStatic, true, line);
-        }
-        else {
+        } else {
             throw new IllegalStateException(
                     "Unexpected option for static imports: " + option);
         }
@@ -665,11 +661,9 @@ public class ImportOrderCheck
             if (!beforeFirstImport && line - lastImportLine < 2 && needSeparator(isStatic)) {
                 log(line, MSG_SEPARATION, name);
             }
-        }
-        else if (groupIdx == lastGroup) {
+        } else if (groupIdx == lastGroup) {
             doVisitTokenInSameGroup(isStatic, previous, name, line);
-        }
-        else {
+        } else {
             log(line, MSG_ORDERING, name);
         }
         if (isSeparatorInGroup(groupIdx, isStatic, line)) {
@@ -690,8 +684,7 @@ public class ImportOrderCheck
         final boolean staticImportSeparator;
         if (staticImportsApart) {
             staticImportSeparator = isStatic && separatedStaticGroups;
-        }
-        else {
+        } else {
             staticImportSeparator = isStatic && separated;
         }
         final boolean separatorBetween = isStatic != lastImportStatic
@@ -737,8 +730,7 @@ public class ImportOrderCheck
                 if (isWrongOrder(name, isStatic)) {
                     log(line, MSG_ORDERING, name);
                 }
-            }
-            else {
+            } else {
                 final boolean shouldFireError =
                     // previous non-static but current is static (above)
                     // or
@@ -768,16 +760,13 @@ public class ImportOrderCheck
         if (isStatic) {
             if (useContainerOrderingForStatic) {
                 result = compareContainerOrder(lastImport, name, caseSensitive) > 0;
-            }
-            else if (staticImportsApart) {
+            } else if (staticImportsApart) {
                 result = sortStaticImportsAlphabetically
                     && compare(lastImport, name, caseSensitive) > 0;
-            }
-            else {
+            } else {
                 result = compare(lastImport, name, caseSensitive) > 0;
             }
-        }
-        else {
+        } else {
             // out of lexicographic order
             result = compare(lastImport, name, caseSensitive) > 0;
         }
@@ -818,15 +807,13 @@ public class ImportOrderCheck
         final int compareContainersOrderResult;
         if (caseSensitive) {
             compareContainersOrderResult = container1.compareTo(container2);
-        }
-        else {
+        } else {
             compareContainersOrderResult = container1.compareToIgnoreCase(container2);
         }
         final int result;
         if (compareContainersOrderResult == 0) {
             result = compare(importName1, importName2, caseSensitive);
-        }
-        else {
+        } else {
             result = compareContainersOrderResult;
         }
         return result;
@@ -861,8 +848,7 @@ public class ImportOrderCheck
         final Pattern[] patterns;
         if (isStatic) {
             patterns = staticGroups;
-        }
-        else {
+        } else {
             patterns = groups;
         }
 
@@ -870,8 +856,7 @@ public class ImportOrderCheck
 
         if (isStatic && option == ImportOrderOption.BOTTOM) {
             number += groups.length + 1;
-        }
-        else if (!isStatic && option == ImportOrderOption.TOP) {
+        } else if (!isStatic && option == ImportOrderOption.TOP) {
             number += staticGroups.length + 1;
         }
         return number;
@@ -898,8 +883,7 @@ public class ImportOrderCheck
                     bestIndex = i;
                     bestEnd = matcher.end();
                     bestPos = matcher.start();
-                }
-                else if (matcher.start() == bestPos && matcher.end() > bestEnd) {
+                } else if (matcher.start() == bestPos && matcher.end() > bestEnd) {
                     bestIndex = i;
                     bestEnd = matcher.end();
                 }
@@ -927,8 +911,7 @@ public class ImportOrderCheck
         final int result;
         if (caseSensitive) {
             result = string1.compareTo(string2);
-        }
-        else {
+        } else {
             result = string1.compareToIgnoreCase(string2);
         }
 
@@ -953,15 +936,13 @@ public class ImportOrderCheck
             if (WILDCARD_GROUP_NAME.equals(pkg)) {
                 // matches any package
                 grp = Pattern.compile("");
-            }
-            else if (CommonUtil.startsWithChar(pkg, '/')) {
+            } else if (CommonUtil.startsWithChar(pkg, '/')) {
                 if (!CommonUtil.endsWithChar(pkg, '/')) {
                     throw new IllegalArgumentException("Invalid group: " + pkg);
                 }
                 pkg = pkg.substring(1, pkg.length() - 1);
                 grp = Pattern.compile(pkg);
-            }
-            else {
+            } else {
                 final StringBuilder pkgBuilder = new StringBuilder(pkg);
                 if (!CommonUtil.endsWithChar(pkg, '.')) {
                     pkgBuilder.append('.');

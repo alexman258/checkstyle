@@ -246,8 +246,7 @@ public class DeclarationOrderCheck extends AbstractCheck {
             if (!ignoreConstructors) {
                 log(ast, MSG_CONSTRUCTOR);
             }
-        }
-        else {
+        } else {
             state.currentScopeState = STATE_CTOR_DEF;
         }
     }
@@ -277,21 +276,18 @@ public class DeclarationOrderCheck extends AbstractCheck {
             if (state.currentScopeState > STATE_INSTANCE_VARIABLE_DEF) {
                 isStateValid = false;
                 log(modifierAst, MSG_INSTANCE);
-            }
-            else if (state.currentScopeState == STATE_STATIC_VARIABLE_DEF) {
+            } else if (state.currentScopeState == STATE_STATIC_VARIABLE_DEF) {
                 state.declarationAccess = Scope.PUBLIC;
                 state.currentScopeState = STATE_INSTANCE_VARIABLE_DEF;
             }
-        }
-        else {
+        } else {
             if (state.currentScopeState > STATE_STATIC_VARIABLE_DEF) {
                 if (!ignoreModifiers
                         || state.currentScopeState > STATE_INSTANCE_VARIABLE_DEF) {
                     isStateValid = false;
                     log(modifierAst, MSG_STATIC);
                 }
-            }
-            else {
+            } else {
                 state.currentScopeState = STATE_STATIC_VARIABLE_DEF;
             }
         }
@@ -315,8 +311,7 @@ public class DeclarationOrderCheck extends AbstractCheck {
                     && !isForwardReference(modifiersAst.getParent())) {
                 log(modifiersAst, MSG_ACCESS);
             }
-        }
-        else {
+        } else {
             state.declarationAccess = access;
         }
     }

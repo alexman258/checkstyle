@@ -100,8 +100,7 @@ public class MultipleVariableDeclarationsCheck extends AbstractCheck {
                     if (ast.getParent().getType() != TokenTypes.FOR_INIT) {
                         log(firstNode, MSG_MULTIPLE_COMMA);
                     }
-                }
-                else {
+                } else {
                     final DetailAST lastNode = getLastNode(ast);
                     final DetailAST firstNextNode = CheckUtil.getFirstNode(nextNode);
 

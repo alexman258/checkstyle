@@ -76,8 +76,7 @@ public class ClassDefHandler extends BlockParentHandler {
                     logError(ident, "ident", lineStart);
                 }
             }
-        }
-        else {
+        } else {
             checkModifiers();
         }
         if (getMainAst().getType() == TokenTypes.ANNOTATION_DEF) {
@@ -86,8 +85,7 @@ public class ClassDefHandler extends BlockParentHandler {
                 checkWrappingIndentation(getMainAst(), getListChild(), 0,
                         getIndent().getFirstIndentLevel(), false);
             }
-        }
-        else {
+        } else {
             checkWrappingIndentation(getMainAst(), getListChild());
         }
         super.checkIndentation();
@@ -116,14 +114,11 @@ public class ClassDefHandler extends BlockParentHandler {
 
         if (ast.getType() == TokenTypes.CLASS_DEF) {
             name = "class def";
-        }
-        else if (ast.getType() == TokenTypes.ENUM_DEF) {
+        } else if (ast.getType() == TokenTypes.ENUM_DEF) {
             name = "enum def";
-        }
-        else if (ast.getType() == TokenTypes.ANNOTATION_DEF) {
+        } else if (ast.getType() == TokenTypes.ANNOTATION_DEF) {
             name = "annotation def";
-        }
-        else {
+        } else {
             name = "interface def";
         }
         return name;

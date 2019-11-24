@@ -298,8 +298,7 @@ public class LeftCurlyCheck
             if (lastAnnotation != null) {
                 if (lastAnnotation.getNextSibling() == null) {
                     resultNode = modifiers.getNextSibling();
-                }
-                else {
+                } else {
                     resultNode = lastAnnotation.getNextSibling();
                 }
             }
@@ -339,11 +338,9 @@ public class LeftCurlyCheck
                 if (!CommonUtil.hasWhitespaceBefore(brace.getColumnNo(), braceLine)) {
                     log(brace, MSG_KEY_LINE_NEW, OPEN_CURLY_BRACE, brace.getColumnNo() + 1);
                 }
-            }
-            else if (option == LeftCurlyOption.EOL) {
+            } else if (option == LeftCurlyOption.EOL) {
                 validateEol(brace, braceLine);
-            }
-            else if (startToken.getLineNo() != brace.getLineNo()) {
+            } else if (startToken.getLineNo() != brace.getLineNo()) {
                 validateNewLinePosition(brace, startToken, braceLine);
             }
         }
@@ -374,12 +371,10 @@ public class LeftCurlyCheck
         if (startToken.getLineNo() + 1 == brace.getLineNo()) {
             if (CommonUtil.hasWhitespaceBefore(brace.getColumnNo(), braceLine)) {
                 log(brace, MSG_KEY_LINE_PREVIOUS, OPEN_CURLY_BRACE, brace.getColumnNo() + 1);
-            }
-            else {
+            } else {
                 log(brace, MSG_KEY_LINE_NEW, OPEN_CURLY_BRACE, brace.getColumnNo() + 1);
             }
-        }
-        else if (!CommonUtil.hasWhitespaceBefore(brace.getColumnNo(), braceLine)) {
+        } else if (!CommonUtil.hasWhitespaceBefore(brace.getColumnNo(), braceLine)) {
             log(brace, MSG_KEY_LINE_NEW, OPEN_CURLY_BRACE, brace.getColumnNo() + 1);
         }
     }
@@ -395,8 +390,7 @@ public class LeftCurlyCheck
         DetailAST nextToken = null;
         if (leftCurly.getType() == TokenTypes.SLIST) {
             nextToken = leftCurly.getFirstChild();
-        }
-        else {
+        } else {
             if (!ignoreEnums
                     && leftCurly.getParent().getParent().getType() == TokenTypes.ENUM_DEF) {
                 nextToken = leftCurly.getNextSibling();

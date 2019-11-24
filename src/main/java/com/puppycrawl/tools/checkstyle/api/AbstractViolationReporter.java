@@ -127,8 +127,7 @@ public abstract class AbstractViolationReporter
         final String messages = "messages";
         if (endIndex == -1) {
             messageBundle = messages;
-        }
-        else {
+        } else {
             final String packageName = className.substring(0, endIndex);
             messageBundle = packageName + "." + messages;
         }

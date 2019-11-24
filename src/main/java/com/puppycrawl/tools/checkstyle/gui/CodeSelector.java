@@ -50,8 +50,7 @@ public class CodeSelector {
         if (node instanceof DetailAST) {
             pModel = new CodeSelectorPresentation((DetailAST) node,
                     new ArrayList<>(lines2position));
-        }
-        else {
+        } else {
             pModel = new CodeSelectorPresentation((DetailNode) node,
                     new ArrayList<>(lines2position));
         }

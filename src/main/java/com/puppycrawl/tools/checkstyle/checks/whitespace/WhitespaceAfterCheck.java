@@ -122,8 +122,7 @@ public class WhitespaceAfterCheck
             if (!isFollowedByWhitespace(targetAST, line)) {
                 log(targetAST, MSG_WS_TYPECAST);
             }
-        }
-        else {
+        } else {
             final String line = getLine(ast.getLineNo() - 1);
             if (!isFollowedByWhitespace(ast, line)) {
                 final Object[] message = {ast.getText()};

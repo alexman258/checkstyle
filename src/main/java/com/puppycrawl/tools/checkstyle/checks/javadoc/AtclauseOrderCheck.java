@@ -182,8 +182,7 @@ public class AtclauseOrderCheck extends AbstractJavadocCheck {
                 if (indexOfCurrentTag != -1) {
                     if (indexOfCurrentTag < maxIndexOfPreviousTag) {
                         log(node.getLineNumber(), MSG_KEY, tagOrder.toString());
-                    }
-                    else {
+                    } else {
                         maxIndexOfPreviousTag = indexOfCurrentTag;
                     }
                 }

@@ -158,8 +158,7 @@ public final class AbstractClassNameCheck extends AbstractCheck {
             if (!ignoreName && !isMatchingClassName(className)) {
                 log(ast, MSG_ILLEGAL_ABSTRACT_CLASS_NAME, className, format.pattern());
             }
-        }
-        else if (!ignoreModifier && isMatchingClassName(className)) {
+        } else if (!ignoreModifier && isMatchingClassName(className)) {
             log(ast, MSG_NO_ABSTRACT_CLASS_MODIFIER, className);
         }
     }

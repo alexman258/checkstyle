@@ -135,8 +135,7 @@ public abstract class AbstractExpressionHandler {
 
         if (subtypeName.isEmpty()) {
             typeStr = "";
-        }
-        else {
+        } else {
             typeStr = " " + subtypeName;
         }
         String messageKey = IndentationCheck.MSG_ERROR;

@@ -175,8 +175,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
         if (cacheFile != null) {
             try {
                 cacheFile.persist();
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 throw new IllegalStateException("Unable to persist cache file.", ex);
             }
         }
@@ -290,10 +289,9 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
                 final SortedSet<LocalizedMessage> fileMessages = processFile(file);
                 fireErrors(fileName, fileMessages);
                 fireFileFinished(fileName);
-            }
-            // -@cs[IllegalCatch] There is no other way to deliver filename that was under
-            // processing. See https://github.com/checkstyle/checkstyle/issues/2285
-            catch (Exception ex) {
+            } catch (Exception ex) {
+            	// -@cs[IllegalCatch] There is no other way to deliver filename that was under
+                // processing. See https://github.com/checkstyle/checkstyle/issues/2285
                 if (fileName != null && cacheFile != null) {
                     cacheFile.remove(fileName);
                 }
@@ -301,8 +299,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
                 // We need to catch all exceptions to put a reason failure (file name) in exception
                 throw new CheckstyleException("Exception was thrown while processing "
                         + file.getPath(), ex);
-            }
-            catch (Error error) {
+            } catch (Error error) {
                 if (fileName != null && cacheFile != null) {
                     cacheFile.remove(fileName);
                 }
@@ -327,15 +324,13 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
             for (final FileSetCheck fsc : fileSetChecks) {
                 fileMessages.addAll(fsc.process(file, theText));
             }
-        }
-        catch (final IOException ioe) {
+        } catch (final IOException ioe) {
             log.debug("IOException occurred.", ioe);
             fileMessages.add(new LocalizedMessage(1,
                     Definitions.CHECKSTYLE_BUNDLE, EXCEPTION_MSG,
                     new String[] {ioe.getMessage()}, null, getClass(), null));
-        }
-        // -@cs[IllegalCatch] There is no other way to obey haltOnException field
-        catch (Exception ex) {
+        } catch (Exception ex) {
+            // -@cs[IllegalCatch] There is no other way to obey haltOnException field
             if (haltOnException) {
                 throw ex;
             }
@@ -466,8 +461,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
                 bean.contextualize(childContext);
                 bean.configure(childConf);
             }
-        }
-        catch (final CheckstyleException ex) {
+        } catch (final CheckstyleException ex) {
             throw new CheckstyleException("cannot initialize module " + name
                     + " - " + ex.getMessage(), ex);
         }
@@ -475,20 +469,16 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
             final FileSetCheck fsc = (FileSetCheck) child;
             fsc.init();
             addFileSetCheck(fsc);
-        }
-        else if (child instanceof BeforeExecutionFileFilter) {
+        } else if (child instanceof BeforeExecutionFileFilter) {
             final BeforeExecutionFileFilter filter = (BeforeExecutionFileFilter) child;
             addBeforeExecutionFileFilter(filter);
-        }
-        else if (child instanceof Filter) {
+        } else if (child instanceof Filter) {
             final Filter filter = (Filter) child;
             addFilter(filter);
-        }
-        else if (child instanceof AuditListener) {
+        } else if (child instanceof AuditListener) {
             final AuditListener listener = (AuditListener) child;
             addListener(listener);
-        }
-        else {
+        } else {
             throw new CheckstyleException(name
                     + " is not allowed as a child in Checker");
         }
@@ -534,15 +524,13 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
     public final void setFileExtensions(String... extensions) {
         if (extensions == null) {
             fileExtensions = null;
-        }
-        else {
+        } else {
             fileExtensions = new String[extensions.length];
             for (int i = 0; i < extensions.length; i++) {
                 final String extension = extensions[i];
                 if (CommonUtil.startsWithChar(extension, '.')) {
                     fileExtensions[i] = extension;
-                }
-                else {
+                } else {
                     fileExtensions[i] = "." + extension;
                 }
             }

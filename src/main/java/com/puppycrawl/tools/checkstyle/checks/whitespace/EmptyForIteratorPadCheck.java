@@ -118,8 +118,7 @@ public class EmptyForIteratorPadCheck
                 if (option == PadOption.NOSPACE
                     && Character.isWhitespace(line.charAt(after))) {
                     log(ast, MSG_WS_FOLLOWED, SEMICOLON);
-                }
-                else if (option == PadOption.SPACE
+                } else if (option == PadOption.SPACE
                          && !Character.isWhitespace(line.charAt(after))) {
                     log(ast, MSG_WS_NOT_FOLLOWED, SEMICOLON);
                 }

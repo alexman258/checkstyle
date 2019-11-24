@@ -237,14 +237,12 @@ public class IllegalInstantiationCheck
 
         if (classes.contains(className)) {
             fullClassName = className;
-        }
-        else {
+        } else {
             final int pkgNameLen;
 
             if (pkgName == null) {
                 pkgNameLen = 0;
-            }
-            else {
+            } else {
                 pkgNameLen = pkgName.length();
             }
 
@@ -252,8 +250,7 @@ public class IllegalInstantiationCheck
                 if (isSamePackage(className, pkgNameLen, illegal)
                         || isStandardClass(className, illegal)) {
                     fullClassName = illegal;
-                }
-                else {
+                } else {
                     fullClassName = checkImportStatements(className);
                 }
 

@@ -804,13 +804,11 @@ public class VisibilityModifierCheck
 
                 if (typeArgs == null) {
                     result = true;
-                }
-                else {
+                } else {
                     final List<String> argsClassNames = getTypeArgsClassNames(typeArgs);
                     result = areImmutableTypeArguments(argsClassNames);
                 }
-            }
-            else {
+            } else {
                 result = !isCanonicalName && isPrimitive(type);
             }
         }
@@ -837,8 +835,7 @@ public class VisibilityModifierCheck
         if (isCanonicalName) {
             // if type class name is in canonical form, abstract tree has specific structure
             typeArgs = type.getFirstChild().findFirstToken(TokenTypes.TYPE_ARGUMENTS);
-        }
-        else {
+        } else {
             typeArgs = type.findFirstToken(TokenTypes.TYPE_ARGUMENTS);
         }
         return typeArgs;
@@ -903,8 +900,7 @@ public class VisibilityModifierCheck
         final String typeName;
         if (isCanonicalName) {
             typeName = getCanonicalName(type);
-        }
-        else {
+        } else {
             typeName = type.getFirstChild().getText();
         }
         return typeName;

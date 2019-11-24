@@ -173,11 +173,9 @@ public class RightCurlyCheck extends AbstractCheck {
         String violation = "";
         if (shouldHaveLineBreakBefore(option, details)) {
             violation = MSG_KEY_LINE_BREAK_BEFORE;
-        }
-        else if (shouldBeOnSameLine(option, details)) {
+        } else if (shouldBeOnSameLine(option, details)) {
             violation = MSG_KEY_LINE_SAME;
-        }
-        else if (shouldBeAloneOnLine(option, details, getLine(details.rcurly.getLineNo() - 1))) {
+        } else if (shouldBeAloneOnLine(option, details, getLine(details.rcurly.getLineNo() - 1))) {
             violation = MSG_KEY_LINE_ALONE;
         }
         return violation;
@@ -392,13 +390,11 @@ public class RightCurlyCheck extends AbstractCheck {
             if (tokenType == TokenTypes.LITERAL_TRY) {
                 if (ast.getFirstChild().getType() == TokenTypes.RESOURCE_SPECIFICATION) {
                     lcurly = ast.getFirstChild().getNextSibling();
-                }
-                else {
+                } else {
                     lcurly = ast.getFirstChild();
                 }
                 nextToken = lcurly.getNextSibling();
-            }
-            else {
+            } else {
                 nextToken = ast.getNextSibling();
                 lcurly = ast.getLastChild();
             }
@@ -407,8 +403,7 @@ public class RightCurlyCheck extends AbstractCheck {
             if (nextToken == null) {
                 shouldCheckLastRcurly = true;
                 nextToken = getNextToken(ast);
-            }
-            else {
+            } else {
                 shouldCheckLastRcurly = false;
             }
 
@@ -430,8 +425,7 @@ public class RightCurlyCheck extends AbstractCheck {
                 shouldCheckLastRcurly = true;
                 nextToken = getNextToken(ast);
                 lcurly = ast.getLastChild();
-            }
-            else {
+            } else {
                 shouldCheckLastRcurly = false;
                 lcurly = nextToken.getPreviousSibling();
             }
@@ -457,8 +451,7 @@ public class RightCurlyCheck extends AbstractCheck {
                 final DetailAST child = ast.getLastChild();
                 lcurly = child.getFirstChild();
                 rcurly = child.getLastChild();
-            }
-            else {
+            } else {
                 lcurly = ast.findFirstToken(TokenTypes.SLIST);
                 if (lcurly != null) {
                     // SLIST could be absent if method is abstract
@@ -486,8 +479,7 @@ public class RightCurlyCheck extends AbstractCheck {
                 if (lcurly != null) {
                     rcurly = lcurly.getLastChild();
                 }
-            }
-            else {
+            } else {
                 shouldCheckLastRcurly = true;
                 lcurly = ast.findFirstToken(TokenTypes.SLIST);
                 if (lcurly != null) {
@@ -515,8 +507,7 @@ public class RightCurlyCheck extends AbstractCheck {
                 // a DetailAST object with DetailAST#NOT_INITIALIZED for line and column numbers
                 // that no 'actual' DetailAST objects can have.
                 next = new DetailAstImpl();
-            }
-            else {
+            } else {
                 next = CheckUtil.getFirstNode(next);
             }
             return next;

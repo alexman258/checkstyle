@@ -487,8 +487,7 @@ public final class IllegalTypeCheck extends AbstractCheck {
         while (child != null) {
             if (child.getType() == TokenTypes.IDENT) {
                 checkIdent(child);
-            }
-            else if (child.getType() == TokenTypes.TYPE_ARGUMENTS) {
+            } else if (child.getType() == TokenTypes.TYPE_ARGUMENTS) {
                 TokenUtil.forEachChild(child, TokenTypes.TYPE_ARGUMENT, this::checkType);
             }
             child = child.getNextSibling();

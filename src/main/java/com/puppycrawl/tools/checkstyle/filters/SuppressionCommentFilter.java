@@ -542,8 +542,7 @@ public class SuppressionCommentFilter
         final Matcher offMatcher = offCommentFormat.matcher(text);
         if (offMatcher.find()) {
             addTag(offMatcher.group(0), line, column, TagType.OFF);
-        }
-        else {
+        } else {
             final Matcher onMatcher = onCommentFormat.matcher(text);
             if (onMatcher.find()) {
                 addTag(onMatcher.group(0), line, column, TagType.ON);
@@ -610,8 +609,7 @@ public class SuppressionCommentFilter
             final Pattern commentFormat;
             if (this.tagType == TagType.ON) {
                 commentFormat = filter.onCommentFormat;
-            }
-            else {
+            } else {
                 commentFormat = filter.offCommentFormat;
             }
 
@@ -625,8 +623,7 @@ public class SuppressionCommentFilter
 
                 if (filter.messageFormat == null) {
                     tagMessageRegexp = null;
-                }
-                else {
+                } else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
                             filter.messageFormat, text, commentFormat);
                     tagMessageRegexp = Pattern.compile(format);
@@ -634,14 +631,12 @@ public class SuppressionCommentFilter
 
                 if (filter.idFormat == null) {
                     tagIdRegexp = null;
-                }
-                else {
+                } else {
                     format = CommonUtil.fillTemplateWithStringsByRegexp(
                             filter.idFormat, text, commentFormat);
                     tagIdRegexp = Pattern.compile(format);
                 }
-            }
-            catch (final PatternSyntaxException ex) {
+            } catch (final PatternSyntaxException ex) {
                 throw new IllegalArgumentException(
                     "unable to parse expanded comment " + format, ex);
             }
@@ -687,8 +682,7 @@ public class SuppressionCommentFilter
             final int result;
             if (line == object.line) {
                 result = Integer.compare(column, object.column);
-            }
-            else {
+            } else {
                 result = Integer.compare(line, object.line);
             }
             return result;
@@ -753,8 +747,7 @@ public class SuppressionCommentFilter
             if (tagIdRegexp != null) {
                 if (event.getModuleId() == null) {
                     match = false;
-                }
-                else {
+                } else {
                     final Matcher idMatcher = tagIdRegexp.matcher(event.getModuleId());
                     match = idMatcher.find();
                 }

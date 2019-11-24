@@ -130,14 +130,12 @@ public class DefaultComesLastCheck extends AbstractCheck {
         if (skipIfLastAndSharedWithCase) {
             if (Objects.nonNull(findNextSibling(ast, TokenTypes.LITERAL_CASE))) {
                 log(ast, MSG_KEY_SKIP_IF_LAST_AND_SHARED_WITH_CASE);
-            }
-            else if (ast.getPreviousSibling() == null
+            } else if (ast.getPreviousSibling() == null
                 && Objects.nonNull(findNextSibling(defaultGroupAST,
                                                    TokenTypes.CASE_GROUP))) {
                 log(ast, MSG_KEY);
             }
-        }
-        else if (Objects.nonNull(findNextSibling(defaultGroupAST,
+        } else if (Objects.nonNull(findNextSibling(defaultGroupAST,
                                                  TokenTypes.CASE_GROUP))) {
             log(ast, MSG_KEY);
         }

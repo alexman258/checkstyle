@@ -252,8 +252,7 @@ public class EmptyCatchBlockCheck extends AbstractCheck {
         String commentContent = "";
         if (firstElementInBlock.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
             commentContent = firstElementInBlock.getFirstChild().getText();
-        }
-        else if (firstElementInBlock.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
+        } else if (firstElementInBlock.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
             commentContent = firstElementInBlock.getFirstChild().getText();
             final String[] lines = LINE_END_PATTERN.split(commentContent);
             for (String line : lines) {

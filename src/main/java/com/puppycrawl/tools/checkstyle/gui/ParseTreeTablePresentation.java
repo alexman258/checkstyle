@@ -143,8 +143,7 @@ public class ParseTreeTablePresentation {
 
         if (node instanceof DetailNode) {
             result = getValueAtDetailNode((DetailNode) node, column);
-        }
-        else {
+        } else {
             result = getValueAtDetailAST((DetailAST) node, column);
         }
 
@@ -162,8 +161,7 @@ public class ParseTreeTablePresentation {
 
         if (parent instanceof DetailNode) {
             result = ((DetailNode) parent).getChildren()[index];
-        }
-        else {
+        } else {
             result = getChildAtDetailAst((DetailAST) parent, index);
         }
 
@@ -180,16 +178,14 @@ public class ParseTreeTablePresentation {
 
         if (parent instanceof DetailNode) {
             result = ((DetailNode) parent).getChildren().length;
-        }
-        else {
+        } else {
             if (parseMode == ParseMode.JAVA_WITH_JAVADOC_AND_COMMENTS
                     && ((AST) parent).getType() == TokenTypes.COMMENT_CONTENT
                     && JavadocUtil.isJavadocComment(((DetailAST) parent).getParent())) {
                 //getChildCount return 0 on COMMENT_CONTENT,
                 //but we need to attach javadoc tree, that is separate tree
                 result = 1;
-            }
-            else {
+            } else {
                 result = ((DetailAST) parent).getChildCount();
             }
         }
@@ -270,8 +266,7 @@ public class ParseTreeTablePresentation {
                 && parent.getType() == TokenTypes.COMMENT_CONTENT
                 && JavadocUtil.isJavadocComment(parent.getParent())) {
             result = getJavadocTree(parent.getParent());
-        }
-        else {
+        } else {
             int currentIndex = 0;
             DetailAST child = parent.getFirstChild();
             while (currentIndex < index) {

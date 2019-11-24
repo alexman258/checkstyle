@@ -127,8 +127,7 @@ public class JavadocParagraphCheck extends AbstractJavadocCheck {
     public void visitJavadocToken(DetailNode ast) {
         if (ast.getType() == JavadocTokenTypes.NEWLINE && isEmptyLine(ast)) {
             checkEmptyLine(ast);
-        }
-        else if (ast.getType() == JavadocTokenTypes.HTML_ELEMENT
+        } else if (ast.getType() == JavadocTokenTypes.HTML_ELEMENT
                 && JavadocUtil.getFirstChild(ast).getType() == JavadocTokenTypes.P_TAG_START) {
             checkParagraphTag(ast);
         }
@@ -154,8 +153,7 @@ public class JavadocParagraphCheck extends AbstractJavadocCheck {
         final DetailNode newLine = getNearestEmptyLine(tag);
         if (isFirstParagraph(tag)) {
             log(tag.getLineNumber(), MSG_REDUNDANT_PARAGRAPH);
-        }
-        else if (newLine == null || tag.getLineNumber() - newLine.getLineNumber() != 1) {
+        } else if (newLine == null || tag.getLineNumber() - newLine.getLineNumber() != 1) {
             log(tag.getLineNumber(), MSG_LINE_BEFORE);
         }
         if (allowNewlineParagraph && isImmediatelyFollowedByText(tag)) {

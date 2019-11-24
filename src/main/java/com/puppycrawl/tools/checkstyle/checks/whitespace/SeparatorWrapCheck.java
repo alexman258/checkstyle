@@ -172,8 +172,7 @@ public class SeparatorWrapCheck
         if (option == WrapOption.EOL
                 && substringBeforeToken.isEmpty()) {
             log(ast, MSG_LINE_PREVIOUS, text);
-        }
-        else if (option == WrapOption.NL
+        } else if (option == WrapOption.NL
                  && substringAfterToken.isEmpty()) {
             log(ast, MSG_LINE_NEW, text);
         }

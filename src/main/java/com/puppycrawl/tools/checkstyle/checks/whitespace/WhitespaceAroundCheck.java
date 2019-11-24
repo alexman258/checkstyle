@@ -650,8 +650,7 @@ public class WhitespaceAroundCheck extends AbstractCheck {
             final DetailAST grandParent = ast.getParent().getParent();
             result = parent.getFirstChild().getType() == TokenTypes.RCURLY
                     && grandParent.getType() == match;
-        }
-        else {
+        } else {
             result = type == TokenTypes.SLIST
                 && parentType == match
                 && ast.getFirstChild().getType() == TokenTypes.RCURLY;

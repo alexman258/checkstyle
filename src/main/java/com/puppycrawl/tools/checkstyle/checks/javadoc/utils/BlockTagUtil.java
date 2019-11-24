@@ -61,8 +61,7 @@ public final class BlockTagUtil {
             final Pattern pattern;
             if (isFirstLine) {
                 pattern = BLOCK_TAG_PATTERN_FIRST_LINE;
-            }
-            else {
+            } else {
                 pattern = BLOCK_TAG_PATTERN;
             }
 

@@ -152,11 +152,9 @@ public class FinalParametersCheck extends AbstractCheck {
         if (container.getType() != TokenTypes.INTERFACE_DEF) {
             if (ast.getType() == TokenTypes.LITERAL_CATCH) {
                 visitCatch(ast);
-            }
-            else if (ast.getType() == TokenTypes.FOR_EACH_CLAUSE) {
+            } else if (ast.getType() == TokenTypes.FOR_EACH_CLAUSE) {
                 visitForEachClause(ast);
-            }
-            else {
+            } else {
                 visitMethod(ast);
             }
         }

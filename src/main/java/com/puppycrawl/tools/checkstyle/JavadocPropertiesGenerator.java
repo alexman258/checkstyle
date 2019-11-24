@@ -79,12 +79,10 @@ public final class JavadocPropertiesGenerator {
             final ParseResult parseResult = cmd.parseArgs(args);
             if (parseResult.isUsageHelpRequested()) {
                 cmd.usage(System.out);
-            }
-            else {
+            } else {
                 writePropertiesFile(cliOptions);
             }
-        }
-        catch (ParameterException ex) {
+        } catch (ParameterException ex) {
             System.err.println(ex.getMessage());
             ex.getCommandLine().usage(System.err);
         }
@@ -104,8 +102,7 @@ public final class JavadocPropertiesGenerator {
             if (objBlock != null) {
                 iteratePublicStaticIntFields(objBlock, writer::println);
             }
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             throw new CheckstyleException("Failed to write javadoc properties of '"
                     + options.inputFile + "' to '" + options.outputFile + "'", ex);
         }
@@ -196,9 +193,8 @@ public final class JavadocPropertiesGenerator {
             // If there is an annotation, the javadoc comment will be a child of it.
             if (child.getType() == TokenTypes.ANNOTATION) {
                 firstSentence = getFirstJavadocSentence(child);
-            }
+            } else if (child.getType() == TokenTypes.BLOCK_COMMENT_BEGIN
             // Otherwise, the javadoc comment will be right here.
-            else if (child.getType() == TokenTypes.BLOCK_COMMENT_BEGIN
                     && JavadocUtil.isJavadocComment(child)) {
                 final DetailNode tree = DetailNodeTreeStringPrinter.parseJavadocAsDetailNode(child);
                 firstSentence = getFirstJavadocSentence(tree);
@@ -231,11 +227,9 @@ public final class JavadocPropertiesGenerator {
                 // Otherwise append the whole line and look for an end-of-sentence marker
                 // on the next line.
                 builder.append(node.getText());
-            }
-            else if (node.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG) {
+            } else if (node.getType() == JavadocTokenTypes.JAVADOC_INLINE_TAG) {
                 formatInlineCodeTag(builder, node);
-            }
-            else {
+            } else {
                 formatHtmlElement(builder, node);
             }
         }
@@ -260,8 +254,7 @@ public final class JavadocPropertiesGenerator {
                 case JavadocTokenTypes.TEXT:
                     if (wrapWithCodeTag) {
                         builder.append("<code>").append(node.getText()).append("</code>");
-                    }
-                    else {
+                    } else {
                         builder.append(node.getText());
                     }
                     break;

@@ -436,8 +436,7 @@ public class SuppressionXpathSingleFilter extends AutomaticBean implements
     public void setFiles(String files) {
         if (files == null) {
             this.files = null;
-        }
-        else {
+        } else {
             this.files = Pattern.compile(files);
         }
     }
@@ -451,8 +450,7 @@ public class SuppressionXpathSingleFilter extends AutomaticBean implements
     public void setChecks(String checks) {
         if (checks == null) {
             this.checks = null;
-        }
-        else {
+        } else {
             this.checks = Pattern.compile(checks);
         }
     }
@@ -466,8 +464,7 @@ public class SuppressionXpathSingleFilter extends AutomaticBean implements
     public void setMessage(String message) {
         if (message == null) {
             this.message = null;
-        }
-        else {
+        } else {
             this.message = Pattern.compile(message);
         }
     }

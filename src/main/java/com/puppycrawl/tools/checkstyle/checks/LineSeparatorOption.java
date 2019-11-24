@@ -70,8 +70,7 @@ public enum LineSeparatorOption {
             // this silently assumes LF and CR are of length 1
             // CRLF always matches LF, so CRLF isn't tested
             result = LF.matches(bytes) || CR.matches(bytes);
-        }
-        else {
+        } else {
             result = Arrays.equals(bytes, lineSeparator);
         }
         return result;

@@ -117,8 +117,7 @@ public final class DetailAstImpl extends CommonASTWithHiddenTokens implements De
             if (previousSiblingNode != null) {
                 astImpl.previousSibling = previousSiblingNode;
                 previousSiblingNode.setNextSibling(astImpl);
-            }
-            else if (parent != null) {
+            } else if (parent != null) {
                 parent.setFirstChild(astImpl);
             }
 
@@ -284,8 +283,7 @@ public final class DetailAstImpl extends CommonASTWithHiddenTokens implements De
             // comment node can't be start of any java statement/definition
             if (TokenUtil.isCommentType(node.getType())) {
                 node = node.getNextSibling();
-            }
-            else {
+            } else {
                 resultNo = node.getColumnNo();
                 break;
             }
@@ -306,8 +304,7 @@ public final class DetailAstImpl extends CommonASTWithHiddenTokens implements De
             // comment node can't be start of any java statement/definition
             if (TokenUtil.isCommentType(node.getType())) {
                 node = node.getNextSibling();
-            }
-            else {
+            } else {
                 resultNo = node.getLineNo();
                 break;
             }
