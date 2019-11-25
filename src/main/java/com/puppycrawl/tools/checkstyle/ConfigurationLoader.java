@@ -191,7 +191,7 @@ public final class ConfigurationLoader {
      * @throws IOException if an error occurs
      * @throws SAXException if an error occurs
      */
-    private void parseInputSource(InputSource source)
+    private void parseInputSource(final InputSource source)
             throws IOException, SAXException {
         saxHandler.parseInputSource(source);
     }
@@ -203,8 +203,8 @@ public final class ConfigurationLoader {
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
-    public static Configuration loadConfiguration(String config,
-            PropertyResolver overridePropsResolver) throws CheckstyleException {
+    public static Configuration loadConfiguration(final String config,
+            final PropertyResolver overridePropsResolver) throws CheckstyleException {
         return loadConfiguration(config, overridePropsResolver, IgnoredModulesOptions.EXECUTE);
     }
 
@@ -216,8 +216,8 @@ public final class ConfigurationLoader {
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
-    public static Configuration loadConfiguration(String config,
-            PropertyResolver overridePropsResolver, ThreadModeSettings threadModeSettings)
+    public static Configuration loadConfiguration(final String config,
+            final PropertyResolver overridePropsResolver, final ThreadModeSettings threadModeSettings)
             throws CheckstyleException {
         return loadConfiguration(config, overridePropsResolver,
                 IgnoredModulesOptions.EXECUTE, threadModeSettings);
@@ -233,9 +233,9 @@ public final class ConfigurationLoader {
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
-    public static Configuration loadConfiguration(String config,
-                                                  PropertyResolver overridePropsResolver,
-                                                  IgnoredModulesOptions ignoredModulesOptions)
+    public static Configuration loadConfiguration(final String config,
+                                                  final PropertyResolver overridePropsResolver,
+                                                  final IgnoredModulesOptions ignoredModulesOptions)
             throws CheckstyleException {
         return loadConfiguration(config, overridePropsResolver, ignoredModulesOptions,
                 ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE);
@@ -252,10 +252,10 @@ public final class ConfigurationLoader {
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
-    public static Configuration loadConfiguration(String config,
-                                                  PropertyResolver overridePropsResolver,
-                                                  IgnoredModulesOptions ignoredModulesOptions,
-                                                  ThreadModeSettings threadModeSettings)
+    public static Configuration loadConfiguration(final String config,
+                                                  final PropertyResolver overridePropsResolver,
+                                                  final IgnoredModulesOptions ignoredModulesOptions,
+                                                  final ThreadModeSettings threadModeSettings)
             throws CheckstyleException {
         // figure out if this is a File or a URL
         final URI uri = CommonUtil.getUriByFilename(config);
@@ -276,9 +276,9 @@ public final class ConfigurationLoader {
      * @return the check configurations
      * @throws CheckstyleException if an error occurs
      */
-    public static Configuration loadConfiguration(InputSource configSource,
-                                                  PropertyResolver overridePropsResolver,
-                                                  IgnoredModulesOptions ignoredModulesOptions)
+    public static Configuration loadConfiguration(final InputSource configSource,
+                                                  final PropertyResolver overridePropsResolver,
+                                                  final IgnoredModulesOptions ignoredModulesOptions)
             throws CheckstyleException {
         return loadConfiguration(configSource, overridePropsResolver,
                 ignoredModulesOptions, ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE);
@@ -298,10 +298,10 @@ public final class ConfigurationLoader {
      * @throws CheckstyleException if an error occurs
      * @noinspection WeakerAccess
      */
-    public static Configuration loadConfiguration(InputSource configSource,
-                                                  PropertyResolver overridePropsResolver,
-                                                  IgnoredModulesOptions ignoredModulesOptions,
-                                                  ThreadModeSettings threadModeSettings)
+    public static Configuration loadConfiguration(final InputSource configSource,
+                                                  final PropertyResolver overridePropsResolver,
+                                                  final IgnoredModulesOptions ignoredModulesOptions,
+                                                  final ThreadModeSettings threadModeSettings)
             throws CheckstyleException {
         try {
             final boolean omitIgnoreModules = ignoredModulesOptions == IgnoredModulesOptions.OMIT;
@@ -346,7 +346,7 @@ public final class ConfigurationLoader {
      * @noinspection MethodWithMultipleReturnPoints, MethodOnlyUsedFromInnerClass
      */
     private static String replaceProperties(
-            String value, PropertyResolver props, String defaultValue)
+            final String value, final PropertyResolver props, final String defaultValue)
             throws CheckstyleException {
         if (value == null) {
             return null;
@@ -399,9 +399,9 @@ public final class ConfigurationLoader {
      *                           {@code ${} without a closing
      *                           {@code }}
      */
-    private static void parsePropertyString(String value,
-                                           List<String> fragments,
-                                           List<String> propertyRefs)
+    private static void parsePropertyString(final String value,
+                                           final List<String> fragments,
+                                           final List<String> propertyRefs)
             throws CheckstyleException {
         int prev = 0;
         //search for the next instance of $ from the 'prev' position
@@ -488,10 +488,10 @@ public final class ConfigurationLoader {
         }
 
         @Override
-        public void startElement(String uri,
-                                 String localName,
-                                 String qName,
-                                 Attributes attributes)
+        public void startElement(final String uri,
+                                 final String localName,
+                                 final String qName,
+                                 final Attributes attributes)
                 throws SAXException {
             if (qName.equals(MODULE)) {
                 //create configuration
@@ -548,9 +548,9 @@ public final class ConfigurationLoader {
         }
 
         @Override
-        public void endElement(String uri,
-                               String localName,
-                               String qName) throws SAXException {
+        public void endElement(final String uri,
+                               final String localName,
+                               final String qName) throws SAXException {
             if (qName.equals(MODULE)) {
                 final Configuration recentModule =
                     configStack.pop();
@@ -561,8 +561,7 @@ public final class ConfigurationLoader {
                     try {
                         final String severity = recentModule.getAttribute(SEVERITY);
                         level = SeverityLevel.getInstance(severity);
-                    }
-                    catch (final CheckstyleException ex) {
+                    } catch (final CheckstyleException ex) {
                         // -@cs[IllegalInstantiation] SAXException is in the overridden
                         // method signature
                         throw new SAXException(
@@ -590,7 +589,7 @@ public final class ConfigurationLoader {
          * @param attributeName name of attribute in module to find
          * @return true if attribute is present in module
          */
-        private boolean containsAttribute(Configuration module, String attributeName) {
+        private boolean containsAttribute(final Configuration module, final String attributeName) {
             final String[] names = module.getAttributeNames();
             final Optional<String> result = Arrays.stream(names)
                     .filter(name -> name.equals(attributeName)).findFirst();

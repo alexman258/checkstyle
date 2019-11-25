@@ -144,7 +144,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @param fileName the cache file.
      * @throws IOException if there are some problems with file loading.
      */
-    public void setCacheFile(String fileName) throws IOException {
+    public void setCacheFile(final String fileName) throws IOException {
         final Configuration configuration = getConfiguration();
         cacheFile = new PropertyCacheFile(configuration, fileName);
         cacheFile.load();
@@ -154,7 +154,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Removes before execution file filter.
      * @param filter before execution file filter to remove.
      */
-    public void removeBeforeExecutionFileFilter(BeforeExecutionFileFilter filter) {
+    public void removeBeforeExecutionFileFilter(final BeforeExecutionFileFilter filter) {
         beforeExecutionFileFilters.removeBeforeExecutionFileFilter(filter);
     }
 
@@ -162,7 +162,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Removes filter.
      * @param filter filter to remove.
      */
-    public void removeFilter(Filter filter) {
+    public void removeFilter(final Filter filter) {
         filters.removeFilter(filter);
     }
 
@@ -186,7 +186,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Removes a given listener.
      * @param listener a listener to remove
      */
-    public void removeListener(AuditListener listener) {
+    public void removeListener(final AuditListener listener) {
         listeners.remove(listener);
     }
 
@@ -194,12 +194,12 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Sets base directory.
      * @param basedir the base directory to strip off in file names
      */
-    public void setBasedir(String basedir) {
+    public void setBasedir(final String basedir) {
         this.basedir = basedir;
     }
 
     @Override
-    public int process(List<File> files) throws CheckstyleException {
+    public int process(final List<File> files) throws CheckstyleException {
         if (cacheFile != null) {
             cacheFile.putExternalResources(getExternalResourceLocations());
         }
@@ -273,7 +273,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @noinspection ProhibitedExceptionThrown
      */
     //-@cs[CyclomaticComplexity] no easy way to split this logic of processing the file
-    private void processFiles(List<File> files) throws CheckstyleException {
+    private void processFiles(final List<File> files) throws CheckstyleException {
         for (final File file : files) {
             String fileName = null;
             try {
@@ -320,7 +320,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @throws CheckstyleException if error condition within Checkstyle occurs.
      * @noinspection ProhibitedExceptionThrown
      */
-    private SortedSet<LocalizedMessage> processFile(File file) throws CheckstyleException {
+    private SortedSet<LocalizedMessage> processFile(final File file) throws CheckstyleException {
         final SortedSet<LocalizedMessage> fileMessages = new TreeSet<>();
         try {
             final FileText theText = new FileText(file.getAbsoluteFile(), charset);
@@ -362,7 +362,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      *            the file to be audited
      * @return {@code true} if the file is accepted.
      */
-    private boolean acceptFileStarted(String fileName) {
+    private boolean acceptFileStarted(final String fileName) {
         final String stripped = CommonUtil.relativizeAndNormalizePath(basedir, fileName);
         return beforeExecutionFileFilters.accept(stripped);
     }
@@ -374,7 +374,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      *            the file to be audited
      */
     @Override
-    public void fireFileStarted(String fileName) {
+    public void fireFileStarted(final String fileName) {
         final String stripped = CommonUtil.relativizeAndNormalizePath(basedir, fileName);
         final AuditEvent event = new AuditEvent(this, stripped);
         for (final AuditListener listener : listeners) {
@@ -389,7 +389,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @param errors the audit errors from the file
      */
     @Override
-    public void fireErrors(String fileName, SortedSet<LocalizedMessage> errors) {
+    public void fireErrors(final String fileName, final SortedSet<LocalizedMessage> errors) {
         final String stripped = CommonUtil.relativizeAndNormalizePath(basedir, fileName);
         boolean hasNonFilteredViolations = false;
         for (final LocalizedMessage element : errors) {
@@ -413,7 +413,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      *            the audited file
      */
     @Override
-    public void fireFileFinished(String fileName) {
+    public void fireFileFinished(final String fileName) {
         final String stripped = CommonUtil.relativizeAndNormalizePath(basedir, fileName);
         final AuditEvent event = new AuditEvent(this, stripped);
         for (final AuditListener listener : listeners) {
@@ -453,7 +453,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @noinspection ChainOfInstanceofChecks
      */
     @Override
-    protected void setupChild(Configuration childConf)
+    protected void setupChild(final Configuration childConf)
             throws CheckstyleException {
         final String name = childConf.getName();
         final Object child;
@@ -499,7 +499,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * that is executed in process().
      * @param fileSetCheck the additional FileSetCheck
      */
-    public void addFileSetCheck(FileSetCheck fileSetCheck) {
+    public void addFileSetCheck(final FileSetCheck fileSetCheck) {
         fileSetCheck.setMessageDispatcher(this);
         fileSetChecks.add(fileSetCheck);
     }
@@ -508,7 +508,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Adds a before execution file filter to the end of the event chain.
      * @param filter the additional filter
      */
-    public void addBeforeExecutionFileFilter(BeforeExecutionFileFilter filter) {
+    public void addBeforeExecutionFileFilter(final BeforeExecutionFileFilter filter) {
         beforeExecutionFileFilters.addBeforeExecutionFileFilter(filter);
     }
 
@@ -516,12 +516,12 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Adds a filter to the end of the audit event filter chain.
      * @param filter the additional filter
      */
-    public void addFilter(Filter filter) {
+    public void addFilter(final Filter filter) {
         filters.addFilter(filter);
     }
 
     @Override
-    public final void addListener(AuditListener listener) {
+    public final void addListener(final AuditListener listener) {
         listeners.add(listener);
     }
 
@@ -531,7 +531,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @param extensions the set of file extensions. A missing
      *     initial '.' character of an extension is automatically added.
      */
-    public final void setFileExtensions(String... extensions) {
+    public final void setFileExtensions(final String... extensions) {
         if (extensions == null) {
             fileExtensions = null;
         }
@@ -554,7 +554,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      *
      * @param moduleFactory the factory for creating FileSetChecks
      */
-    public void setModuleFactory(ModuleFactory moduleFactory) {
+    public void setModuleFactory(final ModuleFactory moduleFactory) {
         this.moduleFactory = moduleFactory;
     }
 
@@ -562,7 +562,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Sets locale country.
      * @param localeCountry the country to report messages
      */
-    public void setLocaleCountry(String localeCountry) {
+    public void setLocaleCountry(final String localeCountry) {
         this.localeCountry = localeCountry;
     }
 
@@ -570,7 +570,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Sets locale language.
      * @param localeLanguage the language to report messages
      */
-    public void setLocaleLanguage(String localeLanguage) {
+    public void setLocaleLanguage(final String localeLanguage) {
         this.localeLanguage = localeLanguage;
     }
 
@@ -581,7 +581,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @param severity  The new severity level
      * @see SeverityLevel
      */
-    public final void setSeverity(String severity) {
+    public final void setSeverity(final String severity) {
         this.severity = SeverityLevel.getInstance(severity);
     }
 
@@ -595,12 +595,12 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      *     unstable.
      */
     @Deprecated
-    public final void setClassLoader(ClassLoader classLoader) {
+    public final void setClassLoader(final ClassLoader classLoader) {
         // no code
     }
 
     @Override
-    public final void setModuleClassLoader(ClassLoader moduleClassLoader) {
+    public final void setModuleClassLoader(final ClassLoader moduleClassLoader) {
         this.moduleClassLoader = moduleClassLoader;
     }
 
@@ -609,7 +609,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * @param charset the name of a charset
      * @throws UnsupportedEncodingException if charset is unsupported.
      */
-    public void setCharset(String charset)
+    public void setCharset(final String charset)
             throws UnsupportedEncodingException {
         if (!Charset.isSupported(charset)) {
             final String message = "unsupported charset: '" + charset + "'";
@@ -622,7 +622,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Sets the field haltOnException.
      * @param haltOnException the new value.
      */
-    public void setHaltOnException(boolean haltOnException) {
+    public void setHaltOnException(final boolean haltOnException) {
         this.haltOnException = haltOnException;
     }
 
@@ -630,7 +630,7 @@ public class Checker extends AutomaticBean implements MessageDispatcher, RootMod
      * Set the tab width to report audit events with.
      * @param tabWidth an {@code int} value
      */
-    public final void setTabWidth(int tabWidth) {
+    public final void setTabWidth(final int tabWidth) {
         this.tabWidth = tabWidth;
     }
 

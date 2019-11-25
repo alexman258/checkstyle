@@ -40,7 +40,7 @@ public class AuditEventDefaultFormatter implements AuditEventFormatter {
     private static final String SUFFIX = "Check";
 
     @Override
-    public String format(AuditEvent event) {
+    public String format(final AuditEvent event) {
         final String fileName = event.getFileName();
         final String message = event.getMessage();
 
@@ -85,7 +85,7 @@ public class AuditEventDefaultFormatter implements AuditEventFormatter {
      * @param severityLevelNameLength length of severity level name.
      * @return the length of the buffer for StringBuilder.
      */
-    private static int calculateBufferLength(AuditEvent event, int severityLevelNameLength) {
+    private static int calculateBufferLength(final AuditEvent event, final int severityLevelNameLength) {
         return LENGTH_OF_ALL_SEPARATORS + event.getFileName().length()
             + event.getMessage().length() + severityLevelNameLength
             + getCheckShortName(event).length();
@@ -96,7 +96,7 @@ public class AuditEventDefaultFormatter implements AuditEventFormatter {
      * @param event audit event.
      * @return check name without 'Check' suffix.
      */
-    private static String getCheckShortName(AuditEvent event) {
+    private static String getCheckShortName(final AuditEvent event) {
         final String checkFullName = event.getSourceName();
         final String checkShortName;
         final int lastDotIndex = checkFullName.lastIndexOf('.');

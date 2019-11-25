@@ -76,7 +76,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
      * @param outputStream where to log audit events
      * @param outputStreamOptions if {@code CLOSE} that should be closed in auditFinished()
      */
-    public DefaultLogger(OutputStream outputStream, OutputStreamOptions outputStreamOptions) {
+    public DefaultLogger(final OutputStream outputStream, final OutputStreamOptions outputStreamOptions) {
         // no need to close oS twice
         this(outputStream, outputStreamOptions, outputStream, OutputStreamOptions.NONE);
     }
@@ -88,10 +88,10 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
      * @param errorStream the {@code OutputStream} for error messages.
      * @param errorStreamOptions if {@code CLOSE} error should be closed in auditFinished()
      */
-    public DefaultLogger(OutputStream infoStream,
-                         OutputStreamOptions infoStreamOptions,
-                         OutputStream errorStream,
-                         OutputStreamOptions errorStreamOptions) {
+    public DefaultLogger(final OutputStream infoStream,
+                         final OutputStreamOptions infoStreamOptions,
+                         final OutputStream errorStream,
+                         final OutputStreamOptions errorStreamOptions) {
         this(infoStream, infoStreamOptions, errorStream, errorStreamOptions,
                 new AuditEventDefaultFormatter());
     }
@@ -106,11 +106,11 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
      * @param messageFormatter formatter for the log message.
      * @noinspection WeakerAccess
      */
-    public DefaultLogger(OutputStream infoStream,
-                         OutputStreamOptions infoStreamOptions,
-                         OutputStream errorStream,
-                         OutputStreamOptions errorStreamOptions,
-                         AuditEventFormatter messageFormatter) {
+    public DefaultLogger(final OutputStream infoStream,
+                         final OutputStreamOptions infoStreamOptions,
+                         final OutputStream errorStream,
+                         final OutputStreamOptions errorStreamOptions,
+                         final AuditEventFormatter messageFormatter) {
         if (infoStreamOptions == null) {
             throw new IllegalArgumentException("Parameter infoStreamOptions can not be null");
         }
@@ -144,7 +144,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
      * @see AuditListener
      **/
     @Override
-    public void addError(AuditEvent event) {
+    public void addError(final AuditEvent event) {
         final SeverityLevel severityLevel = event.getSeverityLevel();
         if (severityLevel != SeverityLevel.IGNORE) {
             final String errorMessage = formatter.format(event);
@@ -153,7 +153,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
     }
 
     @Override
-    public void addException(AuditEvent event, Throwable throwable) {
+    public void addException(final AuditEvent event, final Throwable throwable) {
         synchronized (errorWriter) {
             final LocalizedMessage addExceptionMessage = new LocalizedMessage(1,
                 Definitions.CHECKSTYLE_BUNDLE, ADD_EXCEPTION_MESSAGE,
@@ -165,7 +165,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
     }
 
     @Override
-    public void auditStarted(AuditEvent event) {
+    public void auditStarted(final AuditEvent event) {
         final LocalizedMessage auditStartMessage = new LocalizedMessage(1,
             Definitions.CHECKSTYLE_BUNDLE, AUDIT_STARTED_MESSAGE, null, null,
             LocalizedMessage.class, null);
@@ -174,7 +174,7 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
     }
 
     @Override
-    public void auditFinished(AuditEvent event) {
+    public void auditFinished(final AuditEvent event) {
         final LocalizedMessage auditFinishMessage = new LocalizedMessage(1,
             Definitions.CHECKSTYLE_BUNDLE, AUDIT_FINISHED_MESSAGE, null, null,
             LocalizedMessage.class, null);
@@ -183,12 +183,12 @@ public class DefaultLogger extends AutomaticBean implements AuditListener {
     }
 
     @Override
-    public void fileStarted(AuditEvent event) {
+    public void fileStarted(final AuditEvent event) {
         // No need to implement this method in this class
     }
 
     @Override
-    public void fileFinished(AuditEvent event) {
+    public void fileFinished(final AuditEvent event) {
         infoWriter.flush();
     }
 

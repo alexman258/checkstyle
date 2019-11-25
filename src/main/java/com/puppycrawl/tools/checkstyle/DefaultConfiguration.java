@@ -59,7 +59,7 @@ public final class DefaultConfiguration implements Configuration {
      * Instantiates a DefaultConfiguration.
      * @param name the name for this DefaultConfiguration.
      */
-    public DefaultConfiguration(String name) {
+    public DefaultConfiguration(final String name) {
         this(name, ThreadModeSettings.SINGLE_THREAD_MODE_INSTANCE);
     }
 
@@ -68,8 +68,8 @@ public final class DefaultConfiguration implements Configuration {
      * @param name the name for this DefaultConfiguration.
      * @param threadModeSettings the thread mode configuration.
      */
-    public DefaultConfiguration(String name,
-        ThreadModeSettings threadModeSettings) {
+    public DefaultConfiguration(final String name,
+        final ThreadModeSettings threadModeSettings) {
         this.name = name;
         this.threadModeSettings = threadModeSettings;
     }
@@ -81,7 +81,7 @@ public final class DefaultConfiguration implements Configuration {
     }
 
     @Override
-    public String getAttribute(String attributeName) throws CheckstyleException {
+    public String getAttribute(final String attributeName) throws CheckstyleException {
         if (!attributeMap.containsKey(attributeName)) {
             throw new CheckstyleException(
                     "missing key '" + attributeName + "' in " + name);
@@ -104,7 +104,7 @@ public final class DefaultConfiguration implements Configuration {
      * Makes a configuration a child of this configuration.
      * @param configuration the child configuration.
      */
-    public void addChild(Configuration configuration) {
+    public void addChild(final Configuration configuration) {
         children.add(configuration);
     }
 
@@ -121,7 +121,7 @@ public final class DefaultConfiguration implements Configuration {
      * @param attributeName the name of the attribute.
      * @param value the value of the attribute.
      */
-    public void addAttribute(String attributeName, String value) {
+    public void addAttribute(final String attributeName, final String value) {
         final String current = attributeMap.get(attributeName);
         if (current == null) {
             attributeMap.put(attributeName, value);
@@ -136,7 +136,7 @@ public final class DefaultConfiguration implements Configuration {
      * @param key the message key
      * @param value the custom message pattern
      */
-    public void addMessage(String key, String value) {
+    public void addMessage(final String key, final String value) {
         messages.put(key, value);
     }
 

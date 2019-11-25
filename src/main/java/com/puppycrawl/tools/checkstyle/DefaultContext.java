@@ -35,7 +35,7 @@ public final class DefaultContext implements Context {
     private final Map<String, Object> entries = new HashMap<>();
 
     @Override
-    public Object get(String key) {
+    public Object get(final String key) {
         return entries.get(key);
     }
 
@@ -49,7 +49,7 @@ public final class DefaultContext implements Context {
      * @param key the context key
      * @param value the value for key
      */
-    public void add(String key, Object value) {
+    public void add(final String key, final Object value) {
         entries.put(key, value);
     }
 
