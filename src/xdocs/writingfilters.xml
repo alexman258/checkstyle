@@ -47,7 +47,9 @@
         and class <code>FilterSet</code>.
       </p>
 
-      <img src="images/Filter.gif" alt="Filter UML diagram" />
+      <div class="wrapper">
+        <img src="images/Filter.gif" alt="Filter UML diagram" />
+      </div>
     </section>
 
     <section name="Writing Filters">
@@ -104,7 +106,7 @@ public class FilesFilter
 
     <section name="Declare check's external resource locations">
       <p>
-        See <a href="writingchecks.html#Declare_checks_external_resource_locations">
+        See <a href="writingchecks.html#Declare_check.27s_external_resource_locations">
         Declare check's external resource locations</a>.
       </p>
     </section>

@@ -37,6 +37,9 @@ no-error-orekit)
   echo CS_version: ${CS_POM_VERSION}
   checkout_from https://github.com/Hipparchus-Math/hipparchus.git
   cd .ci-temp/hipparchus
+  # checkout to version that Orekit expects
+  SHA_HIPPARCHUS="4c6c6fc45e859e""ae2d4eb091a3a3c0a7a458b8d9"
+  git checkout $SHA_HIPPARCHUS
   mvn install -DskipTests
   cd -
   checkout_from https://github.com/CS-SI/Orekit.git
@@ -44,7 +47,7 @@ no-error-orekit)
   # no CI is enforced in project, so to make our build stable we should
   # checkout to latest release/development (annotated tag or hash)
   # git checkout $(git describe --abbrev=0 --tags)
-  git checkout 3a9787ec3f166bd770f9c119cd7724f57
+  git checkout 973d1bd3e4532d2c1d3a7c28136e2713bd057542
   mvn -e compile checkstyle:check -Dorekit.checkstyle.version=${CS_POM_VERSION}
   cd ../
   rm -rf Orekit
@@ -91,7 +94,7 @@ no-error-hibernate-search)
   echo CS_version: ${CS_POM_VERSION}
   checkout_from https://github.com/hibernate/hibernate-search.git
   cd .ci-temp/hibernate-search
-  mvn -e clean install -DskipTests=true -Dtest.elasticsearch.host.provided=true \
+  mvn -e clean install -DskipTests=true -Dtest.elasticsearch.run.skip=true \
      -Dcheckstyle.skip=true -Dforbiddenapis.skip=true \
      -Dpuppycrawl.checkstyle.version=${CS_POM_VERSION}
   mvn -e checkstyle:check  -Dpuppycrawl.checkstyle.version=${CS_POM_VERSION}
@@ -143,10 +146,27 @@ no-error-strata)
   echo CS_version: ${CS_POM_VERSION}
   checkout_from https://github.com/OpenGamma/Strata.git
   cd .ci-temp/Strata
+  STRATA_CS_POM_VERSION=$(mvn -e -q -Dexec.executable='echo' -Dexec.args='${checkstyle.version}' \
+                     --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec)
   mvn install -e -B -Dstrict -DskipTests \
-     -Dforbiddenapis.skip=true -Dcheckstyle.version=${CS_POM_VERSION}
+     -Dforbiddenapis.skip=true -Dcheckstyle.version=${CS_POM_VERSION} \
+     -Dcheckstyle.config.suffix="-v$STRATA_CS_POM_VERSION"
   cd ../
   rm -rf Strata
+  ;;
+
+no-error-spring-integration)
+  set -e
+  CS_POM_VERSION=$(mvn -e -q -Dexec.executable='echo' -Dexec.args='${project.version}' \
+                     --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec)
+  echo CS_version: ${CS_POM_VERSION}
+  checkout_from https://github.com/spring-projects/spring-integration.git
+  cd .ci-temp/spring-integration
+  PROP_MAVEN_LOCAL="mavenLocal"
+  PROP_CS_VERSION="checkstyleVersion"
+  ./gradlew clean check --parallel -x test -P$PROP_MAVEN_LOCAL -P$PROP_CS_VERSION=${CS_POM_VERSION}
+  cd ../
+  rm -rf spring-integration
   ;;
 
 no-exception-struts)

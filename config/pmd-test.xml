@@ -153,8 +153,10 @@
             <property name="violationSuppressXPath"
                       value="//ClassOrInterfaceDeclaration[@Image='JavadocTokenTypesTest']
                                  //MethodDeclaration[@Name='testTokenValues']
-            | //ClassOrInterfaceDeclaration[@Image='GeneratedJavadocTokenTypesTest']
-                  //MethodDeclaration[@Name='testTokenNumbers' or @Name='testRuleNumbers']"/>
+                        | //ClassOrInterfaceDeclaration[@Image='GeneratedJavaTokenTypesTest']
+                              //MethodDeclaration[@Name='testTokenNumbering']
+                        | //ClassOrInterfaceDeclaration[@Image='GeneratedJavadocTokenTypesTest']
+                              //MethodDeclaration[@Name='testTokenNumbers']"/>
         </properties>
     </rule>
 
@@ -173,7 +175,7 @@
             <!-- This inherited from GeneratedJavaLexer. -->
             <property name="violationSuppressXPath"
                       value="//ClassOrInterfaceDeclaration[@Image='AssertGeneratedJavaLexer']
-                  //MethodDeclarator[@Image='LA']"/>
+                  //MethodDeclaration[@Name='LA']"/>
         </properties>
     </rule>
 
@@ -186,9 +188,9 @@
             <property name="violationSuppressXPath"
                       value="//ClassOrInterfaceDeclaration[
                       @Image='SuppressionXpathSingleFilterTest']
-                  //MethodDeclarator[@Image='createSuppressionXpathSingleFilter']
+                  //MethodDeclaration[@Name='createSuppressionXpathSingleFilter']
                   | //ClassOrInterfaceDeclaration[ @Image='XdocsPagesTest']
-                        //MethodDeclarator[@Image='validateRuleNameOrder']"/>
+                        //MethodDeclaration[@Name='validateRuleNameOrder']"/>
         </properties>
     </rule>
     <rule ref="category/java/errorprone.xml/CloseResource">

@@ -37,7 +37,7 @@ import com.puppycrawl.tools.checkstyle.utils.CommonUtil;
  * <p>
  * Note: By default, the check rejects all {@code sun.*} packages since programs
  * that contain direct calls to the {@code sun.*} packages are
- * <a href="https://www.oracle.com/technetwork/java/faq-sun-packages-142232.html">
+ * <a href="https://www.oracle.com/java/technologies/faq-sun-packages.html">
  * "not guaranteed to work on all Java-compatible platforms"</a>. To reject other
  * packages, set property {@code illegalPkgs} to a list of the illegal packages.
  * </p>
@@ -285,10 +285,12 @@ public class IllegalImportCheck
      */
     private String[] illegalPkgs;
 
-    /** Specify class names to reject, if <b>regexp</b> property is not set,
-     *  checks if import equals class name. If <b>regexp</b> property is set,
-     *  then list of class names will be interpreted as regular expressions.
-     *  Note, all properties for match will be used. */
+    /**
+     * Specify class names to reject, if <b>regexp</b> property is not set,
+     * checks if import equals class name. If <b>regexp</b> property is set,
+     * then list of class names will be interpreted as regular expressions.
+     * Note, all properties for match will be used.
+     */
     private String[] illegalClasses;
 
     /**

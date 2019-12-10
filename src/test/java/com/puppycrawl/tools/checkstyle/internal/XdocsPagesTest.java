@@ -81,6 +81,7 @@ import com.puppycrawl.tools.checkstyle.checks.blocks.LeftCurlyOption;
 import com.puppycrawl.tools.checkstyle.checks.blocks.RightCurlyOption;
 import com.puppycrawl.tools.checkstyle.checks.imports.ImportOrderOption;
 import com.puppycrawl.tools.checkstyle.checks.javadoc.AbstractJavadocCheck;
+import com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocContentLocationOption;
 import com.puppycrawl.tools.checkstyle.checks.naming.AccessModifier;
 import com.puppycrawl.tools.checkstyle.checks.whitespace.PadOption;
 import com.puppycrawl.tools.checkstyle.checks.whitespace.WrapOption;
@@ -607,10 +608,23 @@ public class XdocsPagesTest {
                     + "' subsection 'Properties' should have one child node",
                 1, nodes.size());
 
-            final Node table = nodes.iterator().next();
+            final Node div = nodes.iterator().next();
             Assert.assertEquals(fileName + " section '" + sectionName
                     + "' subsection 'Properties' has unexpected child node",
-                "table", table.getNodeName());
+                "div", div.getNodeName());
+            final String wrapperMessage = fileName + " section '" + sectionName
+                    + "' subsection 'Properties' wrapping div for table needs the"
+                    + " class 'wrapper'";
+            Assert.assertTrue(wrapperMessage, div.hasAttributes());
+            Assert.assertNotNull(wrapperMessage,
+                    div.getAttributes().getNamedItem("class").getNodeValue());
+            Assert.assertTrue(wrapperMessage,
+                    div.getAttributes().getNamedItem("class").getNodeValue().contains("wrapper"));
+
+            final Node table = XmlUtil.getFirstChildElement(div);
+            Assert.assertEquals(fileName + " section '" + sectionName
+                            + "' subsection 'Properties' has unexpected child node",
+                    "table", table.getNodeName());
 
             validatePropertySectionProperties(fileName, sectionName, table, instance,
                     properties);
@@ -939,6 +953,9 @@ public class XdocsPagesTest {
         else if (fieldClass == AccessModifier[].class) {
             result = "Access Modifier Set";
         }
+        else if (fieldClass == JavadocContentLocationOption.class) {
+            result = "Javadoc Content Location";
+        }
         else if ("PropertyCacheFile".equals(fieldClass.getSimpleName())) {
             result = "File";
         }
@@ -962,7 +979,7 @@ public class XdocsPagesTest {
      * @param fieldClass The bean property's type.
      * @param instance The class instance to work with.
      * @return String form of property's default value.
-     * @noinspection ReuseOfLocalVariable, OverlyNestedMethod
+     * @noinspection OverlyNestedMethod
      */
     private static String getModulePropertyExpectedValue(String sectionName, String propertyName,
             Field field, Class<?> fieldClass, Object instance) throws Exception {

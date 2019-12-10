@@ -8,6 +8,10 @@ build:
         export MAVEN_OPTS="-Dmaven.repo.local=${WERCKER_CACHE_DIR}"
         mvn -version
         echo "------"
+        echo "Link ${WERCKER_CACHE_DIR} to /root/.m2/repository for Gradle builds"
+        mkdir -p /root/.m2
+        ln -s ${WERCKER_CACHE_DIR} /root/.m2/repository
+        echo "------"
         du -hs ${WERCKER_CACHE_DIR}
         echo "------"
         du -hs ${WERCKER_CACHE_DIR}/* | sort -h
@@ -35,9 +39,10 @@ build:
         SKIP_FILES5="|check-only-javadoc-error.sh|eclipse-compiler-javac.sh|idea_inspection"
         SKIP_FILES6="|test-spelling-unknown-words.sh|Jenkinsfile"
         SKIP_FILES=$SKIP_FILES1$SKIP_FILES2$SKIP_FILES3$SKIP_FILES4$SKIP_FILES5$SKIP_FILES6
-        #source ./.ci/common.sh
-        #should_run_job "recheck" $SKIP_FILES
         export RUN_JOB=1
+        source ./.ci/common.sh
+        # should_run_job will change RUN_JOB variable
+        should_run_job "recheck" $SKIP_FILES
         if [[ $RUN_JOB == 1 ]]; then
           mvn -e clean install -Pno-validations
         else
@@ -85,6 +90,16 @@ build:
         fi
 
   - script:
+      name: NoErrorTest - Strata
+      code: |
+        if [[ $RUN_JOB == 1 ]]; then
+          echo "Command: ./.ci/wercker.sh no-error-strata"
+          ./.ci/wercker.sh no-error-strata
+        else
+          echo "build is skipped ..."
+        fi
+
+  - script:
       name: NoErrorTest - Hibernate Search
       code: |
         if [[ $RUN_JOB == 1 ]]; then
@@ -104,6 +119,16 @@ build:
           echo "build is skipped ..."
         fi
 
+  - script:
+      name: NoErrorTest - Spring Integration
+      code: |
+        if [[ $RUN_JOB == 1 ]]; then
+          echo "Command: ./.ci/wercker.sh no-error-spring-integration"
+          ./.ci/wercker.sh no-error-spring-integration
+        else
+          echo "build is skipped ..."
+        fi
+
   # Disabled as it result in "svn: E175002: Unexpected HTTP status 429 'Too Many Requests'"
   # even for "svn checkout -r 14923 ...."
   # - script:
@@ -116,27 +141,25 @@ build:
   #         echo "build is skipped ..."
   #       fi
 
-# disabled till https://github.com/sevntu-checkstyle/sevntu.checkstyle/issues/745
-#  - script:
-#      name: NoErrorTest - checkstyle's sevntu
-#      code: |
-#        if [[ $RUN_JOB == 1 ]]; then
-#          echo "Command: ./.ci/wercker.sh no-error-checkstyles-sevntu"
-#          ./.ci/wercker.sh no-error-checkstyles-sevntu
-#        else
-#          echo "build is skipped ..."
-#        fi
+  - script:
+     name: NoErrorTest - checkstyle's sevntu
+     code: |
+       if [[ $RUN_JOB == 1 ]]; then
+         echo "Command: ./.ci/wercker.sh no-error-checkstyles-sevntu"
+         ./.ci/wercker.sh no-error-checkstyles-sevntu
+       else
+         echo "build is skipped ..."
+       fi
 
-# disabled till https://github.com/sevntu-checkstyle/sevntu.checkstyle/issues/776
-#  - script:
-#      name: NoErrorTest - sevntu-checks
-#      code: |
-#        if [[ $RUN_JOB == 1 ]]; then
-#          echo "Command: ./.ci/wercker.sh no-error-sevntu-checks"
-#          ./.ci/wercker.sh no-error-sevntu-checks
-#        else
-#          echo "build is skipped ..."
-#        fi
+  - script:
+     name: NoErrorTest - sevntu-checks
+     code: |
+       if [[ $RUN_JOB == 1 ]]; then
+         echo "Command: ./.ci/wercker.sh no-error-sevntu-checks"
+         ./.ci/wercker.sh no-error-sevntu-checks
+       else
+         echo "build is skipped ..."
+       fi
 
   - script:
       name: NoExceptiontest - Apache Struts

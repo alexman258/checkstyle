@@ -134,6 +134,7 @@ blockcommentstyle
 blockquote
 blog
 blogspot
+Bludov
 bluej
 bluejcheckstyle
 BNOT
@@ -290,6 +291,7 @@ Daniil
 daniilyar
 Darguments
 Datasource
+daveho
 davidwalsh
 Dcheckstyle
 dcm
@@ -304,6 +306,7 @@ defaultcomeslast
 delims
 DENORMALIZER
 Depedency
+dependabot
 Deque
 DEREF
 descendanttoken
@@ -395,6 +398,7 @@ equalsavoidnull
 equalshashcode
 equalsverifier
 erial
+ERRORLEVEL
 errorprone
 esac
 Eslint
@@ -627,6 +631,7 @@ jarchitect
 javac
 javadoc
 javadocblocktaglocation
+javadoccontentlocation
 javadocdetailnodeparser
 javadocmethod
 javadocpackage
@@ -674,6 +679,7 @@ JFrame
 jgit
 jgrasp
 jguru
+jhu
 jira
 jitpack
 jjva
@@ -939,6 +945,7 @@ onetoplevelclass
 onevariableperline
 oo
 OOL
+oopsla
 opencollective
 openjdk
 operatorwrap
@@ -994,6 +1001,7 @@ pathelement
 patreon
 Paulicke
 paypal
+pbludov
 pdf
 Peclipse
 perl
@@ -1242,7 +1250,6 @@ technotes
 tected
 Testik
 testmodules
-TEXCEPTION
 textlevel
 Tfo
 tfoot
@@ -1425,7 +1432,7 @@ xterm
 xtr
 xwiki
 XXXX
-XXXXXX
+xxxxxx
 xxxxxxxxxx
 XXXXXXXXXXXXXXXXXXXXXXXXXXXX
 xy

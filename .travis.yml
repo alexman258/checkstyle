@@ -33,6 +33,12 @@ matrix:
         - CMD="./.ci/travis/travis.sh pr-description"
         - SKIP_JOB_BY_FILES="false"
 
+    # new questionably spelled words
+    - env:
+        - DESC="spell checker"
+        - CMD="./.ci/test-spelling-unknown-words.sh"
+        - SKIP_JOB_BY_FILES="false"
+
     # unit tests (openjdk8)
     - jdk: openjdk8
       env:
@@ -71,8 +77,8 @@ matrix:
         - CMD="export MAVEN_OPTS='-Xmx2000m' && mvn -e clean compile pmd:check spotbugs:check"
         - USE_MAVEN_REPO="true"
 
-    # spotbugs and pmd (openjdk12)
-    - jdk: openjdk12
+    # spotbugs and pmd (openjdk13)
+    - jdk: openjdk13
       env:
         - DESC="spotbugs,pmd"
         - CMD="export MAVEN_OPTS='-Xmx2000m' && mvn -e clean compile pmd:check spotbugs:check"
@@ -214,13 +220,13 @@ matrix:
         - CMD2="./.ci/travis/travis.sh osx-assembly"
         - CMD="$CMD1 && $CMD2"
 
-    # MacOS JDK12 verify (till cache is not working, we can not do verify)
+    # MacOS JDK13 verify (till cache is not working, we can not do verify)
     - os: osx
-      osx_image: xcode10.2
+      osx_image: xcode11.2
       env:
-        - DESC="MacOS JDK12 verify, site, assembly
-        - CMD1="./.ci/travis/travis.sh osx-jdk12-package"
-        - CMD2="./.ci/travis/travis.sh osx-jdk12-assembly"
+        - DESC="MacOS JDK13 verify, site, assembly
+        - CMD1="./.ci/travis/travis.sh osx-jdk13-package"
+        - CMD2="./.ci/travis/travis.sh osx-jdk13-assembly"
         - CMD="$CMD1 && $CMD2"
 
     # https://sonarcloud.io (openjdk8)
@@ -259,22 +265,22 @@ matrix:
         - USE_MAVEN_REPO="true"
         - CMD="mvn -e package -Passembly && mvn -e site -Dlinkcheck.skip=true"
 
-    # OpenJDK12 build
-    - jdk: openjdk12
+    # OpenJDK13 build
+    - jdk: openjdk13
       env:
-        - DESC="build with OpenJDK12"
+        - DESC="build with OpenJDK13"
         - USE_MAVEN_REPO="true"
-        - CMD="./.ci/travis/travis.sh jdk12-assembly-site"
+        - CMD="./.ci/travis/travis.sh jdk13-assembly-site"
 
-    # OpenJDK12 verify limited
-    - jdk: openjdk12
+    # OpenJDK13 verify limited
+    - jdk: openjdk13
       env:
-        - DESC="verify limited with OpenJDK12"
+        - DESC="verify limited with OpenJDK13"
         - USE_MAVEN_REPO="true"
-        - CMD="./.ci/travis/travis.sh jdk12-verify-limited"
+        - CMD="./.ci/travis/travis.sh jdk13-verify-limited"
 
-    # OpenJDK9 compile input files with jdk9 specific syntax
-    - jdk: openjdk9
+    # OpenJDK11 compile input files with jdk9 specific syntax
+    - jdk: openjdk11
       env:
         - DESC="compile input files with jdk9 specific syntax"
         - CMD="./.ci/travis/travis.sh javac9"
@@ -285,11 +291,11 @@ matrix:
         - DESC="compile input files that are not compiled by eclipse"
         - CMD="./.ci/travis/travis.sh javac8"
 
-    # new questionably spelled words
-    - env:
-        - DESC="spell checker"
-        - CMD="./.ci/test-spelling-unknown-words.sh"
-        - SKIP_JOB_BY_FILES="false"
+    # OpenJDK13 compile input files with jdk13 specific syntax
+    - jdk: openjdk13
+      env:
+        - DESC="compile input files with jdk13 specific syntax"
+        - CMD="./.ci/travis/travis.sh javac13"
 
     # find missing pitests
     - env:
@@ -311,13 +317,14 @@ script:
   - SKIP_FILES3="|shippable.yml|shippable.sh|wercker.yml|wercker.sh|intellij-idea-inspections.xml"
   - SKIP_FILES4="|Jenkinsfile"
   - SKIP_FILES=$SKIP_FILES1$SKIP_FILES2$SKIP_FILES3$SKIP_FILES4
-  #- source ./.ci/common.sh
-  - |
-    if [ -z ${SKIP_JOB_BY_FILES+x} ]; then
-        SKIP_JOB_BY_FILES="recheck";
-    fi
-  #- should_run_job $SKIP_JOB_BY_FILES $SKIP_FILES
   - export RUN_JOB=1
+  #- source ./.ci/common.sh
+#  - |
+#    if [ -z ${SKIP_JOB_BY_FILES+x} ]; then
+#        SKIP_JOB_BY_FILES="recheck";
+#    fi
+  # should_run_job will change RUN_JOB variable
+#  - should_run_job $SKIP_JOB_BY_FILES $SKIP_FILES
   - |
     set -e
     if [[ $RUN_JOB == 1 ]]; then

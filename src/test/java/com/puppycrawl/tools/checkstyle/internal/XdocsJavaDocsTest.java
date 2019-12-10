@@ -26,7 +26,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,31 +63,9 @@ public class XdocsJavaDocsTest extends AbstractModuleTestSupport {
     private static final Map<String, String> CHECK_PROPERTY_DOC = new HashMap<>();
     private static final Map<String, String> CHECK_TEXT = new HashMap<>();
 
-    /**
-     * The list of checks that are not yet compatible with this rule.
-     */
-    private static final String[] INCOMPATIBLE_CHECKS = {
-        // javadoc
-        "JavadocMethod",
-        "JavadocPackage",
-        "JavadocParagraph",
-        "JavadocStyle",
-        "JavadocTagContinuationIndentation",
-        "JavadocType",
-        "JavadocVariable",
-        "NonEmptyAtclauseDescription",
-        "SingleLineJavadoc",
-        "SummaryJavadoc",
-        "WriteTag",
-    };
-
     private static Checker checker;
 
     private static String checkName;
-
-    static {
-        Arrays.sort(INCOMPATIBLE_CHECKS);
-    }
 
     @Override
     protected String getPackageLocation() {
@@ -127,8 +104,7 @@ public class XdocsJavaDocsTest extends AbstractModuleTestSupport {
                 final String sectionName = section.getAttributes().getNamedItem("name")
                         .getNodeValue();
 
-                if ("Content".equals(sectionName) || "Overview".equals(sectionName)
-                        || Arrays.binarySearch(INCOMPATIBLE_CHECKS, sectionName) >= 0) {
+                if ("Content".equals(sectionName) || "Overview".equals(sectionName)) {
                     continue;
                 }
 
@@ -203,12 +179,20 @@ public class XdocsJavaDocsTest extends AbstractModuleTestSupport {
     private static void populateProperties(Node subSection) {
         boolean skip = true;
 
-        for (Node row : XmlUtil.getChildrenElements(XmlUtil.getFirstChildElement(subSection))) {
+        // if the first child is a wrapper element instead of the first table row containing
+        // the table head
+        //   set element to populate properties for to the current elements first child
+        Node child = XmlUtil.getFirstChildElement(subSection);
+        if (child.hasAttributes() && child.getAttributes().getNamedItem("class") != null
+                && "wrapper".equals(child.getAttributes().getNamedItem("class")
+                .getTextContent())) {
+            child = XmlUtil.getFirstChildElement(child);
+        }
+        for (Node row : XmlUtil.getChildrenElements(child)) {
             if (skip) {
                 skip = false;
                 continue;
             }
-
             CHECK_PROPERTIES.add(new ArrayList<>(XmlUtil.getChildrenElements(row)));
         }
     }
@@ -269,7 +253,14 @@ public class XdocsJavaDocsTest extends AbstractModuleTestSupport {
                 }
             }
             else {
-                appendNodeText(result, child);
+                if (child.hasAttributes() && child.getAttributes().getNamedItem("class") != null
+                        && "wrapper".equals(child.getAttributes().getNamedItem("class")
+                        .getNodeValue())) {
+                    appendNodeText(result, XmlUtil.getFirstChildElement(child));
+                }
+                else {
+                    appendNodeText(result, child);
+                }
             }
         }
 
