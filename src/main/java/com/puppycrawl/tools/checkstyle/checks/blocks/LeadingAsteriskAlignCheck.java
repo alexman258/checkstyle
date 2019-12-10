@@ -32,48 +32,46 @@ import java.io.IOException;
 
 /**
  * <p>
- * Leading Asterisk {@code LeadingAsteriskAlignCheck} checks that every 
- * multi-line comment leading asterisk is vertically aligned.  
+ * Leading Asterisk {@code LeadingAsteriskAlignCheck} checks that every
+ * multi-line comment leading asterisk is vertically aligned.
  * 
  * Javadoc comments have a LeadingAsterisk token that can be compared with the
  * leading asterisk token of every other line in the comment.
  * 
- * Regular block comments do not contain a leading asterisk token. 
- * The leading asterisk is found programmatically and compared with
- * other leading asterisks in the comment block.
+ * Regular block comments do not contain a leading asterisk token. The leading
+ * asterisk is found programmatically and compared with other leading asterisks
+ * in the comment block.
  * 
  * </p>
  */
 public class LeadingAsteriskAlignCheck extends AbstractCheck {
 
 	/**
-	* Left align.
-	*/
-	
+	 * Left align.
+	 */
+
 	/**
 	 * Center align
 	 */
-	
+
 	/**
-	  * Right align
-	  */
-	
-	
+	 * Right align
+	 */
+
 	/**
-	 * Alignment of leading asterisk.
-	 * Default is 0. This aligns the asterisks directly below the first asterisk
-	 * Other options are -1, and 1. Which either left aligns, or right aligns
-	 * all other asterisks.
+	 * Alignment of leading asterisk. Default is 0. This aligns the asterisks
+	 * directly below the first asterisk Other options are -1, and 1. Which either
+	 * left aligns, or right aligns all other asterisks.
 	 */
 	private int alignment = 0;
-	
+
 	public static final String LEADING_ASTERISK_NOT_ALIGNED = "Leading asterisk not properly aligned.";
 
 	@Override
 	public boolean isCommentNodesRequired() {
 		return true;
 	}
-		
+
 	@Override
 	public int[] getDefaultTokens() {
 		return getAcceptableTokens();
@@ -81,27 +79,27 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 
 	@Override
 	public int[] getAcceptableTokens() {
-		return new int[] {TokenTypes.BLOCK_COMMENT_BEGIN, TokenTypes.BLOCK_COMMENT_END};
+		return new int[] { TokenTypes.BLOCK_COMMENT_BEGIN, TokenTypes.BLOCK_COMMENT_END };
 	}
 
 	@Override
 	public final int[] getRequiredTokens() {
-		return new int[] {TokenTypes.BLOCK_COMMENT_BEGIN, TokenTypes.BLOCK_COMMENT_END};
+		return new int[] { TokenTypes.BLOCK_COMMENT_BEGIN };
 	}
-	
+
 	@Override
 	public void visitToken(DetailAST ast) {
-		
-		if(ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
-			
+
+		if (ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
+
 			DetailAST firstChild = ast.getFirstChild();
-			
+
 			if (firstChild == null) {
 				return;
 			}
-			
+
 			DetailAST secondChild = firstChild.getFirstChild();
-			
+
 			if (secondChild.getType() == JavadocTokenTypes.JAVADOC) {
 				checkJavadocCommentBlock(ast, ast.getLastChild());
 			} else {
@@ -109,61 +107,58 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param blockBegin The beginning token of the comment block.
-	 * @param blockEnd The end token of the comment block
-	 */		
+	 * @param blockEnd   The end token of the comment block
+	 */
 	public void checkRegularCommentBlock(DetailAST blockBegin) {
-        final FileContents contents = getFileContents();
+		final FileContents contents = getFileContents();
 
-        int currentLineNum = blockBegin.getLineNo();
-        int endLineNum = blockBegin.getLastChild().getLineNo();
-        
+		int currentLineNum = blockBegin.getLineNo();
+		int endLineNum = blockBegin.getLastChild().getLineNo();
+
 		boolean leadingAsteriskAligned = true;
-		
+
 		String lineContents = contents.getLine(currentLineNum);
-		
+
 		// Get the offset of the leading asterisk for the fist line in block comment.
 		int offset = lineContents.indexOf('*');
-		
-		
-		// Compare the offset of the leading asterisk for every other line in the block comment
-		while(currentLineNum <= endLineNum) {
+
+		// Compare the offset of the leading asterisk for every other line in the block
+		// comment
+		while (currentLineNum <= endLineNum) {
 			currentLineNum++;
 
 			lineContents = contents.getLine(currentLineNum);
-			
-			if(lineContents.indexOf('*') != (offset + alignment)) {
+
+			if (lineContents.indexOf('*') != (offset + alignment)) {
 				log(currentLineNum, LEADING_ASTERISK_NOT_ALIGNED);
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param blockBegin The beginning token of the comment block.
-	 * @param blockEnd The end token of the comment block
-	 */		  
+	 * @param blockEnd   The end token of the comment block
+	 */
 	public void checkJavadocCommentBlock(DetailAST blockBegin, DetailAST blockEnd) {
-		
+
 	}
-	
-	
+
 	/**
 	 * @param align What offset the alignment should have.
 	 */
 	public void setAlignment(int align) {
-		
+
 		if (align >= -1 && align <= 1) {
 			alignment = align;
 		} else {
 			alignment = 0;
 		}
-		
+
 	}
 
 }
