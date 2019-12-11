@@ -14,7 +14,7 @@ public class LeadingAsteriskAlignTest {
 	 */
 	
 	/*
-	  * This comment  raise a violation
+	    * This comment  raise a violation
 	 */
 	
 	/*

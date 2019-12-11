@@ -22,7 +22,6 @@ package com.puppycrawl.tools.checkstyle.checks.blocks;
 import com.puppycrawl.tools.checkstyle.api.AbstractCheck;
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FileContents;
-import com.puppycrawl.tools.checkstyle.api.JavadocTokenTypes;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 
 /**
@@ -61,9 +60,16 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 	 * left aligns, or right aligns all other asterisks.
 	 */
 	private int alignment = 0;
+	
+	private FileContents contents;
 
 	public static final String LEADING_ASTERISK_NOT_ALIGNED = "leading.asterisk.misaligned";
 
+	@Override
+	public void init() {
+		contents = getFileContents();
+	}
+	
 	@Override
 	public boolean isCommentNodesRequired() {
 		return true;
@@ -88,20 +94,16 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 	public void visitToken(DetailAST ast) {
 
 		if (ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
-			checkRegularCommentBlock(ast);
+			checkCommentBlock(ast);
 		}
 	}
 
 	/**
 	 * @param blockBegin The beginning token of the comment block.
 	 */
-	public void checkRegularCommentBlock(DetailAST blockBegin) {
-		final FileContents contents = getFileContents();
-
+	private void checkCommentBlock(DetailAST blockBegin) {
 		int currentLineNum = blockBegin.getLineNo();
 		int endLineNum = blockBegin.getLastChild().getLineNo();
-
-		boolean leadingAsteriskAligned = true;
 
 		String lineContents = contents.getLine(currentLineNum);
 
