@@ -24,11 +24,6 @@ import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.FileContents;
 import com.puppycrawl.tools.checkstyle.api.JavadocTokenTypes;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-//import com.puppycrawl.tools.checkstyle.api.AbstractCheck.FileContext;
-import com.puppycrawl.tools.checkstyle.utils.CommonUtil;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 /**
  * <p>
@@ -36,7 +31,9 @@ import java.io.IOException;
  * multi-line comment leading asterisk is vertically aligned.
  * 
  * Javadoc comments have a LeadingAsterisk token that can be compared with the
- * leading asterisk token of every other line in the comment.
+ * leading asterisk token of every other line in the comment. 
+ * For some reason, this leading asterisk column is always 0. So for now,
+ * treating javadoc comments identically to regular block comments.
  * 
  * Regular block comments do not contain a leading asterisk token. The leading
  * asterisk is found programmatically and compared with other leading asterisks
@@ -65,7 +62,7 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 	 */
 	private int alignment = 0;
 
-	public static final String LEADING_ASTERISK_NOT_ALIGNED = "Leading asterisk not properly aligned.";
+	public static final String LEADING_ASTERISK_NOT_ALIGNED = "leading.asterisk.misaligned";
 
 	@Override
 	public boolean isCommentNodesRequired() {
@@ -91,27 +88,12 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 	public void visitToken(DetailAST ast) {
 
 		if (ast.getType() == TokenTypes.BLOCK_COMMENT_BEGIN) {
-
-			DetailAST firstChild = ast.getFirstChild();
-
-			if (firstChild == null) {
-				return;
-			}
-
-			DetailAST secondChild = firstChild.getFirstChild();
-
-			if (secondChild.getType() == JavadocTokenTypes.JAVADOC) {
-				checkJavadocCommentBlock(ast, ast.getLastChild());
-			} else {
-				checkRegularCommentBlock(ast);
-			}
+			checkRegularCommentBlock(ast);
 		}
 	}
 
 	/**
-	 * 
 	 * @param blockBegin The beginning token of the comment block.
-	 * @param blockEnd   The end token of the comment block
 	 */
 	public void checkRegularCommentBlock(DetailAST blockBegin) {
 		final FileContents contents = getFileContents();
@@ -140,15 +122,6 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 	}
 
 	/**
-	 * 
-	 * @param blockBegin The beginning token of the comment block.
-	 * @param blockEnd   The end token of the comment block
-	 */
-	public void checkJavadocCommentBlock(DetailAST blockBegin, DetailAST blockEnd) {
-
-	}
-
-	/**
 	 * @param align What offset the alignment should have.
 	 */
 	public void setAlignment(int align) {
@@ -158,7 +131,6 @@ public class LeadingAsteriskAlignCheck extends AbstractCheck {
 		} else {
 			alignment = 0;
 		}
-
 	}
 
 }
